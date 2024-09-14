@@ -12,9 +12,9 @@ export default function Header () {
   const path = useLocation().pathname;  // get the current path
   return (
     <Navbar className='border-b-2'>
-      <Link to="/" className="self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
-          <span className='flex items-center self-center mx-2 py-1'>
-           <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px"/>
+      <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
+          <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px"/>
+          <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
           DevJourney
           </span>
       </Link>
