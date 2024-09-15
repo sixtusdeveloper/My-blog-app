@@ -1,4 +1,3 @@
-import { time } from 'console';
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
@@ -19,8 +18,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
  
-}, { timestamps: true });
+    }, 
+    { timestamps: true }
+);
 
-const User = mongoose.model('User', userSchema);    // create a model from the schema
 
-export default User;  // export the model   
+const User = mongoose.model('User', userSchema);    // Create a User model from the userSchema
+
+export default User;    // Export the User model
