@@ -1,6 +1,6 @@
 import express from 'express';
-import { signup } from '../controllers/auth.controller.js';  // Import the signup function from the controller  
-import { signin } from '../controllers/auth.controller.js';  // Import the signup function from the controller  
+import { signup, signin } from '../controllers/auth.controller.js';  // Import the signup function from the controller  
+ 
 
 const router = express.Router();    // Create a new router object
 
