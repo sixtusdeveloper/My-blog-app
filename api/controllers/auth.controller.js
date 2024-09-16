@@ -15,7 +15,7 @@ export const signup = async (req, res, next) => {
     const newUser = new User({ 
         username, 
         email, 
-        password: hashedPassword 
+        password: hashedPassword, 
     });  // Create a new user object with the extracted fields
 
 
@@ -27,3 +27,6 @@ export const signup = async (req, res, next) => {
        next(error);  // If an error occurs, return the error message
     }
 };  
+
+
+export const signin = async (req, res, next) => {  }  // Define the signin function
