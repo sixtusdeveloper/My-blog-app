@@ -50,9 +50,11 @@ export const signin = async (req, res, next) => {
         }   
 
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key    
+        const { password: pass, ...rest } = validUser._doc;  // Extract the user object from the validUser object and exclude the password field  
+
         res.status(200).cookie('access_token', token, {
             httpOnly: true})
-            .json(validUser);  // Return a success message
+            .json(rest);  // Return a success message
         
     }
     catch (error) {
