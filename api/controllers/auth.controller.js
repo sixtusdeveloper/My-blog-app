@@ -41,7 +41,7 @@ export const signin = async (req, res, next) => {
     try {
         const validUser = await User.findOne({ email });  // Find the user with the provided email address
         if (!validUser) {  // If the user does not exist, return an error
-            next(errorHandler(404, 'User does not exist'));  // Return an error message
+            return next(errorHandler(404, 'User does not exist'));  // Return an error message
         }   
 
         const validPassword = bcryptjs.compareSync(password, validUser.password);  // Compare the provided password with the hashed password stored in the database 
