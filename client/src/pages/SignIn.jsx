@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';  // Import the useDispatch hook
+import OAuth from '../components/OAuth';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -52,6 +53,8 @@ export default function SignIn() {
     }
   };
 
+
+
   return (
     <div className='min-h-screen mt-20'>
       <div className='flex p-8 max-w-5xl gap-8 mx-auto flex-col md:flex-row'>
@@ -83,6 +86,7 @@ export default function SignIn() {
           )}
 
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+            <OAuth /> {/* Added the OAuth component */}
             <div>
               <Label value="Your Email" className='text-base' />
               <TextInput
