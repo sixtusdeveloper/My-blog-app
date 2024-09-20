@@ -39,7 +39,7 @@ export default function OAuth() {
 
     return (
         <Button type="button" gradientDuoTone='pinkToOrange' outline onClick={handleGoogleClick}>
-            <img src="/oauth.png" alt="Google logo" width="30px" height='10px' />
+            <img src="/oauth.png" alt="Google logo" width="30px" height='auto' />
             <span className='ml-2 self-center'>Continue with Google</span>
         </Button>
         

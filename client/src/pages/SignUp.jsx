@@ -58,8 +58,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className='min-h-screen mt-20'>
-      <div className='flex p-8 max-w-5xl gap-8 mx-auto flex-col md:flex-row'>
+    <div className='min-h-screen pt-20'>
+      <div className='flex p-8 lg:p-10 max-w-6xl gap-8 mx-auto flex-col md:flex-row'>
         {/* Left side content */}
         <div className='flex-1'>
           <h1 className="text-2xl font-bold">
@@ -120,14 +120,14 @@ export default function SignUp() {
               />
             </div>
 
-            <Button gradientDuoTone='purpleToPink' className='text-base' type="submit" disabled={loading}>
+            <Button gradientDuoTone='purpleToPink' className='text-base font-semibold p-2' type="submit" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner size='sm' />
                   <span className='ml-2'>Loading...</span>
                 </>
               ) : (
-                'Sign Up'
+                'SIGN UP' 
               )}
             </Button>
           </form>
