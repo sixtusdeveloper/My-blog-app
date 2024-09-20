@@ -1,6 +1,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import OAuth from '../components/OAuth';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -87,6 +88,7 @@ export default function SignUp() {
           )}
 
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+            <OAuth /> {/* Added the OAuth component */}
             <div>
               <Label value="Your username" className='text-base' />
               <TextInput
