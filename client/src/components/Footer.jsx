@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsLinkedin } from 'react-
 export default function FooterCom() {
   return (
     <Footer container className='border border-t-8 border-teal-500'>
-      <div className='w-full max-w-7xl mx-auto'>
+      <div className='w-full max-w-6xl mx-auto'>
         <div className='grid gap-8 lg:gap-10 w-full justify-between lg:grid-cols-2 sm:grid-cols-2'>
           {/* Left section with logo and description */}
           <div className='mt-5 lg:text-left'>
@@ -15,7 +15,7 @@ export default function FooterCom() {
                 DevJourney
               </span>
             </Link>
-            <p className='text-sm leading-snug mt-3'>
+            <p className='text-sm leading-snug mt-3 lg:pr-8'>
               DevJourney is your go-to platform for expert insights, tutorials, and collaborative projects in the world of development. Whether you're a seasoned developer or just starting your journey, we help you sharpen your skills and build meaningful connections.
             </p>
           </div>
