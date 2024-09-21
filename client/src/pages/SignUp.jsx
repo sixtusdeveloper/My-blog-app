@@ -58,8 +58,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className='min-h-screen pt-20'>
-      <div className='flex p-8 lg:p-10 max-w-6xl gap-8 mx-auto flex-col md:flex-row'>
+    <div className='bg-white dark:bg-[rgb(16,23,42)] w-full pt-20'>
+      <div className='flex self-center py-20 px-8 lg:px-10 max-w-6xl gap-8 mx-auto flex-col md:flex-row'>
         {/* Left side content */}
         <div className='flex-1'>
           <h1 className="text-2xl font-bold">
