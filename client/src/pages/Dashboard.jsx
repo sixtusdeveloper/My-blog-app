@@ -25,7 +25,7 @@ export default function Dashboard() {
       </div>
 
       {/* Profile */}
-      <div>
+      <div className='w-full max-w-lg p-4 mx-auto'>
         {tab === 'profile' && <DashboardProfile />}
       </div>
     </div>

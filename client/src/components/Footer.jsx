@@ -25,17 +25,17 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='About Us' />
               <Footer.LinkGroup col>
-                <Footer.Link href='/about'>Our Mission</Footer.Link>
-                <Footer.Link href='/team'>Meet the Team</Footer.Link>
-                <Footer.Link href='/contact'>Contact Us</Footer.Link>
+                <Link to='/about' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Our Mission</Link>
+                <Link to='/team' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Meet the Team</Link>
+                <Link to='/contact' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Contact Us</Link>
               </Footer.LinkGroup>
             </div>
             <div>
               <Footer.Title title='Resources' />
               <Footer.LinkGroup col>
-                <Footer.Link href='/blog'>Blog</Footer.Link>
-                <Footer.Link href='/tutorials'>Tutorials</Footer.Link>
-                <Footer.Link href='/projects'>Open Source Projects</Footer.Link>
+                <Link to='/blog' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Blog</Link>
+                <Link to='/tutorials' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Tutorials</Link>
+                <Link to='/projects' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Open Source Projects</Link>
               </Footer.LinkGroup>
             </div>
 
@@ -43,8 +43,8 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='Legal' />
               <Footer.LinkGroup col>
-                <Footer.Link href='/privacy-policy'>Privacy Policy</Footer.Link>
-                <Footer.Link href='/terms'>Terms &amp; Conditions</Footer.Link>
+                <Link to='/privacy-policy' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Privacy Policy</Link>
+                <Link to='/terms' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Terms &amp; Conditions</Link>
               </Footer.LinkGroup>
             </div>
           </div>
