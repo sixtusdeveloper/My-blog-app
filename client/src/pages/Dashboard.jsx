@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardProfile from '../components/DashboardProfile'; 
 
-
 export default function Dashboard() {
   const location = useLocation()
   const [tab, setTab] = useState('')
