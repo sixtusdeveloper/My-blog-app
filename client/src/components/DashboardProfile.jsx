@@ -93,7 +93,7 @@ export default function DashboardProfile() {
                         />
                     )}
                     <img 
-                        src={imageFileUrl || currentUser.profilePicture || '/user.png'} 
+                        src={imageFileUrl || currentUser?.profilePicture || '/user.png'} 
                         alt={currentUser.username} 
                         className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
                     />
