@@ -14,6 +14,9 @@ export default function DashboardProfile() {
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
     const [imageFileUploadError, setImageFileUploadError] = useState(null);  
     const filePickerRef = useRef();  
+    const [formData, setFormData] = useState({
+
+    })
 
     // Handle image selection and validate the file size
     const handleImageChange = (e) => {
@@ -57,6 +60,9 @@ export default function DashboardProfile() {
         }, () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 setImageFileUrl(downloadURL);
+                setFormData({
+                    ...formData, profilePicture: downloadURL
+                });
 
                 // Set a timeout to remove the progress bar after 2 seconds
                 setTimeout(() => {
@@ -66,11 +72,24 @@ export default function DashboardProfile() {
         });
     };
 
+    const handleChange = (e) => {
+       setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if(object.keys(formData).length === 0){
+            return;
+
+        }
+    }
+
     return (
         <div className='mt-20 w-full p-4'>
             <h1 className='font-semibold text-2xl md:text-3xl text-center p-8'>Profile</h1>
 
-            <form className='flex flex-col gap-6'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                 <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
                 <div className='relative self-center shadow-md overflow-hidden rounded-full w-32 h-32 cursor-pointer' onClick={() => filePickerRef.current.click()}>
                     {imageFileUploadProgress && (
@@ -103,9 +122,9 @@ export default function DashboardProfile() {
                     <Alert type='error' color='failure'>{imageFileUploadError}</Alert>
                 }
                 
-                <TextInput label='Username' type="text" id="username" placeholder="Username" defaultValue={currentUser?.username}/>
-                <TextInput label='Email' type="email" id="email" placeholder="Email" defaultValue={currentUser?.email}/>
-                <TextInput type="password" id="password" placeholder="Password"/>
+                <TextInput label='Username' type="text" id="username" placeholder="Username" defaultValue={currentUser?.username} onChange={handleChange} />
+                <TextInput label='Email' type="email" id="email" placeholder="Email" defaultValue={currentUser?.email} onChange={handleChange} />
+                <TextInput type="password" id="password" placeholder="Password" onChange={handleChange} />
 
                 <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold'>UPDATE</Button>
             </form>
