@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { errorHandler } from './error.js';
 
-export const verifyUser = (req, res, next) => { 
+export const verifyToken = (req, res, next) => { 
    const token = req.cookies.access_token; // verifyUser function to verify a user
 
     if (!token) {
@@ -17,3 +17,6 @@ export const verifyUser = (req, res, next) => {
         next();
     });  // if there is no error, set the user and call the next middleware
 }   
+
+
+
