@@ -9,7 +9,7 @@ export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;  // Extract the username, email and password from the request body 
 
     if (!username || !email || !password || username === '' || email === '' || password === '') {   // If any of the required fields are missing, return an error
-        next(errorHandler(400, 'All fields are required'));  // Return an error message
+        return next(errorHandler(400, 'All fields are required'));  // Return an error message
     }   
 
     const hashedPassword = bcryptjs.hashSync(password, 10);  // Hash the password using bcryptjs  
@@ -36,7 +36,7 @@ export const signin = async (req, res, next) => {
 
 
     if (!email || !password || email === '' || password === '') {  // If any of the required fields are missing, return an error
-        next(errorHandler(400, 'All fields are required'));  // Return an error message
+        return next(errorHandler(400, 'All fields are required'));  // Return an error message
     }   
 
     try {
