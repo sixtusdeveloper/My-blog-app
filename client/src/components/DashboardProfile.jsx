@@ -6,6 +6,9 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { updateStart, updateSuccess, updateFailure } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
+import { set } from 'mongoose';
 
 export default function DashboardProfile() {
     const {currentUser} = useSelector(state => state.user);
@@ -13,10 +16,12 @@ export default function DashboardProfile() {
     const [imageFileUrl, setImageFileUrl] = useState(null);  
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
     const [imageFileUploadError, setImageFileUploadError] = useState(null);  
+    const [imageFileUploading, setImageFileUploading] = useState(false); 
+    const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
+    const [updateUserError, setUpdateUserError] = useState(null);
     const filePickerRef = useRef();  
-    const [formData, setFormData] = useState({
-
-    })
+    const [formData, setFormData] = useState({});
+    const dispatch = useDispatch();
 
     // Handle image selection and validate the file size
     const handleImageChange = (e) => {
@@ -42,6 +47,7 @@ export default function DashboardProfile() {
     }, [imageFile])
 
     const uploadImageToServer = async () => {
+        setImageFileUploading(true);
         setImageFileUploadError(null);
         const storage = getStorage(app);
         const fileName = new Date().getTime() + '-' + imageFile.name;
@@ -57,13 +63,14 @@ export default function DashboardProfile() {
             setImageFileUploadProgress(null);
             setImageFile(null);  // Reset the file
             setImageFileUrl(null);  // Reset the image URL
+            setImageFileUploading(false);
         }, () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 setImageFileUrl(downloadURL);
                 setFormData({
                     ...formData, profilePicture: downloadURL
                 });
-
+                setImageFileUploading(false);
                 // Set a timeout to remove the progress bar after 2 seconds
                 setTimeout(() => {
                     setImageFileUploadProgress(null);  // Hide the progress bar
@@ -79,14 +86,39 @@ export default function DashboardProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if(object.keys(formData).length === 0){
+        setUpdateUserError(null);
+        setUpdateUserSuccess(null);
+
+        if(Object.keys(formData).length === 0){
+            setUpdateUserError('No changes detected');  
+            return;
+        }
+
+        if(imageFileUploading) {
+            setUpdateUserError('Please wait, image still uploading...');
             return;
         }
         
         try {
-            
+            dispatch(updateStart());
+            const res = await fetch(`/api/user/update/${currentUser._id}`, {  
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                dispatch(updateFailure(data.message));
+                setUpdateUserError(data.message);
+            } else {
+                dispatch(updateSuccess(data));  
+                setUpdateUserSuccess("Profile updated successfully");
+            }
         } catch (error) {
-            
+            dispatch(updateFailure(error.message));
+            setUpdateUserError(error.message);
         }
 
     }
@@ -94,7 +126,7 @@ export default function DashboardProfile() {
     return (
         <div className='mt-20 w-full p-4'>
             <h1 className='font-semibold text-2xl md:text-3xl text-center p-8'>Profile</h1>
-
+            
             <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                 <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
                 <div className='relative self-center shadow-md overflow-hidden rounded-full w-32 h-32 cursor-pointer' onClick={() => filePickerRef.current.click()}>
@@ -123,6 +155,14 @@ export default function DashboardProfile() {
                         className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
                     />
                 </div>
+
+                {updateUserError && (
+                    <Alert type='error' color='failure'>{updateUserError}</Alert>
+                )}
+
+                {updateUserSuccess && (
+                   <Alert type='success' color='success'>{updateUserSuccess}</Alert>
+                )}
                 
                 {imageFileUploadError && 
                     <Alert type='error' color='failure'>{imageFileUploadError}</Alert>
