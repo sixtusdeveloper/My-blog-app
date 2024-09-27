@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import postRoutes from './routes/post.route.js'
 import cookieParser from 'cookie-parser'; 
 
 dotenv.config();
@@ -20,6 +21,7 @@ const app = express();
 
 app.use(express.json());    // parse requests of content-type - application/json
 app.use(cookieParser());    // parse requests of content-type - application/x-www-form-urlencoded
+app.use('/api/post', postRoutes); 
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
