@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'; // Import createSlice from @reduxjs/toolkit
 import { sign } from 'jsonwebtoken';
+import { deleteUser } from '../../../../api/controllers/user.controller';
 
 const initialState = {  // Define the initial state
     currentUser: null,
@@ -39,10 +40,28 @@ const userSlice = createSlice({  // Create a slice
             state.loading = false;
             state.error = action.payload;
         },
+        deleteUserStart: (state) => {
+            state.loading = true;
+            state.error = null;
+        },  
+        deleteUserSuccess: (state) => {
+            state.loading = false;
+            state.currentUser = null;
+            state.error = null;
+        },  
+        deleteUserFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        signoutSuccess: (state) => {
+            state.currentUser = null;
+            state.loading = false;
+            state.error = null;
+        }
     },
 });
 
 
-export const { signInStart, signInSuccess, signInFailure, updateStart, updateSuccess, updateFailure } = userSlice.actions;  // Export the actions
+export const { signInStart, signInSuccess, signInFailure, updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } = userSlice.actions;  // Export the actions
 
 export default userSlice.reducer;  // Export the reducer    
