@@ -1,16 +1,18 @@
 
-import { Alert, Button, TextInput } from 'flowbite-react';
+import { Alert, Button, Modal, TextInput } from 'flowbite-react';
 import { useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';  
 import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { updateStart, updateSuccess, updateFailure } from '../redux/user/userSlice';
+import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+
 
 export default function DashboardProfile() {
-    const {currentUser} = useSelector(state => state.user);
+    const {currentUser, error} = useSelector((state) => state.user);
     const [imageFile, setImageFile] = useState(null);   
     const [imageFileUrl, setImageFileUrl] = useState(null);  
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -21,6 +23,7 @@ export default function DashboardProfile() {
     const filePickerRef = useRef();  
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);  
 
     // Handle image selection and validate the file size
     const handleImageChange = (e) => {
@@ -44,7 +47,8 @@ export default function DashboardProfile() {
             uploadImageToServer();   
         }   
     }, [imageFile])
-
+     
+    // Image upload function
     const uploadImageToServer = async () => {
         setImageFileUploading(true);
         setImageFileUploadError(null);
@@ -81,7 +85,8 @@ export default function DashboardProfile() {
     const handleChange = (e) => {
        setFormData({ ...formData, [e.target.id]: e.target.value });
     };
-
+   
+    // Update User function
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -121,6 +126,45 @@ export default function DashboardProfile() {
         }
 
     }
+    
+    // Delete User function    
+    const handleDeleteUser = async () => {
+        setShowModal(false);
+
+        try {
+            dispatch(deleteUserStart());
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE',
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                dispatch(deleteUserFailure(data.message));
+            } else {
+                dispatch(deleteUserSuccess(data));
+            }
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message));
+        }
+    }
+
+    // Signed Out function
+    const handleSignout = async () => {   
+
+        try {
+            const res = await fetch('/api/user/signout', {
+                method: 'POST',
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                console.log(data.message); 
+            }
+            else {
+                dispatch(signoutSuccess());
+            }
+        } catch (error) {   
+            console.log(error);
+        }
+    }
 
     return (
         <div className='mt-20 w-full p-4'>
@@ -155,6 +199,9 @@ export default function DashboardProfile() {
                     />
                 </div>
 
+                {error && (
+                    <Alert type='error' color='failure'>{error}</Alert>
+                )}
                 {updateUserError && (
                     <Alert type='error' color='failure'>{updateUserError}</Alert>
                 )}
@@ -175,9 +222,26 @@ export default function DashboardProfile() {
             </form>
 
             <div className='flex justify-between py-8'>
-                <span className='text-purple-600 hover:text-purple-800 cursor-pointer'>Delete Account</span>
-                <span className='text-purple-600 hover:text-purple-800 cursor-pointer'>Sign Out</span>
+                <span onClick={() => setShowModal(true)} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Delete Account</span>
+                <span onClick={handleSignout} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Sign Out</span>
             </div>
+
+            <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+               <Modal.Header />
+
+                <Modal.Body>
+                    <div className="text-center p-4"> 
+                        <HiOutlineExclamationCircle className='h-14 w-14 mx-auto mb-4 text-red-800' />
+
+                        <h3 className='text-center text-lg mb-4 text-gray-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
+
+                        <div className='flex justify-center gap-4'>
+                            <Button color='failure' onClick={handleDeleteUser} className='text-base font-semibold'>Yes, Delete</Button>
+                            <Button color='gray' onClick={() => setShowModal(false)} className='text-base font-semibold'>No, Cancel</Button>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }
