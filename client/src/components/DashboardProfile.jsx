@@ -9,10 +9,11 @@ import 'react-circular-progressbar/dist/styles.css';
 import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserSuccess, deleteUserFailure, signoutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 
 export default function DashboardProfile() {
-    const {currentUser, error} = useSelector((state) => state.user);
+    const {currentUser, error, loading} = useSelector((state) => state.user);
     const [imageFile, setImageFile] = useState(null);   
     const [imageFileUrl, setImageFileUrl] = useState(null);  
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -218,7 +219,15 @@ export default function DashboardProfile() {
                 <TextInput label='Email' type="email" id="email" placeholder="Email" defaultValue={currentUser?.email} onChange={handleChange} />
                 <TextInput type="password" id="password" placeholder="Password" onChange={handleChange} />
 
-                <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold'>UPDATE</Button>
+                <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold' disabled={loading || imageFileUploading}>
+                   {loading ? 'Loading...' : 'UPDATE PROFILE'} 
+                </Button>
+                {/* IsAdmin functionality */}
+                {currentUser.isAdmin && (
+                    <Link to={'/create-post'}>
+                       <Button type="button" gradientDuoTone='purpleToPink' outline className='mt-4 w-full text-base font-semibold'>CREATE POST</Button>
+                    </Link>
+                )}  
             </form>
 
             <div className='flex justify-between py-8'>
