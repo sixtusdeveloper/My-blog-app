@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png',
  
     },
+    isAdmin: {
+        type: Boolean,
+        default : false, 
+    },
   },
 
     { timestamps: true }

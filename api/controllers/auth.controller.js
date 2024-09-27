@@ -50,7 +50,7 @@ export const signin = async (req, res, next) => {
             return next(errorHandler(400, 'Invalid password'));  // Return an error message
         }   
 
-        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key    
+        const token = jwt.sign({ id: validUser._id, isAdmin: validUser.isAdmin }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key    
         const { password: pass, ...rest } = validUser._doc;  // Extract the user object from the validUser object and exclude the password field  
 
         res.status(200).cookie('access_token', token, {
@@ -71,7 +71,7 @@ export const google = async (req, res, next) => {
     try {
         const user = await User.findOne({ email });  // Find the user with the provided email address
        if(user){  // If the user already exists, return a success message
-            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key
+            const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key
             const { password, ...rest } = user._doc;  // Extract the user object from the user object and exclude the password field
             res.status(200).cookie('access_token', token, {
                 httpOnly: true})
@@ -89,12 +89,12 @@ export const google = async (req, res, next) => {
             });  // Create a new user object with the extracted fields
             await newUser.save();  // Save the user to the database
 
-            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key
+            const token = jwt.sign({ id: newUser._id, isAdmin: newUser.isAdmin }, process.env.JWT_SECRET);  // Create a new token with the user's id and the secret key
             const { password, ...rest } = newUser._doc;  // Extract the user object from the newUser object and exclude the password field
             res.status(200).cookie('access_token', token, {
                 httpOnly: true,
             })
-            .json(rest);  // Return a success message
+            .json(rest);  // Return a success messageser
 
         }
     }   
