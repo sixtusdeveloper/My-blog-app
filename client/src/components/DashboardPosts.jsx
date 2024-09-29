@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 export default function DashboardPosts() {
   const { currentUser } = useSelector(state => state.user);
-  const [ userPosts, setUserPosts ] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
+  const [showMore, setShowMore] = useState(true);  
   console.log(userPosts);
   useEffect(() => { 
     const fetchPosts = async () => {  
@@ -14,6 +15,9 @@ export default function DashboardPosts() {
         const data = await res.json()
         if(res.ok) {
           setUserPosts(data.posts)
+          if(data.posts.length < 9) {
+            setShowMore(false)
+          }
         } 
       } catch (error) {
         console.log(error)
@@ -24,12 +28,28 @@ export default function DashboardPosts() {
       fetchPosts();
     }
   }, [currentUser._id])
+
+  const handleShowMore = async () => {
+    const startIndex = userPosts.length;   
+    try {
+      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`)
+      const data = await res.json()
+      if(res.ok) {
+        setUserPosts([...userPosts, ...data.posts])
+        if(data.posts.length < 9) {
+          setShowMore(false)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
-    <div className='relative mt-4 mx-auto py-4 table-auto overscroll-x-scroll 
+    <div className='relative mt-4 mx-auto py-4 table-auto overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
     dark:scrollbar-thumb-slate-500'>
         {currentUser.isAdmin && userPosts.length > 0 ? (
-          // <div className='flex flex-col justify-center'>
+          <div>
             <Table hoverable className='shadow-md'>
               <Table.Head>
                 <Table.HeadCell>Date updated</Table.HeadCell>
@@ -80,7 +100,14 @@ export default function DashboardPosts() {
                 </Table.Body>
               ))}
             </Table>
-          // </div>
+            {showMore && (
+              <div className='flex justify-center mt-4'>
+                <button onClick={handleShowMore} className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600'>
+                  Load More
+                </button>
+              </div>
+            )}  
+          </div>
         ) : (
           <h1 className='text-center text-2xl'>No Posts Found</h1>
         )}
