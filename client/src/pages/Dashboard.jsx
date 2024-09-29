@@ -4,6 +4,7 @@ import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardProfile from '../components/DashboardProfile'; 
 import DashboardPosts from '../components/DashboardPosts';
 
+
 export default function Dashboard() {
   const location = useLocation()
   const [tab, setTab] = useState('')
@@ -25,11 +26,18 @@ export default function Dashboard() {
       </div>
 
       {/* Profile */}
-      <div className='w-full max-w-lg p-4 mx-auto'>
-        {tab === 'profile' && <DashboardProfile />}
+      <div className='w-full p-4 mx-auto'>
+        <div className='w-full px-4 mx-auto max-w-lg '>
+          {tab === 'profile' && <DashboardProfile />}
+        </div>
 
-        {tab === 'posts' && <DashboardPosts />} 
+        <div className='w-full pt-4 mx-auto max-w-7xl'>
+          {tab === 'posts' && <DashboardPosts />} 
+        </div>
+
       </div>
+
+      
     </div>
   )
 }

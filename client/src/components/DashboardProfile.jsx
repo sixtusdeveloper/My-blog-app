@@ -168,7 +168,7 @@ export default function DashboardProfile() {
     }
 
     return (
-        <div className='mt-20 w-full p-4'>
+        <div className='mt-10 w-full p-4'>
             <h1 className='font-semibold text-2xl md:text-3xl text-center p-8'>Profile</h1>
             
             <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
