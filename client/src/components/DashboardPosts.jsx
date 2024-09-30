@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';  
-import { Table } from 'flowbite-react';
+import { Table, Modal, Button } from 'flowbite-react';
 import { Link } from 'react-router-dom';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { set } from 'mongoose';
 
 export default function DashboardPosts() {
   const { currentUser } = useSelector(state => state.user);
   const [userPosts, setUserPosts] = useState([]);
-  const [showMore, setShowMore] = useState(true);  
-  console.log(userPosts);
+  const [showMore, setShowMore] = useState(true); 
+  const [showModal, setShowModal] = useState(false);  
+  const [postIdToDelete, setPostIdToDelete] = useState('');
+
   useEffect(() => { 
     const fetchPosts = async () => {  
       try {
@@ -32,10 +36,10 @@ export default function DashboardPosts() {
   const handleShowMore = async () => {
     const startIndex = userPosts.length;   
     try {
-      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`)
+      const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`);
       const data = await res.json()
       if(res.ok) {
-        setUserPosts([...userPosts, ...data.posts])
+        setUserPosts((prev) => [...prev, ...data.posts])
         if(data.posts.length < 9) {
           setShowMore(false)
         }
@@ -44,6 +48,23 @@ export default function DashboardPosts() {
       console.log(error)
     }
   }
+
+  const handleDeletePost = async () => { 
+    setShowModal(false);
+    try {
+      const res = await fetch(`/api/post/deletepost/${postIdToDelete}/${currentUser._id}`, {
+        method: 'DELETE'
+      })
+      if(res.ok) {
+        setUserPosts((prev) => prev.filter((post) => post._id !== postIdToDelete))
+        setShowModal(false)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <div className='relative mt-4 mx-auto py-4 table-auto overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
@@ -81,13 +102,16 @@ export default function DashboardPosts() {
                     </Table.Cell>
 
                     <Table.Cell>
-                      <Link to={`/category/${post.category}`} className='text-purple-500 font-medium hover:text-purple-600'>
+                      <Link to={`/category/${post.category}`} className='text-purple-500 cursor-pointer font-medium hover:text-purple-600'>
                         {post.category}
                       </Link>
                     </Table.Cell>
 
                     <Table.Cell>
-                      <span className='bg-red-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600'>Delete</span>
+                      <span onClick={() => {
+                        setShowModal(true)
+                        setPostIdToDelete(post._id) 
+                      }} className='bg-red-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600'>Delete</span>
                     </Table.Cell>
 
                     <Table.Cell>
@@ -102,7 +126,7 @@ export default function DashboardPosts() {
             </Table>
             {showMore && (
               <div className='flex justify-center mt-4'>
-                <button onClick={handleShowMore} className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600'>
+                <button onClick={handleShowMore} className='text-purple-500 px-4 py-2 hover:text-purple-600'>
                   Load More
                 </button>
               </div>
@@ -111,6 +135,23 @@ export default function DashboardPosts() {
         ) : (
           <h1 className='text-center text-2xl'>No Posts Found</h1>
         )}
+
+        <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+          <Modal.Header />
+
+          <Modal.Body>
+            <div className="text-center p-4"> 
+              <HiOutlineExclamationCircle className='h-14 w-14 mx-auto mb-4 text-red-800' />
+
+              <h3 className='text-center text-lg mb-4 text-gray-500 dark:text-gray-400'>Are you sure you want to delete this post?</h3>
+
+              <div className='flex justify-center gap-4'>
+                  <Button color='failure' onClick={handleDeletePost} className='text-base font-semibold'>Yes, Delete</Button>
+                  <Button color='gray' onClick={() => setShowModal(false)} className='text-base font-semibold'>No, Cancel</Button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
     </div>
   )
 }
