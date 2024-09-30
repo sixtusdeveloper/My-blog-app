@@ -103,6 +103,7 @@ export default function CreatePost() {
                             <option value='vuejs'>Vue.js</option>
                             <option value='vuejs'>CSS</option>
                             <option value='vuejs'>Java</option>
+                            <option value='vuejs'>MySQL</option>
                         
                         </Select>
                     </div>
