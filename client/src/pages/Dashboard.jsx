@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardProfile from '../components/DashboardProfile'; 
 import DashboardPosts from '../components/DashboardPosts';
+import DashboardUsers from '../components/DashboardUsers';
 
 
 export default function Dashboard() {
@@ -30,9 +31,15 @@ export default function Dashboard() {
         <div className='w-full px-4 mx-auto max-w-lg '>
           {tab === 'profile' && <DashboardProfile />}
         </div>
-
+       
+       {/* posts */}
         <div className='w-full pt-4 mx-auto max-w-7xl'>
           {tab === 'posts' && <DashboardPosts />} 
+        </div>
+
+        {/* users */}
+        <div className='w-full pt-4 mx-auto max-w-7xl'>
+          {tab === 'users' && <DashboardUsers />}
         </div>
 
       </div>
