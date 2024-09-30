@@ -88,3 +88,41 @@ export const signout = (req, res) => {
     }
 }
 
+
+export const getUsers = async (req, res, next) => {
+
+    if(!req.user.isAdmin){
+        return next(errorHandler(403, 'You are not authorized to perform this action'));
+    }
+    try {
+        const startIndex = parseInt(req.query.startIndex) || 0;  // Get the startIndex from the query parameters
+        const limit = parseInt(req.query.limit) || 10;  // Get the limit from the query parameters
+        const sortDirection = req.query.sort === 'asc' ? 1 : -1;  // Get the sortDirection from the query parameters
+
+        const users = await User.find().sort({ createdAt: sortDirection}).skip(startIndex).limit(limit);  // Find all users   
+
+        const usersWithoutPassword = users.map((user) => { // Exclude the password from the user data
+            const { password, ...rest } = user._doc;
+            return rest;
+        });
+
+        const totalUsers = await User.countDocuments();  // Get the total number of users   
+        const now = new Date();  // Get the current date    
+
+        const oneMonthAgo = new Date(  // Get the date one month ago
+            now.getFullYear(),
+            now.getMonth() - 1,
+            now.getDate()
+        );  
+
+        const lastMonthUsers = await User.countDocuments({  // Get the number of users created in the last month
+            createdAt: {
+                $gte: oneMonthAgo,
+            }
+        }); 
+
+        res.status(200).json({ users: usersWithoutPassword, totalUsers, lastMonthUsers });  // Return the users data    
+    } catch (error) {
+        next(error);  // Handle any errors
+    }
+}
