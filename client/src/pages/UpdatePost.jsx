@@ -3,20 +3,52 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { app } from '../firebase';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useSelector } from 'react-redux';
 
 
-export default function CreatePost() {
+export default function UpdatePost() {
     
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null); 
     const navigate = useNavigate(); 
     const [formData, setFormData] = useState({});   
-    const [publishError, setPublishError] = useState(null);    
+    const [publishError, setPublishError] = useState(null);  
+    const { postId } = useParams();  
+    const { currentUser } = useSelector((state) => state.user);
+
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const res = await fetch(`/api/post/getposts?postId=${postId}`);
+                const data = await res.json();
+                
+                if (!res.ok) {
+                    console.log(data.message);
+                    setPublishError(data.message);
+                    return;
+                }
+    
+                // Ensure _id is part of formData
+                if (res.ok && data.posts[0]) {
+                    setPublishError(null);
+                    setFormData({
+                        ...data.posts[0], // Assuming posts[0] contains the necessary data including _id
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchPost();
+    }, [postId]);
+
+    
     const hangleUploadImage = async () => {
 
         try {
@@ -53,57 +85,64 @@ export default function CreatePost() {
         
     }
 
-    const handleSubmit = async (e) => { 
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/post/create', {
-                method: 'POST',
+            // Use postId from useParams if formData._id is undefined
+            const postIdToUpdate = formData._id || postId;
+    
+            const res = await fetch(`/api/post/updatepost/${postIdToUpdate}/${currentUser._id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
+    
             const data = await res.json();
-            if(!res.ok){    
-               setPublishError(data.message);
-               return;
+            
+            if (!res.ok) {
+                setPublishError(data.message);
+                return;
             }
-
-            if(res.ok){
-                setPublishError(null);   
-                navigate(`/post/${data.slug}`);  
+    
+            if (res.ok) {
+                setPublishError(null);
+                navigate(`/post/${data.slug}`);
             }
+        } catch (error) {
+            setPublishError('Something went wrong');
         }
-        catch (error) {
-            setPublishError('Post creation failed. Please try again');
-        }
-    }
+    };
 
     return (
         <div className='bg-white dark:bg-[rgb(16,23,42)] min-h-screen px-4 md:px-10 w-full'>
             <div className="max-w-3xl py-20 mx-auto">
-                <h1 className='text-center font-semibold text-3xl my-16 md:mt-20'>Create Your Post</h1>
+                <h1 className='text-center font-semibold text-3xl my-16 md:mt-20'>Update Post</h1>
 
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
                      
                     <div className='flex flex-col gap-4 sm:flex-row justify-between'>
                         <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({
                             ...formData, title: e.target.value  
-                        })}/>
+                        })}
+                        value={formData.title}
+                        />
 
                         <Select onChange={(e) => setFormData({
                             ...formData, category: e.target.value 
                            })}
+                            value={formData.category}
                          >
                             <option value='uncategorized'>Select a Category</option>
                             <option value='javascript'>JavaScript</option>
-                            <option value='mysql'>MySQL</option>
                             <option value='reactjs'>React.js</option>
                             <option value='nextjs'>Next.js</option>
                             <option value='typescript'>TypeScript</option>
                             <option value='vuejs'>Vue.js</option>
-                            <option value='css'>CSS</option>
-                            <option value='java'>Java</option>
+                            <option value='vuejs'>CSS</option>
+                            <option value='vuejs'>Java</option>
+                            <option value='vuejs'>MySQL</option>
                         
                         </Select>
                     </div>
@@ -138,8 +177,9 @@ export default function CreatePost() {
                     onChange={(value) => setFormData({
                         ...formData, content: value
                     })} 
+                    value={formData.content}
                     />    
-                    <Button type='submit' gradientDuoTone='purpleToPink'>PUBLISH POST</Button>
+                    <Button type='submit' gradientDuoTone='purpleToPink'>UPDATE POST</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>
             
