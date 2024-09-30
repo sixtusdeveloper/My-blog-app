@@ -55,9 +55,12 @@ export default function DashboardPosts() {
       const res = await fetch(`/api/post/deletepost/${postIdToDelete}/${currentUser._id}`, {
         method: 'DELETE'
       })
-      if(res.ok) {
-        setUserPosts((prev) => prev.filter((post) => post._id !== postIdToDelete))
-        setShowModal(false)
+      const data = await res.json() 
+      if(!res.ok) {
+        console.log(data.message)
+      }else{
+        setUserPosts((prev) => prev.filter((post) => post._id !== postIdToDelete ))
+
       }
     } catch (error) {
       console.log(error)
@@ -66,7 +69,7 @@ export default function DashboardPosts() {
 
 
   return (
-    <div className='relative mt-4 mx-auto py-4 table-auto overflow-x-scroll 
+    <div className='relative mt-4 mx-auto py-4 table-auto lg:overflow-hidden overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
     dark:scrollbar-thumb-slate-500'>
         {currentUser.isAdmin && userPosts.length > 0 ? (
