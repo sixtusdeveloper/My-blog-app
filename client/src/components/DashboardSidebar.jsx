@@ -1,5 +1,5 @@
 import { Sidebar } from 'flowbite-react'; 
-import { HiUser, HiArrowSmRight, HiDocumentText } from 'react-icons/hi';
+import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup } from 'react-icons/hi';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -65,6 +65,18 @@ export default function DashboardSidebar() {
                             icon={HiDocumentText}
                         >
                             Posts
+                        </Sidebar.Item>
+                    )}
+
+                    {currentUser.isAdmin && (
+                        // Render this item only if the user is an admin
+                        <Sidebar.Item
+                            as={Link}
+                            to='/dashboard?tab=users'  
+                            active={tab === 'users'}
+                            icon={HiOutlineUserGroup}
+                        >
+                            Users
                         </Sidebar.Item>
                     )}
 
