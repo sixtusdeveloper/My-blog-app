@@ -179,7 +179,7 @@ export default function UpdatePost() {
                     })} 
                     value={formData.content}
                     />    
-                    <Button type='submit' gradientDuoTone='purpleToPink'>UPDATE POST</Button>
+                    <Button type='submit' gradientDuoTone='purpleToPink'>Update Post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>
             

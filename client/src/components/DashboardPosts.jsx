@@ -69,7 +69,7 @@ export default function DashboardPosts() {
 
 
   return (
-    <div className='relative mt-4 mx-auto py-4 table-auto lg:overflow-hidden overflow-x-scroll 
+    <div className='relative mt-6 mx-auto py-4 table-auto lg:overflow-hidden overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
     dark:scrollbar-thumb-slate-500'>
         {currentUser.isAdmin && userPosts.length > 0 ? (
