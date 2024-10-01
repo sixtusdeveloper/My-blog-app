@@ -220,12 +220,12 @@ export default function DashboardProfile() {
                 <TextInput type="password" id="password" placeholder="Password" onChange={handleChange} />
 
                 <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold' disabled={loading || imageFileUploading}>
-                   {loading ? 'Loading...' : 'UPDATE PROFILE'} 
+                   {loading ? 'Loading...' : 'Update Profile'}   
                 </Button>
                 {/* IsAdmin functionality */}
                 {currentUser.isAdmin && (
                     <Link to={'/create-post'}>
-                       <Button type="button" gradientDuoTone='purpleToPink' outline className='mt-4 w-full text-base font-semibold'>CREATE POST</Button>
+                       <Button type="button" gradientDuoTone='purpleToPink' outline className='mt-4 w-full text-base font-semibold'>Create post</Button>
                     </Link>
                 )}  
             </form>

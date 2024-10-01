@@ -104,6 +104,10 @@ export default function CreatePost() {
                             <option value='vuejs'>Vue.js</option>
                             <option value='css'>CSS</option>
                             <option value='java'>Java</option>
+                            <option value='php'>PHP</option>
+                            <option value='shell'>Shell</option>
+                            <option value='python'>Python</option>
+                            <option value='tailwindcss'>Tailwindcss</option>
                         
                         </Select>
                     </div>
@@ -139,7 +143,7 @@ export default function CreatePost() {
                         ...formData, content: value
                     })} 
                     />    
-                    <Button type='submit' gradientDuoTone='purpleToPink'>PUBLISH POST</Button>
+                    <Button type='submit' gradientDuoTone='purpleToPink'>Publish post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>
             
