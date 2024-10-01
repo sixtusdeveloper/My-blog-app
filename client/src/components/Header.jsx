@@ -41,7 +41,7 @@ export default function Header () {
     <Navbar className='border-b-2 lg:px-8 fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800'>
       <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
           <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px"/>
-          <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
+          <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
           DevJourney
           </span>
       </Link>
