@@ -4,14 +4,14 @@ import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsLinkedin } from 'react-
 
 export default function FooterCom() {
   return (
-    <Footer container className='border border-t-8 border-teal-500'>
+    <Footer container className='border border-t-8 border-blue-500'>
       <div className='w-full max-w-6xl mx-auto lg:px-10 px-4'>
         <div className='grid gap-8 lg:gap-10 w-full justify-between lg:grid-cols-2 sm:grid-cols-2'>
           {/* Left section with logo and description */}
           <div className='mt-5 lg:text-left'>
             <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
               <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px" />
-              <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
+              <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
                 DevJourney
               </span>
             </Link>
