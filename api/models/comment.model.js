@@ -3,22 +3,22 @@ import mongoose from "mongoose";
 const commentSchema = new mongoose.Schema({
     content: {
         type: String,
-        required: true
+        required: true,
     },
 
     postId: {
         type: String,
-        required: true
+        required: true,
     },
 
     userId: {
         type: String,
-        required: true
+        required: true,
     },
 
     likes: {
         type: Array,
-        default: []
+        default: [],
     },
 
     numberOfLikes: {
@@ -26,7 +26,9 @@ const commentSchema = new mongoose.Schema({
         default: 0,
     },
 
-}, { timestamps: true });
+   },
+   { timestamps: true }
+);
 
 const Comment = mongoose.model('Comment', commentSchema);
 
