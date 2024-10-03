@@ -2,7 +2,7 @@ import { Spinner, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import CallToAction from "../pages/CallToAction";
-import CommentSection from "../pages/CommentSection";
+import CommentSection from "../components/CommentSection";
 
 
 export default function PostPage() {
@@ -85,11 +85,6 @@ export default function PostPage() {
 
                 <CommentSection postId={post._id} />
             </div>
-
-                
-        
-            
-            
         </main>
     );
 }
