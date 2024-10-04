@@ -83,6 +83,14 @@ export default function CommentSection({postId}) {
             console.log(error.message);
         }
     }
+
+    const handleEdit = async (comment, editedContent) => {
+        setComments(
+          comments.map((c) =>
+            c._id === comment._id ? { ...c, content: editedContent } : c
+          )
+        );
+    };
     
     return (
         <div className='w-full'>
@@ -109,7 +117,7 @@ export default function CommentSection({postId}) {
 
                         <Textarea
                             placeholder='Write a comment...'   
-                            rows='3'
+                            rows='4'
                             maxLength='250' 
                             onChange={(e) => setComment(e.target.value)}
                             value={comment}
@@ -135,7 +143,7 @@ export default function CommentSection({postId}) {
                         </div>
                         {
                             comments.map(comment => (
-                                <Comment key={comment._id} comment={comment} onLike={handleLike} />
+                                <Comment key={comment._id} comment={comment} onLike={handleLike} onEdit={handleEdit} />
                             ))  
                         }
                     </>
