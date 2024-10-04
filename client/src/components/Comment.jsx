@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
+import { FaThumbsUp } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-export default function Comment({ comment }) {
+export default function Comment({ comment, onLike }) {
     const [user, setUser] = useState({}); 
-    console.log(user);
+    const { currentUser } = useSelector((state) => state.user);
+
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -31,7 +34,18 @@ export default function Comment({ comment }) {
                     <span className='text-[13px] text-gray-500'>{moment(comment.createdAt).fromNow()}</span>
                 </div>
 
-                <p className='mb-2 text-gray-600 dark:text-gray-200'>{comment.content}</p>
+                <p className='mb-2 text-gray-500 dark:text-gray-400'>{comment.content}</p>
+
+                <div className='flex gap-2 items-center pt-2 border-t dark:border-gray-700 max-w-fit'>
+                    <button type='button' onClick={() => onLike(comment._id)} 
+                    className={`text-gray-400 hover:text-blue-600 dark:text-blue-500
+                    ${currentUser && comment.likes.includes(currentUser._id) && '!text-blue-600 dark:!text-blue-500'}`}>
+                        <FaThumbsUp className='mr-1 text-sm' />
+                    </button>
+                    <span className='text-gray-400 text-[13px]'>
+                        {comment.numberOfLikes > 0 && comment.numberOfLikes + ' ' + (comment.numberOfLikes === 1 ? 'likes' : 'like')} 
+                    </span>
+                </div>
             </div>
             
         </div>
