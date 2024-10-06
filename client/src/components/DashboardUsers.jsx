@@ -1,6 +1,7 @@
+
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';  
-import { Table, Modal, Button } from 'flowbite-react';
+import { Table, Modal, Button, Spinner } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaCheck, FaTimes } from 'react-icons/fa';  
@@ -11,6 +12,7 @@ export default function DashboardUsers() {
   const [showMore, setShowMore] = useState(true); 
   const [showModal, setShowModal] = useState(false);  
   const [userIdToDelete, setUserIdToDelete] = useState('');
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => { 
     const fetchUsers = async () => {  
@@ -23,12 +25,16 @@ export default function DashboardUsers() {
             setShowMore(false)
           }
         } 
+        setLoading(false); // Stop spinner after loading data
       } catch (error) {
         console.log(error)
+        setLoading(false); // Stop spinner even if there's an error
       }
     } 
 
     if(currentUser.isAdmin) {
+      setLoading(true); // Start spinner when fetching begins
+      setTimeout(fetchUsers, 2000); // Fetch after a 2-second delay
       fetchUsers();
     }
   }, [currentUser._id])
@@ -66,6 +72,16 @@ export default function DashboardUsers() {
     } catch (error) {
       console.log(error)
     }
+  }
+
+
+  // Spinner logic
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen py-20">
+        <Spinner size="xl" />
+      </div>
+    );
   }
 
 
@@ -151,4 +167,22 @@ export default function DashboardUsers() {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
