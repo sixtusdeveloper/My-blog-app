@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';  
-import { Table, Modal, Button } from 'flowbite-react';
+import { Table, Modal, Button, Spinner } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { set } from 'mongoose';
 
 export default function DashboardPosts() {
   const { currentUser } = useSelector(state => state.user);
@@ -11,6 +10,7 @@ export default function DashboardPosts() {
   const [showMore, setShowMore] = useState(true); 
   const [showModal, setShowModal] = useState(false);  
   const [postIdToDelete, setPostIdToDelete] = useState('');
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => { 
     const fetchPosts = async () => {  
@@ -23,13 +23,17 @@ export default function DashboardPosts() {
             setShowMore(false)
           }
         } 
+        setLoading(false); // Stop spinner after loading data
       } catch (error) {
         console.log(error)
+        setLoading(false); // Stop spinner even if there's an error
       }
     } 
 
     if(currentUser.isAdmin) {
       fetchPosts();
+      setLoading(true); // Start spinner when fetching begins
+      setTimeout(fetchPosts, 2000); // Fetch after a 2-second delay
     }
   }, [currentUser._id])
 
@@ -66,6 +70,17 @@ export default function DashboardPosts() {
       console.log(error)
     }
   }
+
+
+  // Spinner logic
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen py-20">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+
 
 
   return (

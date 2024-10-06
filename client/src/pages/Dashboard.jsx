@@ -4,6 +4,7 @@ import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardProfile from '../components/DashboardProfile'; 
 import DashboardPosts from '../components/DashboardPosts';
 import DashboardUsers from '../components/DashboardUsers';
+import DashboardComments from '../components/DashboardComments';
 
 
 export default function Dashboard() {
@@ -32,14 +33,19 @@ export default function Dashboard() {
           {tab === 'profile' && <DashboardProfile />}
         </div>
        
-       {/* posts */}
+       {/* Posts */}
         <div className='w-full pt-4 mx-auto max-w-7xl'>
           {tab === 'posts' && <DashboardPosts />} 
         </div>
 
-        {/* users */}
+        {/* Users */}
         <div className='w-full pt-4 mx-auto max-w-7xl'>
           {tab === 'users' && <DashboardUsers />}
+        </div>
+
+        {/* Comments */}
+        <div className='w-full pt-4 mx-auto max-w-7xl'>
+          {tab === 'comments' && <DashboardComments />}
         </div>
 
       </div>
