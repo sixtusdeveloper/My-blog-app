@@ -119,6 +119,12 @@ export default function PostPage({ posts }) {
                         recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
                     </div>
 
+                    <Link to={'/search'}>
+                        <Button gradientDuoTone='purpleToBlue' outline className='self-center my-4'>
+                        View all posts
+                        </Button>
+                    </Link>
+
                 </div>
             </div>
         </main>
