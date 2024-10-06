@@ -5,6 +5,7 @@ import DashboardProfile from '../components/DashboardProfile';
 import DashboardPosts from '../components/DashboardPosts';
 import DashboardUsers from '../components/DashboardUsers';
 import DashboardComments from '../components/DashboardComments';
+import DashboardComponent from '../components/DashboardComponent';
 
 
 export default function Dashboard() {
@@ -46,6 +47,11 @@ export default function Dashboard() {
         {/* Comments */}
         <div className='w-full pt-4 mx-auto max-w-7xl'>
           {tab === 'comments' && <DashboardComments />}
+        </div>
+
+        {/* Dashboard component */}
+        <div className='w-full pt-0 md:pt-2 mx-auto max-w-7xl'>
+          {tab === 'dash' && <DashboardComponent />}
         </div>
 
       </div>
