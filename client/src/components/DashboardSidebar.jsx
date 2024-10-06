@@ -1,5 +1,5 @@
 import { Sidebar } from 'flowbite-react'; 
-import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, } from 'react-icons/hi';
+import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie, } from 'react-icons/hi';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -45,6 +45,19 @@ export default function DashboardSidebar() {
             <Sidebar.Items className='mt-20'>
                 <Sidebar.ItemGroup className='flex flex-col gap-1'>
                     {/* Use the `as` prop to render `Sidebar.Item` as a `Link` */}
+                    {currentUser && currentUser.isAdmin && (
+                        <Sidebar.Item
+                            as={Link}
+                            to='/dashboard?tab=dash'
+                            active={tab === 'dash' || !tab}
+                            icon={HiChartPie}
+                            labelColor='dark'
+                        >
+                            Dashboard
+                        </Sidebar.Item>
+                    )}
+
+                    {/* Use the `as` prop to render `Sidebar.Item` as a `Link` */}
                     <Sidebar.Item
                         as={Link}
                         to='/dashboard?tab=profile'
@@ -55,6 +68,7 @@ export default function DashboardSidebar() {
                     >
                         Profile
                     </Sidebar.Item>
+                    
  
                     {currentUser.isAdmin && (
                         // Render this item only if the user is an admin

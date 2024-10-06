@@ -90,7 +90,7 @@ export default function DashComments() {
 
 
   return (
-    <div className='relative mt-4 mx-auto py-4 table-auto lg:overflow-hidden overflow-x-scroll 
+    <div className='relative mx-auto py-2 table-auto lg:overflow-hidden overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
     dark:scrollbar-thumb-slate-500'>
         {currentUser.isAdmin && comments.length > 0 ? (
@@ -112,14 +112,14 @@ export default function DashComments() {
                       {new Date(comment.updatedAt).toLocaleString()}
                     </Table.Cell>
 
-                    <Table.Cell className='text-gray-300'>
+                    <Table.Cell className='text-gray-500 dark:text-gray-400'>
                       {comment.content}
                     </Table.Cell>
 
                     <Table.Cell className='text-gray-300'>{comment.numberOfLikes}</Table.Cell>
-
-                    <Table.Cell className='text-cyan-600'>{comment.postId}</Table.Cell>
                     
+                    <Table.Cell className='text-gray-500 dark:text-gray-300'>{comment.postId}</Table.Cell>
+                    <Table.Cell className='text-gray-500 dark:text-gray-300'>{comment.userId}</Table.Cell>
                     <Table.Cell>
                       <span onClick={() => {
                         setShowModal(true)
