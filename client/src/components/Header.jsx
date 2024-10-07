@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai'; 
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { FaUser } from 'react-icons/fa';
@@ -9,13 +9,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
 
+
 export default function Header () {
   const dispatch = useDispatch();
   const path = useLocation().pathname;  // get the current path
   const { currentUser } = useSelector(state => state.user); 
   const { theme } = useSelector(state => state.theme);  // get the current theme
+  const [searchTerm, setSearchTerm] = useState('');  // Search term state 
+  const location = useLocation();  // Get the current location
+  const navigate = useNavigate();  // Get the navigate function
   // Define a fallback avatar image
   const defaultAvatar = '/public/user.png'; // You can use an appropriate path to a default avatar image
+
+
+  useEffect(() => {
+    // Get the search query from the URL
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');  // Get the search term from the URL
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);  // Set the search term state
+    } 
+  }, [location.search]);
 
    // Signed Out function
   const handleSignout = async () => {   
@@ -37,6 +51,17 @@ export default function Header () {
   }
 
 
+  // Handle the search form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('searchTerm', searchTerm);  // Set the search term in the URL
+    const searchQuery = urlParams.toString();  // Convert the URLSearchParams object to a string
+    // Redirect to the search page with the search term
+    navigate(`/search?${searchTerm}`);
+  }
+
+
   return (
     <Navbar className='border-b-2 lg:px-8 fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800'>
       <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
@@ -45,12 +70,14 @@ export default function Header () {
           DevJourney
           </span>
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput 
         className="hidden md:block"
         type="text" 
         rightIcon={AiOutlineSearch} 
         placeholder='Search for a topic' 
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} 
         />
       </form>
 
