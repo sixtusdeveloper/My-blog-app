@@ -116,7 +116,7 @@ export default function DashComments() {
                       {comment.content}
                     </Table.Cell>
 
-                    <Table.Cell className='text-gray-300'>{comment.numberOfLikes}</Table.Cell>
+                    <Table.Cell className='text-gray-800 dark:text-gray-300'>{comment.numberOfLikes}</Table.Cell>
                     
                     <Table.Cell className='text-gray-500 dark:text-gray-300'>{comment.postId}</Table.Cell>
                     <Table.Cell className='text-gray-500 dark:text-gray-300'>{comment.userId}</Table.Cell>
