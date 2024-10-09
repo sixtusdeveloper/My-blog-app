@@ -32,8 +32,8 @@ export default function Home() {
         }}
       >
         {/* Left Side: Welcome Message */}
-        <div className="lg:w-3/5 w-full bg-blue-900 bg-opacity-20 rounded-md shadow-sm flex flex-col items-start justify-center p-4 md:p-8 ">
-          <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+        <div className="lg:w-3/5 w-full bg-blue-900 bg-opacity-20 rounded-md shadow-sm flex flex-col items-start justify-center p-4 md:p-8">
+          <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
             Welcome to My Blog!
           </h1>
           <p className="text-lg lg:text-xl text-gray-100 mb-6">

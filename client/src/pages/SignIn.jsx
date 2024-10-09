@@ -106,14 +106,14 @@ export default function SignIn() {
               />
             </div>
 
-            <Button gradientDuoTone='purpleToPink' className='text-base font-semibold p-2' type="submit" disabled={loading}>
+            <Button gradientDuoTone='purpleToPink' className='text-lg tracking-wide font-medium p-2' type="submit" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner size='sm' />
                   <span className='ml-2'>Loading...</span>
                 </>
               ) : (
-                'SIGN IN'
+                'Sign in'
               )}
             </Button>
           </form>
