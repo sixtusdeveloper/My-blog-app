@@ -1,18 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import React, { useState } from 'react';
-import { Button, Modal, TextInput, Alert } from 'flowbite-react';
+import { Button, Modal, TextInput, Alert, Label, Spinner } from 'flowbite-react';
 
 
 export default function About() {
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState('');
-  const [subscribeSuccess, setSubscribeSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
   const [subscribeError, setSubscribeError] = useState(null);
 
-  const handleChange = (e) => {  
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-  }
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -25,7 +23,10 @@ export default function About() {
     }
 
     try {
-        const res = await fetch(`/api/newsletter/postnewsletter`, {
+        setLoading(true);
+        setSubscribeError(null); // Clear any previous error messages
+
+        const res = await fetch('/api/newsletter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,18 +36,27 @@ export default function About() {
 
         const data = await res.json();
 
+        console.log('Response:', data); // Log the response for debugging
+
         if (!res.ok) {
-            throw new Error(data.message || 'Subscription failed');
+            const errorMsg = data.message || 'Something went wrong. Please try again.';
+            setSubscribeError(errorMsg);
+            return;
         }
 
-        setSubscribeSuccess('You have successfully subscribed!');
-        setSubscribeError(null);
-        setEmail('');
+        // If Subscription is successful, redirect to the sign-in page
+        navigate('/subscribed-success');
+
+        setEmail(''); // Clear email input
+
     } catch (error) {
-        setSubscribeError(error.message);
-        setSubscribeSuccess(null);
+        console.error('Error during subscription:', error); // Log any caught error
+        setSubscribeError('An unexpected error occurred. Please try again later.');
+    } finally {
+        setLoading(false);
     }
-};
+  };
+
 
 
   return (
@@ -203,25 +213,32 @@ export default function About() {
             Newsletter
           </Modal.Header>
           <Modal.Body>
-            <div className="flex flex-col p-4 md:p-8">
+            <div className="flex flex-col p-0 md:p-8">
               {subscribeError && (
                 <Alert type='error' color='failure'>{subscribeError}</Alert>
               )}
 
-                {subscribeSuccess && (
-                  <Alert type='success' color='success'>{subscribeSuccess}</Alert>
-                )}
               <form onSubmit={handleSubscribe} className='my-4'>
-                <TextInput 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={email} 
-                  id="email"
-                  onChange={(e) => setEmail(e.target.value)} 
-                  className="mb-4"
-                />
-                <Button gradientDuoTone='purpleToPink' className='text-lg tracking-wide w-full font-medium p-2' type="submit">
-                  Subscribe
+                <div>
+                  <Label value="Your Email" className='text-base mb-1' />
+                  <TextInput 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    value={email} 
+                    id="email"
+                    onChange={(e) => setEmail(e.target.value)} 
+                    className="mb-4"
+                  />
+                </div>
+                <Button gradientDuoTone='purpleToPink' className='text-lg tracking-wide w-full font-medium p-2' type="submit" disabled={loading}>
+                {loading ? (
+                <>
+                  <Spinner size='sm' />
+                  <span className='ml-2'>Loading...</span>
+                </>
+                ) : (
+                  'Subscribe'
+                )}
                 </Button>
               </form>
             </div>
