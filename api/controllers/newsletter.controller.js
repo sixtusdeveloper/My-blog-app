@@ -3,7 +3,7 @@ import Newsletter from '../models/newsletter.model.js';  // Import the Newslette
 
 import crypto from 'crypto';
 
-export const postnewsletter = async (req, res, next) => {
+export const newsletter = async (req, res, next) => {
     const { email } = req.body;
 
     try {
