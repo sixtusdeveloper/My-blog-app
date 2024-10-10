@@ -34,41 +34,25 @@ export default function Search() {
     }
 
     const fetchPosts = async () => {
-        setLoading(true);
-        const searchQuery = urlParams.toString();
+      setLoading(true);
+      const searchQuery = urlParams.toString();
 
-        // Simulate 2-second delay for the loading state
-        setTimeout(async () => {
-            const res = await fetch(`/api/post/getposts?${searchQuery}`);
-            if (!res.ok) {
-                setLoading(false);
-                return;
-            }
-            if (res.ok) {
-                const data = await res.json();
-                setPosts(data.posts);
-                setLoading(false);
-                setShowMore(data.posts.length === 9);
-            }
-            }, 2000);
-        };
+      // Simulate 2-second delay for the loading state
+      setTimeout(async () => {
+          const res = await fetch(`/api/post/getposts?${searchQuery}`);
+          if (!res.ok) {
+              setLoading(false);
+              return;
+          }
+          if (res.ok) {
+              const data = await res.json();
+              setPosts(data.posts);
+              setLoading(false);
+              setShowMore(data.posts.length === 9);
+          }
+          }, 2000);
+      };
 
-        //   const res = await fetch(`/api/post/getposts?${searchQuery}`);
-        //   if (!res.ok) {
-        //     setLoading(false);
-        //     return;
-        //   }
-        //   if (res.ok) {
-        //     const data = await res.json();
-        //     setPosts(data.posts);
-        //     setLoading(false);
-        //     if (data.posts.length === 9) {
-        //       setShowMore(true);
-        //     } else {
-        //       setShowMore(false);
-        //     }
-        //   }
-    
     fetchPosts();
   }, [location.search]);
 
