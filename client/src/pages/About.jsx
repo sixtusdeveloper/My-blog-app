@@ -8,9 +8,9 @@ export default function About() {
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false); // For success modal
   const navigate = useNavigate(); 
   const [subscribeError, setSubscribeError] = useState(null);
-
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export default function About() {
         setLoading(true);
         setSubscribeError(null); // Clear any previous error messages
 
-        const res = await fetch('/api/newsletter', {
+        const res = await fetch('/api/newsletter/newsletter', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,9 +44,9 @@ export default function About() {
             return;
         }
 
-        // If Subscription is successful, redirect to the sign-in page
-        navigate('/subscribed-success');
-
+        // If Subscription is successful, show success modal
+        setSuccessModalOpen(true);  // Open the success modal
+        setModalOpen(false);  // Close the subscribe modal
         setEmail(''); // Clear email input
 
     } catch (error) {
@@ -69,7 +69,7 @@ export default function About() {
           >
           <div className="absolute inset-0 bg-black opacity-60"></div> {/* Dark overlay for contrast */}
 
-          <div className="relative text-white p-4 max-w-3xl space-y-8">
+          <div className="relative text-white mt-10 p-4 max-w-3xl space-y-8">
             <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
             About My DevJourney
             </h1>
@@ -125,31 +125,33 @@ export default function About() {
             </p>
           </div>
         </section>
-
-        <section className="py-16 px-4 border-t border-t-gray-800 dark:border-t-gray-800 bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 text-white">
+        
+        {/* My stack */}
+        <section className="py-16 px-4 border-t border-t-gray-800 dark:border-t-gray-800 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white">
           <div className="max-w-5xl mx-auto">
             <h2 className="md:text-3xl text-2xl text-center py-4 font-bold mb-8">Technologies I Work With</h2>
             <div className="grid md:grid-col-2 grid-col-1 lg:grid-cols-3 gap-6">
-              <div className="text-center border p-4 border-gray-400 rounded-lg bg-gray-200 shadow-md transition-transform hover:scale-105">
+              <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
                 <img src="/mean-stack.jpg" alt="mean-stack" className="mx-auto rounded-md relative overflow-hidden tech-stack-img" />
-                <p className="text-lg mt-4 text-gray-600">MEAN Stack</p>
+                <p className="text-lg mt-4 text-gray-200">MEAN Stack</p>
               </div>
-              <div className="text-center border p-4 border-gray-400 rounded-lg bg-gray-200 shadow-md transition-transform hover:scale-105">
+              <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
                 <img src="/mern-stack.jpg" alt="mern-stack" className="mx-auto rounded-md relative overflow-hidden tech-stack-img" />
-                <p className="text-lg mt-4 text-gray-600">MERN Stack</p>
+                <p className="text-lg mt-4 text-gray-200">MERN Stack</p>
               </div>
-              <div className="text-center border p-4 border-gray-400 rounded-lg bg-gray-200 shadow-md transition-transform hover:scale-105">
+              <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
                 <img src="/lamp-stack.png" alt="lamp-stack" className="rounded-md mx-auto relative overflow-hidden tech-stack-img" />
-                <p className="text-lg mt-4 text-gray-600">LAMP Stack</p>
+                <p className="text-lg mt-4 text-gray-200">LAMP Stack</p>
               </div>
               {/* Add more technology cards */}
             </div>
           </div>
         </section>
 
+        {/* Testimonial */}
         <section className="py-16 px-4 border-b border-b-gray-200 dark:border-b-gray-800">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-text-2xl md:text-3xl font-bold mb-12">What Others Are Saying</h2>
+            <h2 className="text-text-2xl md:text-3xl font-bold mb-12">What Others Are Saying About My Posts</h2>
             <div className="testimonial-carousel overflow-hidden relative">
               <div className="flex space-x-6 animate-scroll">
                 {/* Original Testimonials */}
@@ -242,6 +244,28 @@ export default function About() {
                 </Button>
               </form>
             </div>
+          </Modal.Body>
+        </Modal>
+
+         {/* Success Modal */}
+         <Modal
+          show={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+        >
+          <Modal.Header>
+            Subscription Successful!
+          </Modal.Header>
+          <Modal.Body>
+            <p className="text-lg">
+              Thank you for subscribing to my newsletter! You will receive updates on my latest posts and projects.
+            </p>
+            <Button 
+              gradientDuoTone='purpleToBlue' 
+              className='mt-4' 
+              onClick={() => setSuccessModalOpen(false)}
+            >
+              Close
+            </Button>
           </Modal.Body>
         </Modal>
       
