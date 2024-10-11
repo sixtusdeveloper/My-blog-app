@@ -4,6 +4,7 @@ import { Button, Spinner } from 'flowbite-react'
 import { Link } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import CallToAction from './CallToAction';
+import { FaArrowRight } from 'react-icons/fa';
 
 export default function Home() {
   const [posts, setPosts] = useState([]); 
@@ -29,9 +30,9 @@ export default function Home() {
 
 
   return (
-    <div className="w-full pt-10 bg-white dark:bg-[rgb(16,23,42)]">
+    <section className="w-full pt-10 bg-white dark:bg-[rgb(16,23,42)]">
       {/* Hero Section */}
-      <section 
+      <div 
         className="relative flex flex-col lg:flex-row justify-between items-center py-20 px-4 lg:px-20 min-h-[80vh]" 
         style={{
           backgroundImage: `linear-gradient(to right, rgba(35, 56, 56, 180), rgba(35, 55, 156, 0.4)), url(${javaImage})`,
@@ -52,10 +53,48 @@ export default function Home() {
             <Button type='button' gradientDuoTone='purpleToPink' className='text-xl font-medium p-2'>Explore Posts</Button>
           </Link>
         </div>
-      </section>
+      </div>
+     
+     {/* Featured Post */}
+      <div className="featured-post py-8 md:px-1 px-4 md:py-10">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-center md:text-start my-8 md:my-10">Featured Post</h2>
+          <div className="flex md:flex-row flex-col items-center gap-8">
+            <img src="blog04.webp" alt="Featured Post" className="w-1/3 mr-4" />
+            <div className='px-4'>
+              <h3 className="text-xl font-bold">How I Transitioned Into Tech</h3>
+              <p className="text-gray-600 dark:text-gray-300 mt-2">Read about my journey from a beginner to a Full-Stack Software Engineer...</p>
+              <p className="flex items-center text-lg mt-4">
+                <a href="/posts/how-i-transitioned-into-tech" className="text-green-500 hover:text-green-600 mt-4 inline-block">
+                  <span className='flex items-center'>
+                    Read More
+                    <FaArrowRight className="ml-2" />
+                  </span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="popular-posts px-6 py-8">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">Trending Posts</h2>
+          <ul className="space-y-4">
+            <li className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
+              <h3 className="text-lg font-bold"><a href="/posts/1" className="hover:underline">How to Ace Your Tech Interviews 🔥</a></h3>
+              <p className="text-gray-600 dark:text-gray-300">A guide to mastering technical interviews and landing your dream job.</p>
+            </li>
+            <li className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
+              <h3 className="text-lg font-bold"><a href="/posts/2" className="hover:underline">Top 10 Frontend Tools in 2024</a></h3>
+              <p className="text-gray-600 dark:text-gray-300">Explore the must-have tools for frontend developers this year.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       {/* Blog Posts Section */}
-      <div className='py-8 px-4 lg:px-4 w-full max-w-6xl mx-auto'>
+      <section className='py-8 px-4 lg:px-4 w-full max-w-6xl mx-auto'>
         <div className='flex flex-col justify-center items-center mb-5'>
           <h2 className='py-4 text-2xl text-center font-bold dark:text-gray-300 text-gray-800 mb-4'>Recent Posts</h2>
 
@@ -78,13 +117,27 @@ export default function Home() {
             </Link>
           )}
         </div>
-        <div className='py-8'>
 
+        {/* Call to action */}
+        <div className='py-8'>
           <CallToAction />
         </div>
-      </div>
 
-    </div>
+        
+        <div className="poll-section py-8 md:py-10">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-6">Your Opinion Matters</h2>
+            <p className="text-gray-600 mb-4">Which JavaScript framework do you prefer?</p>
+            <div className="flex justify-center space-x-4">
+              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">React</button>
+              <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Vue</button>
+              <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Angular</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section>
   );
 }
 

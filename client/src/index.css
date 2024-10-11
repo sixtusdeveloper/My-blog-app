@@ -72,3 +72,12 @@ body{
     white-space: nowrap;
   }
   
+
+  .profile-pic{
+    height: 200px !important;
+    width: 200px !important;
+    object-fit: cover !important;
+    margin: 0 auto !important;
+    display: block !important;
+
+  }
