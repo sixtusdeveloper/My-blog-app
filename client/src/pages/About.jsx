@@ -89,7 +89,6 @@ export default function About() {
         </div>
       </div>
 
-
       <div className="author-section px-4 py-8">
         <div className="max-w-5xl mx-auto flex md:flex-row flex-col gap-4 items-center">
           <img src="/profile-img.png" alt="Author" className="profile-pic rounded-lg mr-6" />
@@ -100,8 +99,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-
        
       {/* My Journey */}
         <section className="py-16 px-6">
