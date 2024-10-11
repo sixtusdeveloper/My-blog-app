@@ -4,7 +4,7 @@ import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
-import Engagements from "./pages/Engagements";
+import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
@@ -15,6 +15,7 @@ import PostPage from "./pages/PostPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Search from "./pages/Search";
 import Category from "./pages/Category";
+import FAQPage from "./pages/FAQPage";
 
 
 export default function App() {
@@ -35,9 +36,10 @@ export default function App() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
-        <Route path="/engagements" element={<Engagements />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/post/:postSlug" element={<PostPage />} />
         <Route path="/category/:category" element={<Category />} />
+        <Route path="/faq" element={<FAQPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import CallToAction from './CallToAction';
 import { FaArrowRight } from 'react-icons/fa';
+import PollSection from '../components/PollSection';
 
 export default function Home() {
   const [posts, setPosts] = useState([]); 
@@ -123,18 +124,10 @@ export default function Home() {
           <CallToAction />
         </div>
 
-        
-        <div className="poll-section py-8 md:py-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-6">Your Opinion Matters</h2>
-            <p className="text-gray-600 mb-4">Which JavaScript framework do you prefer?</p>
-            <div className="flex justify-center space-x-4">
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">React</button>
-              <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Vue</button>
-              <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Angular</button>
-            </div>
-          </div>
+        <div>
+          <PollSection /> 
         </div>
+       
       </section>
 
     </section>
