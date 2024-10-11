@@ -61,62 +61,93 @@ export default function About() {
 
   return (
     <section className='max-w-screen w-full bg-white dark:bg-[rgb(16,23,42)]'>
-        <div
-          className="relative flex items-center py-20 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
-          style={{
-              backgroundImage: 'url("/bg.png")', // Replace with your desired background image.
-          }}
-          >
-          <div className="absolute inset-0 bg-black opacity-60"></div> {/* Dark overlay for contrast */}
+      <div
+        className="relative flex items-center py-20 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        style={{
+            backgroundImage: 'url("/bg.png")', // Replace with your desired background image.
+        }}
+        >
+        <div className="absolute inset-0 bg-black opacity-60"></div> {/* Dark overlay for contrast */}
 
-          <div className="relative text-white mt-10 p-4 max-w-3xl space-y-8">
-            <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
-            About My DevJourney
-            </h1>
+        <div className="relative text-white mt-10 p-4 max-w-3xl space-y-8">
+          <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
+          About My DevJourney
+          </h1>
 
-            <p className="text-lg lg:text-xl text-gray-100 mb-6">
-            Hi, I'm <strong>Sixtus Aondoakaa</strong>, also known as <strong>Sixtusdev</strong>. Join me on my journey through the tech industry as I share my experiences, insights, and knowledge to help you grow as a developer. Let's learn, build, and innovate together.
-            </p>
-            <Link to='/blog'>
-                <Button 
-                size="lg" 
-                gradientDuoTone="purpleToBlue"
-                className="hover:scale-105 transform transition-transform my-7 duration-300"
-                >
-                Explore My Blog
-                </Button>
-            </Link>
+          <p className="text-lg lg:text-xl text-gray-100 mb-6">
+          Hi, I'm <strong>Sixtus Aondoakaa</strong>, also known as <strong>Sixtusdev</strong>. Join me on my journey through the tech industry as I share my experiences, insights, and knowledge to help you grow as a developer. Let's learn, build, and innovate together.
+          </p>
+          <Link to={'/search'}>
+              <Button 
+              size="lg" 
+              gradientDuoTone="purpleToBlue"
+              className="hover:scale-105 transform transition-transform my-7 duration-300"
+              >
+              Explore My Blog
+              </Button>
+          </Link>
+        </div>
+      </div>
+
+
+      <div className="author-section px-4 py-8">
+        <div className="max-w-5xl mx-auto flex md:flex-row flex-col gap-4 items-center">
+          <img src="/profile-img.png" alt="Author" className="profile-pic rounded-lg mr-6" />
+          <div className='px-4'>
+            <h2 className="text-2xl py-4 font-bold">Meet the Author</h2>
+            <p className="text-gray-600 dark:text-gray-300">Hi, I’m Sixtus, a Software Engineer passionate about creating innovative solutions in the tech space. 
+            Through my blog, I share tips, tutorials, and insights to help you on your tech journey.</p>
           </div>
         </div>
-         {/* My Journey */}
-        <section className="py-16 px-4">
+      </div>
+
+
+       
+      {/* My Journey */}
+        <section className="py-16 px-6">
           <div className="max-w-5xl mx-auto w-full">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">My Journey</h2>
             <ul className="space-y-6">
               <li className="border-l-4 border-indigo-600 pl-4">
-                <h3 className="text-xl font-bold">Started at XYZ Company (2018)</h3>
+                <h3 className="text-xl font-bold">My First Steps into Tech (2018)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Learned to build scalable web applications and began my journey as a full-stack developer.
+                  My journey began with curiosity and a passion for problem-solving. I started teaching myself programming languages 
+                  like HTML, CSS, and JavaScript, spending countless hours learning the basics of web development. My hunger to build 
+                  led me to explore more.
                 </p>
               </li>
+
               <li className="border-l-4 border-indigo-600 pl-4">
-                <h3 className="text-xl font-bold">Started at XYZ Company (2018)</h3>
+                <h3 className="text-xl font-bold">Diving into Software Development (2019 - 2021)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Learned to build scalable web applications and began my journey as a full-stack developer.
+                  Over time, I honed my skills and became proficient in both frontend and backend technologies. Working on projects for 
+                  clients as a freelance Software Developer, I gained hands-on experience building dynamic, scalable applications while 
+                  navigating the fast-paced world of technology.
                 </p>
               </li>
+
               <li className="border-l-4 border-indigo-600 pl-4">
-                <h3 className="text-xl font-bold">Started at XYZ Company (2018)</h3>
+                <h3 className="text-xl font-bold">Joining a Collaborative Tech Team (2023 - Present)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Learned to build scalable web applications and began my journey as a full-stack developer.
+                  My role as a Software Engineer at SkilledUp.life Company marked a turning point. Collaborating with skilled developers, 
+                  learning advanced frameworks like React and building user-centered applications became my daily routine. This role 
+                  expanded my perspective on teamwork and product development.
                 </p>
               </li>
-              {/* Add more timeline entries */}
+
+              <li className="border-l-4 border-indigo-600 pl-4">
+                <h3 className="text-xl font-bold">Building for the Future (Present)</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Today, I continue to push boundaries, exploring new technologies and staying committed to lifelong learning. My 
+                  journey is a testament to the power of dedication, curiosity, and persistence in the tech world.
+                </p>
+              </li>
             </ul>
+
             <p className="flex items-center text-lg mt-8">
               <a href="https://www.sixtusdev.net/pages/portfolio/#experiences" 
-              target="_blank" rel="noopener noreferrer" 
-              className="text-green-500 hover:text-green-600">
+                target="_blank" rel="noopener noreferrer" 
+                className="text-green-500 hover:text-green-600">
                 <span className='flex items-center'>
                   Learn more about my journey
                   <FaArrowRight className="ml-2" />
@@ -125,12 +156,13 @@ export default function About() {
             </p>
           </div>
         </section>
+
         
         {/* My stack */}
         <section className="py-16 px-4 border-t border-t-gray-800 dark:border-t-gray-800 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white">
           <div className="max-w-5xl mx-auto">
             <h2 className="md:text-3xl text-2xl text-center py-4 font-bold mb-8">Technologies I Work With</h2>
-            <div className="grid md:grid-col-2 grid-col-1 lg:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
                 <img src="/mean-stack.jpg" alt="mean-stack" className="mx-auto rounded-md relative overflow-hidden tech-stack-img" />
                 <p className="text-lg mt-4 text-gray-200">MEAN Stack</p>
@@ -157,29 +189,29 @@ export default function About() {
                 {/* Original Testimonials */}
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"This blog has transformed the way I approach coding!"</p>
-                  <p className="mt-4 font-semibold">- John Doe, Software Engineer</p>
+                  <p className="mt-4 font-semibold">- Stephen Anada, Software Engineer</p>
                 </div>
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"Insightful, inspiring, and educational!"</p>
-                  <p className="mt-4 font-semibold">- Jane Smith, Developer</p>
+                  <p className="mt-4 font-semibold">- Frank Danjima, Software Engineer</p>
                 </div>
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"I learn something new every time I visit."</p>
-                  <p className="mt-4 font-semibold">- Chris Lee, Frontend Developer</p>
+                  <p className="mt-4 font-semibold">- Chris Benjamin, Frontend Engineer</p>
                 </div>
 
                 {/* Duplicate Testimonials for seamless scroll */}
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"This blog has transformed the way I approach coding!"</p>
-                  <p className="mt-4 font-semibold">- John Doe, Software Engineer</p>
+                  <p className="mt-4 font-semibold">- Stephen Anada, Software Engineer</p>
                 </div>
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"Insightful, inspiring, and educational!"</p>
-                  <p className="mt-4 font-semibold">- Jane Smith, Developer</p>
+                  <p className="mt-4 font-semibold">- Frank Danjima, Software Engineer</p>
                 </div>
                 <div className="p-10 rounded-md border border-gray-300 dark:border-gray-700 shadow-md bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
                   <p className="text-lg italic">"I learn something new every time I visit."</p>
-                  <p className="mt-4 font-semibold">- Chris Lee, Frontend Developer</p>
+                  <p className="mt-4 font-semibold">- Chris Benjamin, Frontend Engineer</p>
                 </div>
               </div>
             </div>
