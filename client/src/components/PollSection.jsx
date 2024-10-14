@@ -52,25 +52,6 @@ const PollSection = () => {
     }
   };
 
-  const handleReset = async () => {
-    try {
-      const response = await fetch('/api/pollVote/reset', {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to reset votes');
-      }
-
-      setVotes({
-        React: 0,
-        Vue: 0,
-        Angular: 0,
-      });
-    } catch (error) {
-      console.error('Error resetting poll votes', error);
-    }
-  };
 
   return (
     <section className="poll-section py-10">
@@ -128,11 +109,6 @@ const PollSection = () => {
             </tbody>
           </table>
 
-          <div className="mt-6">
-            <Button onClick={handleReset} className="self-center px-2 py-1" gradientDuoTone="redToYellow">
-              Reset Poll
-            </Button>
-          </div>
         </div>
       </div>
     </section>

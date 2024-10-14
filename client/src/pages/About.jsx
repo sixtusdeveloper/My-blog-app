@@ -57,17 +57,15 @@ export default function About() {
     }
   };
 
-
-
   return (
     <section className='max-w-screen w-full bg-white dark:bg-[rgb(16,23,42)]'>
       <div
-        className="relative flex items-center py-20 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        className="relative flex items-center py-8 md:py-16 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
         style={{
             backgroundImage: 'url("/bg.png")', // Replace with your desired background image.
         }}
         >
-        <div className="absolute inset-0 bg-black opacity-60"></div> {/* Dark overlay for contrast */}
+        <div className="absolute inset-0 bg-black opacity-70"></div> {/* Dark overlay for contrast */}
 
         <div className="relative text-white mt-10 p-4 max-w-3xl space-y-8">
           <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
@@ -153,7 +151,6 @@ export default function About() {
             </p>
           </div>
         </section>
-
         
         {/* My stack */}
         <section className="py-16 px-4 border-t border-t-gray-800 dark:border-t-gray-800 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 text-white">
@@ -161,15 +158,15 @@ export default function About() {
             <h2 className="md:text-3xl text-2xl text-center py-4 font-bold mb-8">Technologies I Work With</h2>
             <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
-                <img src="/mean-stack.jpg" alt="mean-stack" className="mx-auto rounded-md relative overflow-hidden tech-stack-img" />
+                <img src="/mean-stack.jpg" alt="mean-stack" className="mx-auto rounded-md tech-stack-img" />
                 <p className="text-lg mt-4 text-gray-200">MEAN Stack</p>
               </div>
               <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
-                <img src="/mern-stack.jpg" alt="mern-stack" className="mx-auto rounded-md relative overflow-hidden tech-stack-img" />
+                <img src="/mern-stack.jpg" alt="mern-stack" className="mx-auto rounded-md tech-stack-img" />
                 <p className="text-lg mt-4 text-gray-200">MERN Stack</p>
               </div>
               <div className="text-center border p-4 border-gray-300 rounded-lg shadow-md transition-transform hover:scale-105">
-                <img src="/lamp-stack.png" alt="lamp-stack" className="rounded-md mx-auto relative overflow-hidden tech-stack-img" />
+                <img src="/lamp-stack.png" alt="lamp-stack" className="rounded-md mx-auto tech-stack-img" />
                 <p className="text-lg mt-4 text-gray-200">LAMP Stack</p>
               </div>
               {/* Add more technology cards */}
@@ -282,7 +279,9 @@ export default function About() {
           onClose={() => setSuccessModalOpen(false)}
         >
           <Modal.Header>
-            Subscription Successful!
+            <div className='flex flex-1 items-center gap-2'>
+              <img src="/success-icon.webp" alt="success icon" className='h-12 w-12' />&nbsp;Subscription Successful!
+            </div>
           </Modal.Header>
           <Modal.Body>
             <p className="text-lg">

@@ -10,6 +10,7 @@ import { updateStart, updateSuccess, updateFailure, deleteUserStart, deleteUserS
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import { AiOutlineEdit } from 'react-icons/ai';
 
 
 export default function DashboardProfile() {
@@ -198,6 +199,7 @@ export default function DashboardProfile() {
                         alt={currentUser.username} 
                         className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
                     />
+                   <p className='absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 cursor-pointer' onClick={() => filePickerRef.current.click()}><AiOutlineEdit size={18} className='mr-1'/>Edit</p>
                 </div>
 
                 {error && (
@@ -225,7 +227,7 @@ export default function DashboardProfile() {
                 {/* IsAdmin functionality */}
                 {currentUser.isAdmin && (
                     <Link to={'/create-post'}>
-                       <Button type="button" gradientDuoTone='purpleToPink' outline className='mt-4 w-full text-base font-semibold'>Create post</Button>
+                       <Button type="button" gradientDuoTone='purpleToPink' outline className='mb-1 w-full text-base font-semibold'>Create post</Button>
                     </Link>
                 )}  
             </form>

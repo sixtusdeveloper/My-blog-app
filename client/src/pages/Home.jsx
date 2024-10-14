@@ -63,10 +63,10 @@ export default function Home() {
           <div className="flex md:flex-row flex-col items-center gap-8">
             <img src="blog04.webp" alt="Featured Post" className="w-1/3 mr-4" />
             <div className='px-4'>
-              <h3 className="text-xl font-bold">How I Transitioned Into Tech</h3>
+              <h3 className="text-xl font-bold">How I Transitioned Into Tech: From Beginner to Full-Stack Engineer</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">Read about my journey from a beginner to a Full-Stack Software Engineer...</p>
               <p className="flex items-center text-lg mt-4">
-                <a href="/posts/how-i-transitioned-into-tech" className="text-green-500 hover:text-green-600 mt-4 inline-block">
+                <a href="/post/how-i-transitioned-into-tech-from-beginner-to-full-stack-engineer" className="text-green-500 hover:text-green-600 mt-4 inline-block">
                   <span className='flex items-center'>
                     Read More
                     <FaArrowRight className="ml-2" />
@@ -83,11 +83,11 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-6">Trending Posts</h2>
           <ul className="space-y-4">
             <li className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
-              <h3 className="text-lg font-bold"><a href="/posts/1" className="hover:underline">How to Ace Your Tech Interviews 🔥</a></h3>
+              <h3 className="text-lg font-bold"><a href="/post/how-to-ace-your-tech-interviews-" className="hover:underline">How to Ace Your Tech Interviews 🔥</a></h3>
               <p className="text-gray-600 dark:text-gray-300">A guide to mastering technical interviews and landing your dream job.</p>
             </li>
             <li className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
-              <h3 className="text-lg font-bold"><a href="/posts/2" className="hover:underline">Top 10 Frontend Tools in 2024</a></h3>
+              <h3 className="text-lg font-bold"><a href="/post/top-10-frontend-tools-in-2024-" className="hover:underline">Top 10 Frontend Tools in 2024 🚀</a></h3>
               <p className="text-gray-600 dark:text-gray-300">Explore the must-have tools for frontend developers this year.</p>
             </li>
           </ul>
@@ -95,7 +95,7 @@ export default function Home() {
       </div>
 
       {/* Blog Posts Section */}
-      <section className='py-8 px-4 lg:px-4 w-full max-w-6xl mx-auto'>
+      <section className='py-8 px-4 lg:px-10 w-full max-w-6xl mx-auto'>
         <div className='flex flex-col justify-center items-center mb-5'>
           <h2 className='py-4 text-2xl text-center font-bold dark:text-gray-300 text-gray-800 mb-4'>Recent Posts</h2>
 
@@ -124,7 +124,7 @@ export default function Home() {
           <CallToAction />
         </div>
 
-        <div>
+        <div className='max-w-3xl mx-auto w-full'>
           <PollSection /> 
         </div>
        

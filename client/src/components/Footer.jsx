@@ -1,10 +1,10 @@
 import { Footer } from 'flowbite-react';
 import { Link } from 'react-router-dom';
-import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsLinkedin } from 'react-icons/bs';
+import { BsFacebook, BsYoutube, BsTwitter, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 export default function FooterCom() {
   return (
-    <Footer container className='border border-t-8 border-blue-500'>
+    <Footer container className='border border-t-8 border-blue-500 w-full'>
       <div className='w-full max-w-6xl mx-auto lg:px-10 px-4'>
         <div className='grid gap-8 lg:gap-10 w-full justify-between lg:grid-cols-2 sm:grid-cols-2'>
           {/* Left section with logo and description */}
@@ -25,17 +25,17 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='About Us' />
               <Footer.LinkGroup col>
-                <Link to='/about' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Our Mission</Link>
+                <Link to='/about' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>My Mission</Link>
                 <Link to='/team' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Meet the Team</Link>
-                <Link to='/contact' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Contact Us</Link>
+                <Link to='/contact' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Contact Me</Link>
               </Footer.LinkGroup>
             </div>
             <div>
               <Footer.Title title='Resources' />
               <Footer.LinkGroup col>
-                <Link to='/blog' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Blog</Link>
-                <Link to='/tutorials' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Tutorials</Link>
-                <Link to='/projects' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Open Source Projects</Link>
+                <Link to='/search' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Posts</Link>
+                <Link to='https://www.sixtusdev.net' target='_blank' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>My website</Link>
+                <Link to='https://www.sixtusdev.net/#projects' target='_blank' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Open Source Projects</Link>
               </Footer.LinkGroup>
             </div>
 
@@ -44,7 +44,7 @@ export default function FooterCom() {
               <Footer.Title title='Legal' />
               <Footer.LinkGroup col>
                 <Link to='/privacy-policy' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Privacy Policy</Link>
-                <Link to='/terms' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Terms &amp; Conditions</Link>
+                <Link to='/terms-and-conditions' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Terms &amp; Conditions</Link>
               </Footer.LinkGroup>
             </div>
           </div>
@@ -56,11 +56,11 @@ export default function FooterCom() {
         <div className='w-full sm:flex sm:items-center sm:justify-between mt-8'>
           <Footer.Copyright href='#' by="DevJourney" year={new Date().getFullYear()} />
           <div className="flex gap-6 mt-4 sm:mt-0 sm:justify-center lg:justify-end">
-            <Footer.Icon href='https://www.facebook.com/' icon={BsFacebook} />
-            <Footer.Icon href='https://www.instagram.com/' icon={BsInstagram} />
-            <Footer.Icon href='https://www.twitter.com/' icon={BsTwitter} />
-            <Footer.Icon href='https://github.com/sahandghavidel' icon={BsGithub} />
-            <Footer.Icon href='https://www.linkedin.com/' icon={BsLinkedin} />
+            <Footer.Icon href='https://www.facebook.com/sixtusushrey/' icon={BsFacebook} />
+            <Footer.Icon href="https://www.youtube.com/@Sixtusdev/" icon={BsYoutube} />
+            <Footer.Icon href='https://x.com/dev_elites/' icon={BsTwitter} />
+            <Footer.Icon href='https://github.com/sixtusdeveloper/' icon={BsGithub} />
+            <Footer.Icon href='https://www.linkedin.com/in/sixtusushrey/' icon={BsLinkedin} />
           </div>
         </div>
       </div>

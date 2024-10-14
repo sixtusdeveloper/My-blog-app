@@ -16,6 +16,9 @@ import ScrollToTop from "./components/ScrollToTop";
 import Search from "./pages/Search";
 import Category from "./pages/Category";
 import FAQPage from "./pages/FAQPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import Team from "./pages/Team";
 
 
 export default function App() {
@@ -40,6 +43,9 @@ export default function App() {
         <Route path="/post/:postSlug" element={<PostPage />} />
         <Route path="/category/:category" element={<Category />} />
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       </Routes>
       <Footer />
     </BrowserRouter>

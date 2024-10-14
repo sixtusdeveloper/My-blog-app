@@ -6,6 +6,7 @@ import DashboardPosts from '../components/DashboardPosts';
 import DashboardUsers from '../components/DashboardUsers';
 import DashboardComments from '../components/DashboardComments';
 import DashboardComponent from '../components/DashboardComponent';
+import DashboardVotes from '../components/DashboardVotes';
 
 
 export default function Dashboard() {
@@ -21,15 +22,14 @@ export default function Dashboard() {
 
 
   return (
-    <div className='min-h-screen flex flex-col md:flex-row bg-white dark:bg-[rgb(16,23,42)] w-full'>
+    <div className='min-h-screen flex mx-auto flex-col lg:flex-row bg-white dark:bg-[rgb(16,23,42)] w-full'>
       {/* Sidebar */}
-      <div className='md:w-56'>
+      <div className='w-full lg:w-52'>
         <DashboardSidebar />  
-
       </div>
 
       {/* Profile */}
-      <div className='w-full p-4 mx-auto'>
+      <div className='w-full p-4 md:p-2 mx-auto'>
         <div className='w-full px-4 mx-auto max-w-lg '>
           {tab === 'profile' && <DashboardProfile />}
         </div>
@@ -49,14 +49,17 @@ export default function Dashboard() {
           {tab === 'comments' && <DashboardComments />}
         </div>
 
+        {/* Vote test */}
+        <div className='w-full pt-4 mx-auto max-w-7xl'>
+          {tab === 'votes' && <DashboardVotes />}
+        </div>
+
         {/* Dashboard component */}
         <div className='w-full pt-0 md:pt-2 mx-auto max-w-7xl'>
           {tab === 'dash' && <DashboardComponent />}
         </div>
 
       </div>
-
-      
     </div>
   )
 }
