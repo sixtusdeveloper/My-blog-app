@@ -1,5 +1,6 @@
 import { Sidebar } from 'flowbite-react'; 
 import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie, } from 'react-icons/hi';
+import { FaStar } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -41,7 +42,7 @@ export default function DashboardSidebar() {
 
 
     return (
-        <Sidebar className='w-full md:w-56'>
+        <Sidebar className='w-full lg:w-52 pt-8 lg:pt-2'>
             <Sidebar.Items className='mt-20'>
                 <Sidebar.ItemGroup className='flex flex-col gap-1'>
                     {/* Use the `as` prop to render `Sidebar.Item` as a `Link` */}
@@ -100,6 +101,16 @@ export default function DashboardSidebar() {
                                 as='div'
                                 >
                                 Comments
+                                </Sidebar.Item>
+                            </Link>
+
+                            <Link to='/dashboard?tab=votes'>
+                                <Sidebar.Item
+                                active={tab === 'votes'}
+                                icon={FaStar}
+                                as='div'
+                                >
+                                Votes
                                 </Sidebar.Item>
                             </Link>
 

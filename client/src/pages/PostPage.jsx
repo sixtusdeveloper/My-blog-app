@@ -84,7 +84,7 @@ export default function PostPage() {
 
     return (
         <main className="dark:bg-[rgb(16,23,42)] overflow-x-hidden min-h-screen w-full py-20">
-            <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex flex-col max-w-5xl mx-auto px-4 md:px-6 lg:px-4">
                 <h1 className="text-3xl lg:text-4xl pt-6 mt-10 font-serif">{post && post.title}</h1>
                 <div className="flex justify-between gap-8 items-center my-2">
                     <div className="flex justify-between items-center gap-4">

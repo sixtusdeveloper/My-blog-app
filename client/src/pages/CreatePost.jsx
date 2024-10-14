@@ -108,6 +108,10 @@ export default function CreatePost() {
                             <option value='shell'>Shell</option>
                             <option value='python'>Python</option>
                             <option value='tailwindcss'>Tailwindcss</option>
+                            <option value='career'>Career</option>
+                            <option value='frontend'>Frontend</option>
+                            <option value='backend'>Backend</option>
+                            <option value='devops'>DevOps</option>
                         
                         </Select>
                     </div>

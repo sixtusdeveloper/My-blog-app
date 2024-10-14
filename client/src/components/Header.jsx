@@ -63,12 +63,12 @@ export default function Header () {
 
 
   return (
-    <Navbar className='border-b-2 lg:px-8 fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800'>
+    <Navbar className='border-b-2 lg:px-4 fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800'>
       <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
-          <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px"/>
-          <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
-          DevJourney
-          </span>
+        <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px"/>
+        <span className='self-center mx-1 py-1 px-3 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
+        DevJourney
+        </span>
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput 
@@ -145,6 +145,12 @@ export default function Header () {
         <Navbar.Link active={path === "/faq"} as={"div"}>
           <Link to="/faq">
             FAQ
+          </Link>
+        </Navbar.Link>  
+
+        <Navbar.Link active={path === "/team"} as={"div"}>
+          <Link to="/team">
+            Team
           </Link>
         </Navbar.Link>  
 

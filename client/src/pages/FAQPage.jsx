@@ -58,7 +58,7 @@ const FAQPage = () => {
                 ))}
             </div>
 
-            <div className='p-8 text-center'>
+            <div className='py-4 text-center'>
                 <p>Could not find what you're looking for? <a href="/contact" className='text-green-600 hover:text-green-500 ml-2'>Message me then..</a> </p>
             </div>
         </div>

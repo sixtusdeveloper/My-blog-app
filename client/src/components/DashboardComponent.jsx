@@ -90,7 +90,7 @@ export default function DashboardComp() {
 
 
   return (
-    <div className='relative mx-auto py-1 table-auto lg:overflow-hidden overflow-x-scroll 
+    <div className='relative mx-auto py-1 table-auto overflow-x-scroll 
     scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
     dark:scrollbar-thumb-slate-500'>
       <div className='md:flex flex-col space-y-4 md:space-y-0 md:flex-row gap-2 justify-between items-center'>
@@ -147,13 +147,13 @@ export default function DashboardComp() {
             <div className='text-gray-200'>Last month</div>
           </div>
         </div>
-
       </div>
+
       <div className='flex flex-wrap md:flex-nowrap gap-2 py-4 mx-auto justify-center'>
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex justify-between p-3 text-sm font-semibold'>
+          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent users</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
               <Link to={'/dashboard?tab=users'}>See all</Link>
             </Button>
           </div>
@@ -179,10 +179,11 @@ export default function DashboardComp() {
               ))}
           </Table>
         </div>
+
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex justify-between p-3 text-sm font-semibold'>
+          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent comments</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
               <Link to={'/dashboard?tab=comments'}>See all</Link>
             </Button>
           </div>
@@ -204,10 +205,11 @@ export default function DashboardComp() {
               ))}
           </Table>
         </div>
+
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex justify-between p-3 text-sm font-semibold'>
+          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
             <h1 className='text-center p-2'>Recent posts</h1>
-            <Button outline gradientDuoTone='purpleToPink'>
+            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
               <Link to={'/dashboard?tab=posts'}>See all</Link>
             </Button>
           </div>
