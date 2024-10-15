@@ -58,7 +58,7 @@ export default function Header () {
     urlParams.set('searchTerm', searchTerm);  // Set the search term in the URL
     const searchQuery = urlParams.toString();  // Convert the URLSearchParams object to a string
     // Redirect to the search page with the search term
-    navigate(`/search?${searchTerm}`);
+    navigate(`/search?${searchQuery}`); 
   }
 
 
