@@ -110,7 +110,7 @@ export default function DashboardSidebar() {
                                 icon={FaStar}
                                 as='div'
                                 >
-                                Votes
+                                Votes poll
                                 </Sidebar.Item>
                             </Link>
 

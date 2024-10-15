@@ -35,7 +35,7 @@ export default function FooterCom() {
               <Footer.LinkGroup col>
                 <Link to='/search' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Posts</Link>
                 <Link to='https://www.sixtusdev.net' target='_blank' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>My website</Link>
-                <Link to='https://www.sixtusdev.net/#projects' target='_blank' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>Open Source Projects</Link>
+                <Link to='https://www.sixtusdev.net/pages/portfolio' target='_blank' className='text-sm text-gray-600 hover:underline dark:text-gray-400'>My projects</Link>
               </Footer.LinkGroup>
             </div>
 

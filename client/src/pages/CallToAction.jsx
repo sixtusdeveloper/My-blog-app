@@ -14,8 +14,8 @@ export default function CallToAction() {
           gradientDuoTone="purpleToBlue"
           className="rounded-tl-xl rounded-bl-none"
         >
-          <a href="/blog" className="text-white" target="_self">
-            Explore My Blog
+          <a href="/create-post" className="text-white" target="_self">
+            Share your experience  
           </a>
         </Button>
       </div>
