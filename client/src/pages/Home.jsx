@@ -31,10 +31,10 @@ export default function Home() {
 
 
   return (
-    <section className="w-full pt-10 bg-white dark:bg-[rgb(16,23,42)]">
+    <section className="w-full bg-white dark:bg-[rgb(16,23,42)]">
       {/* Hero Section */}
       <div 
-        className="relative flex flex-col lg:flex-row justify-between items-center py-20 px-4 lg:px-20 min-h-[80vh]" 
+        className="relative flex flex-col lg:flex-row justify-between items-center pt-20 px-4 lg:px-20 min-h-[80vh]" 
         style={{
           backgroundImage: `linear-gradient(to right, rgba(35, 56, 56, 180), rgba(35, 55, 156, 0.4)), url(${javaImage})`,
           backgroundSize: 'cover',
