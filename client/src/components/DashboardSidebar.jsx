@@ -1,5 +1,6 @@
 import { Sidebar } from 'flowbite-react'; 
 import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie, } from 'react-icons/hi';
+import { MdPostAdd } from 'react-icons/md';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -69,6 +70,18 @@ export default function DashboardSidebar() {
                     >
                         Profile
                     </Sidebar.Item>
+
+                    {currentUser.isAdmin && (
+                        // Render this item only if the user is an admin
+                        <Sidebar.Item
+                            as={Link}
+                            to='/create-post'
+                            active={tab === 'createpost'}
+                            icon={MdPostAdd}
+                        >
+                            Create post
+                        </Sidebar.Item>
+                    )}
                     
  
                     {currentUser.isAdmin && (
