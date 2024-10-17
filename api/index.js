@@ -11,7 +11,7 @@ import commentRoutes from './routes/comment.route.js';
 import newsletterRoutes from './routes/newsletter.route.js';
 import pollVoteRoutes from './routes/pollvote.route.js';
 import contactRoutes from './routes/contact.route.js'; // Import the contact route
-// import path from 'path';  // Import the path module
+import path from 'path';  // Import the path module
 
 
 dotenv.config();  // Load environment variables
@@ -26,7 +26,7 @@ mongoose
     console.log(err);
   });
 
-  // const __dirname = path.resolve();  // Define the project root directory  
+  const __dirname = path.resolve();  // Define the project root directory  
 
 const app = express();
 
@@ -44,11 +44,11 @@ app.use('/api/pollVote', pollVoteRoutes);
 app.use('/api/contact', contactRoutes); // Use the contact route
 
 // Serve static assets in production
-// app.use(express.static(path.join(__dirname, '/client/dist'))); 
+app.use(express.static(path.join(__dirname, '/client/dist'))); 
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));  
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));  
+})
 
 
 // Error Handling Middleware
