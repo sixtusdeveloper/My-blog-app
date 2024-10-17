@@ -61,7 +61,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-center md:text-start my-8 md:my-10">Featured Post</h2>
           <div className="flex md:flex-row flex-col items-center gap-8">
-            <img src="/transition.avif" alt="Featured Post" className="w-1/3 mr-4" />
+            
+            <img src="/transition.avif" alt="Featured Post" className="w-1/3 p-4 border border-gray-300 dark:border-gray-800 rounded-lg post-img" />
+           
             <div className='px-4'>
               <h3 className="text-xl font-bold">How I Transitioned Into Tech: From Beginner to Full-Stack Engineer</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">Read about my journey from a beginner to a Full-Stack Software Engineer...</p>
