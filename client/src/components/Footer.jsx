@@ -55,7 +55,8 @@ export default function FooterCom() {
         {/* Footer bottom with copyright and social icons */}
         <div className='w-full sm:flex sm:items-center sm:justify-between mt-8'>
           <Footer.Copyright href='#' by="DevJourney" year={new Date().getFullYear()} />
-          <p className='text-sm text-gray-500 dark:text-gray-400'>Developed by Sixtusdev | All Rights Reserved</p>
+          <p className='text-xs text-gray-500 dark:text-gray-400'>Developed by Sixtusdev | All Rights Reserved</p>
+          <p className='text-xs text-gray-500 dark:text-gray-400'>Version 1.0.0</p>
           <div className="flex gap-6 mt-4 sm:mt-0 sm:justify-center lg:justify-end">
             <Footer.Icon href='https://www.facebook.com/sixtusushrey/' icon={BsFacebook} />
             <Footer.Icon href="https://www.youtube.com/@Sixtusdev/" icon={BsYoutube} />
