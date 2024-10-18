@@ -1,5 +1,5 @@
 import { Sidebar } from 'flowbite-react'; 
-import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie, } from 'react-icons/hi';
+import { HiUser, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiAnnotation, HiChartPie } from 'react-icons/hi';
 import { MdPostAdd } from 'react-icons/md';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
