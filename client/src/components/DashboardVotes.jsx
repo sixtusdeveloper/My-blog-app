@@ -34,6 +34,7 @@ export default function DashboardVotes() {
 
     if (currentUser.isAdmin) {
       setLoading(true);
+      setTimeout(fetchVotes, 2000); // Fetch after a 2-second delay
       fetchVotes();
     }
   }, [currentUser._id]);

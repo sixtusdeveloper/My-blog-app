@@ -6,11 +6,11 @@ export default function PostCard({ post }) {
     <div className='w-full mx-auto'>
         <div className='p-4 border border-gray-300 dark:border-gray-800 rounded-lg'>
             <Link to={`/post/${post.slug}`}>
-                <img
-                src={post.image}
-                alt='post cover'
-                className="w-full h-54 object-cover rounded-lg post-img"
-                />
+              <img
+              src={post.image}
+              alt='post cover'
+              className="w-full h-54 object-cover rounded-lg post-img"
+              />
             </Link>
             <div className='py-3'>
                 <h3 className="text-base font-bold"> 

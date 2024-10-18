@@ -60,11 +60,14 @@ export default function Home() {
       <div className="featured-post py-8 md:px-1 px-4 md:py-10">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-center md:text-start my-8 md:my-10">Featured Post</h2>
-          <div className="flex md:flex-row flex-col items-center gap-8">
+          <div className="p-4 border border-gray-300 dark:border-gray-800 rounded-lg flex md:flex-row flex-col items-center gap-8">
             
-            <img src="/transition.avif" alt="Featured Post" className="md:w-1/3 p-4 max-w-full border border-gray-300 dark:border-gray-800 rounded-lg" />
+            <img src="/transition.avif" alt="Featured Post" 
+              // className="md:w-1/3 p-4 max-w-full border border-gray-300 dark:border-gray-800 rounded-lg"
+               className="md:w-1/3 max-w-full object-cover rounded-lg"
+            />
            
-            <div className='px-4'>
+            <div className='py-4'>
               <h3 className="text-xl font-bold">How I Transitioned Into Tech: From Beginner to Full-Stack Engineer</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">Read about my journey from a beginner to a Full-Stack Software Engineer...</p>
               <p className="flex items-center text-lg mt-4">
