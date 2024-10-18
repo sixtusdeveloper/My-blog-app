@@ -40,7 +40,7 @@ const FAQPage = () => {
     <section className='min-h-screen w-full pt-20 bg-white dark:bg-[rgb(16,23,42)]'>
         <div className="px-4 md:px-10 max-w-4xl mx-auto py-10">
             <h1 className='text-3xl lg:text-5xl font-extrabold leading-tight dark:text-gray-200 text-gray-600 my-8'>Frequently Asked Questions (FAQ)</h1>
-            <p className='text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-6 text-center sm:text-start'>Welcome to my FAQ page! Here you can find answers to the most common questions about my platform.</p>
+            <p className='text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 sm:text-start'>Welcome to my FAQ page! Here you can find answers to the most common questions about my platform.</p>
             <div className="border border-gray-300 dark:border-gray-800 rounded-md py-10">
                 {faqs.map((faq, index) => (
                 <div key={index} className="border-b border-b-gray-300 dark:border-b-gray-700">
