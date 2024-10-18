@@ -66,29 +66,3 @@ export default Contact; // Export the Contact model
 
 
 
-
-
-// import mongoose from 'mongoose';
-
-// const contactSchema = new mongoose.Schema(
-//   {
-//     name: {
-//       type: String,
-//       required: true, // Ensure name is provided
-//     },
-//     email: {
-//       type: String,
-//       required: true,
-//       match: [/.+@.+\..+/, "Please enter a valid email address"], // Validates email format
-//     },
-//     message: {
-//       type: String,
-//       required: true, // Ensure message is provided
-//     },
-//   },
-//   { timestamps: true } // Automatically add createdAt and updatedAt fields
-// );
-
-// const Contact = mongoose.model('Contact', contactSchema);
-
-// export default Contact;
