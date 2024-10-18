@@ -71,10 +71,10 @@ export default function Home() {
               <h3 className="text-xl font-bold">How I Transitioned Into Tech: From Beginner to Full-Stack Engineer</h3>
               <p className="text-gray-600 dark:text-gray-300 mt-2">Read about my journey from a beginner to a Full-Stack Software Engineer...</p>
               <p className="flex items-center text-lg mt-4">
-                <a href="/post/how-i-transitioned-into-tech-from-beginner-to-full-stack-engineer" className="text-green-500 hover:text-green-600 mt-4 inline-block">
+                <a href="/post/how-i-transitioned-into-tech-from-beginner-to-full-stack-engineer" className="text-green-500 hover:text-green-600 mt-4 items-center inline-block">
                   <span className='flex items-center'>
-                    Read More
-                    <FaArrowRight className="ml-2" />
+                    Read post
+                    <FaArrowRight size={18} className="ml-1" />
                   </span>
                 </a>
               </p>

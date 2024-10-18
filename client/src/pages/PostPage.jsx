@@ -90,8 +90,8 @@ export default function PostPage() {
                     <div className="flex justify-between items-center gap-4">
                         <p className="text-gray-500 dark:text-gray-400 text-xs md:text-sm">{post && new Date(post.createdAt).toLocaleString()}</p>
 
-                        <span className='italic text-xs md:text-sm'>
-                          {post && (post.content.length / 1000).toFixed(0)} mins read
+                        <span className='text-xs md:text-sm text-green-500'>
+                        🕒 {post && (post.content.length / 1000).toFixed(0)}  mins read
                         </span>
                     </div>
                     
