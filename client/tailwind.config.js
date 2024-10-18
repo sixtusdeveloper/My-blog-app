@@ -1,19 +1,17 @@
-const flowbite = require("flowbite-react/tailwind");
+import { content as _content, plugin } from "flowbite-react/tailwind";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    // ...
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    flowbite.content(),
-  ],
-  plugins: [
-    // ...
-    flowbite.plugin(), 
-    require('tailwind-scrollbar'),
-  ],
-};
+export const content = [
+  // ...
+  './index.html',
+  './src/**/*.{js,ts,jsx,tsx}',
+  _content(),
+];
+export const plugins = [
+  // ...
+  plugin(),
+  require('tailwind-scrollbar'),
+];
 
 
 
