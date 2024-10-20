@@ -110,10 +110,10 @@ export default function CreatePost() {
                 </div>
             </div>
             
-            <div className="max-w-3xl pb-10 mx-auto px-4 md:px-10" id='create'>
-                <h1 className='text-2xl font-bold text-center md:text-start my-8 md:my-10'>Create Your Post</h1>
+            <div className="w-full pb-20 mx-auto px-4" id='create'>
+                <h1 className='text-2xl font-bold text-center md:text-center my-8 md:my-10'>Create Your Post</h1>
 
-                <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+                <form className='flex flex-col gap-4 md:px-10 mx-auto max-w-5xl relative' onSubmit={handleSubmit}>
                      
                     <div className='flex flex-col gap-4 sm:flex-row justify-between'>
                         <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({

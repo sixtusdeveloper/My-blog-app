@@ -60,7 +60,7 @@ export default function About() {
   return (
     <section className='max-w-screen w-full bg-white dark:bg-[rgb(16,23,42)]'>
       <div
-        className="relative flex items-center py-8 md:py-16 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        className="relative flex items-center py-8 md:py-16 px-4 lg:px-10 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
         style={{
             backgroundImage: 'url("/bg.png")', // Replace with your desired background image.
         }}
