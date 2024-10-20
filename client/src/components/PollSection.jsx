@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Button } from 'flowbite-react';
 
 const PollSection = () => {
   const [votes, setVotes] = useState({
@@ -59,52 +58,52 @@ const PollSection = () => {
         <h2 className="text-2xl font-bold mb-6">Your Opinion Matters</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">Which JavaScript framework do you prefer?</p>
 
-        <div className="flex flex-wrap md:flex-nowrap gap-4 justify-center space-x-4">
-          <Button
-            onClick={() => handleVote('React')}
-            className="self-center px-2 py-1"
-            gradientDuoTone="purpleToPink"
-          >
-            React [{votes.React}]
-          </Button>
-          <Button
-            onClick={() => handleVote('Vue')}
-            className="self-center px-2 py-1"
-            gradientDuoTone="purpleToBlue"
-          >
-            Vue [{votes.Vue}]
-          </Button>
-          <Button
-            onClick={() => handleVote('Angular')}
-            className="self-center px-2 py-1"
-            gradientDuoTone="purpleToBlue"
-          >
-            Angular [{votes.Angular}]
-          </Button>
-        </div>
-
         <div className="mt-8">
-          <h3 className="text-xl font-bold py-2">Results:</h3>
-
           <table className="table-auto border-collapse w-full mt-4">
             <thead>
               <tr className="bg-white dark:bg-[rgb(16,23,42)] border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-200 uppercase text-sm leading-normal">
                 <th className="py-3 px-6 text-left">Framework</th>
                 <th className="py-3 px-6 text-center">Votes</th>
+                <th className="py-3 px-6 text-center">Lang</th>
               </tr>
             </thead>
             <tbody className="text-sm font-light border border-gray-300 dark:border-gray-700">
               <tr className="border-b border-gray-200 dark:bg-[rgb(16,23,42)] dark:border-gray-700 bg-white hover:bg-gray-100">
                 <td className="py-3 px-6 text-left">React</td>
                 <td className="py-3 px-6 text-center">{votes.React}</td>
+                <td className="py-3 px-6 text-center">
+                <button
+                  className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                  onClick={() => handleVote('React')}
+                >
+                  React [{votes.React}]
+                </button>
+                </td>
               </tr>
               <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
                 <td className="py-3 px-6 text-left">Vue</td>
                 <td className="py-3 px-6 text-center">{votes.Vue}</td>
+                <td className="py-3 px-6 text-center">
+                <button
+                  className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                  onClick={() => handleVote('Vue')}
+                  
+                >
+                  Vue [{votes.Vue}]
+                </button>
+                </td>
               </tr>
               <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
                 <td className="py-3 px-6 text-left">Angular</td>
                 <td className="py-3 px-6 text-center">{votes.Angular}</td>
+                <td className="py-3 px-6 text-center">
+                  <button
+                     className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                    onClick={() => handleVote('Angular')}
+                  >
+                    Angular [{votes.Angular}]
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -116,11 +116,39 @@ export default function UpdatePost() {
     };
 
     return (
-        <div className='bg-white dark:bg-[rgb(16,23,42)] min-h-screen px-4 md:px-10 w-full'>
-            <div className="max-w-3xl py-20 mx-auto">
-                <h1 className='text-center font-semibold text-3xl my-16 md:mt-20'>Update Post</h1>
+        <section className='bg-white dark:bg-[rgb(16,23,42)] min-h-screen w-full'>
+            <div
+                className="relative flex items-center pt-20 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+                style={{
+                    backgroundImage: 'url("/post-bg.avif")', // Replace with your desired background image.
+                }}
+                >
+                <div className="absolute inset-0 bg-black opacity-70"></div> {/* Dark overlay for contrast */}
 
-                <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+                <div className="relative text-white mt-10 p-4 max-w-3xl space-y-8">
+                <h1 className="text-3xl lg:text-5xl font-extrabold leading-tight text-white mb-4">
+                    Join Me Let's Create Something Amazing!
+                </h1>
+                
+                <p className="text-lg lg:text-xl text-gray-100 mb-6">
+                    Share your knowledge, insights, and experiences with the world. Write a post on DevJourney and inspire others to learn and grow. Let's create something amazing together!
+                </p>
+
+                <a href='#create'>
+                    <Button 
+                    size="lg" 
+                    gradientDuoTone="purpleToBlue"
+                    className="hover:scale-105 transform transition-transform my-7 duration-300"
+                    >
+                    Get Started
+                    </Button>
+                </a>
+                </div>
+            </div>
+            <div className="w-full pb-20 mx-auto px-4" id='create'>
+               <h1 className='text-2xl font-bold text-center md:text-center my-8 md:my-10'>Update Post</h1>
+
+                <form className='flex flex-col gap-4 md:px-10 mx-auto max-w-5xl relative' onSubmit={handleSubmit}>
                      
                     <div className='flex flex-col gap-4 sm:flex-row justify-between'>
                         <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({
@@ -184,6 +212,6 @@ export default function UpdatePost() {
                 </form>
             
             </div>
-        </div>
+        </section>
     )
 }
