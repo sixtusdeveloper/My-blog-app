@@ -9,7 +9,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://devjourney-0i4t.onrender.com',
-        secure: false,
+        secure: true,
       },
     },
   },
