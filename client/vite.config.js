@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://devjourney-0i4t.onrender.com',
         secure: false,
       },
     },
