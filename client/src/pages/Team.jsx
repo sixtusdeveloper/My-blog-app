@@ -29,7 +29,7 @@ const MeetTheTeam = () => {
   return (
     <section className="w-full bg-white dark:bg-[rgb(16,23,42)]">
       <div
-        className="relative flex items-center pt-14 md:py-10 px-4 lg:px-10 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        className="relative flex items-center pt-14 md:py-10 md:px-4 lg:px-10 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
         style={{
             backgroundImage: 'url("/bg-img.avif")', // Replace with your desired background image.
         }}
@@ -58,7 +58,7 @@ const MeetTheTeam = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-10 py-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-10 py-10">
           <div className="py-6">
               {teamMembers.map((member, index) => (
               <div key={index} className="flex flex-wrap justify-between lg:flex-nowrap items-center gap-6 border border-gray-300 dark:border-gray-800 shadow-md rounded-lg p-4">

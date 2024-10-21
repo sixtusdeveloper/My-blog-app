@@ -43,7 +43,7 @@ export default function Home() {
     <section className="w-full bg-white dark:bg-[rgb(16,23,42)]">
       {/* Hero Section */}
       <div
-        className="relative flex flex-col lg:flex-row justify-between items-center pt-20 px-4 lg:px-10 min-h-[85vh]"
+        className="relative flex flex-col lg:flex-row justify-between items-center pt-20  md:px-4 lg:px-10 min-h-[85vh]"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(35, 56, 56, 180), rgba(35, 55, 156, 0.4)), url(${javaImage})`,
           backgroundSize: 'cover',
@@ -68,7 +68,7 @@ export default function Home() {
       </div>
 
       {/* Featured Post */}
-      <div className="featured-post py-8 md:px-1 px-4 md:pt-4">
+      <div className="featured-post py-8 px-2 md:px-4 md:pt-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-center md:text-start my-6 md:my-6">Featured Post</h2>
           <div className="p-4 border border-gray-300 dark:border-gray-800 rounded-lg flex md:flex-row flex-col items-center gap-8">
@@ -100,13 +100,13 @@ export default function Home() {
       </div>
 
       {/* Trending Posts Section */}
-      <div className="popular-posts px-6 py-8">
+      <div className="popular-posts px-4 md:px-6 py-8">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">Trending Posts</h2>
           <ul className="space-y-4">
             {posts.slice(0, visiblePosts).map((post) => (
               <li key={post._id} className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
-                <h3 className="text-lg font-bold">
+                <h3 className="text-base font-semibold">
                   <Link to={`/post/${post.slug}`} className="hover:underline">
                     {post.title}
                   </Link>
@@ -138,7 +138,7 @@ export default function Home() {
       </div>
 
       {/* Blog Posts Section */}
-      <section className="py-8 px-4 lg:px-10 w-full max-w-6xl mx-auto">
+      <section className="py-8 px-2 md:px-4 lg:px-10 w-full max-w-6xl mx-auto">
         <div className="flex flex-col justify-center items-center mb-5">
           <h2 className="py-4 text-2xl text-center font-bold dark:text-gray-300 text-gray-800 mb-4">
             Recent Posts

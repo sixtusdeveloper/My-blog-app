@@ -81,12 +81,12 @@ export default function Header () {
         />
       </form>
 
-      <Button className='w-12 h-10 md:hidden' color='gray' pill>
+      <Button className='w-12 h-10 hidden md:hidden' color='gray' pill>
         <AiOutlineSearch />
       </Button>
      
       <div className='flex gap-4 lg:gap-8 md:order-2'>
-        <Button className='w-12 h-10 hidden md:block' color='gray' pill 
+        <Button className='w-12 h-10' color='gray' pill 
         onClick={() => dispatch(
           toggleTheme()
         )}>
