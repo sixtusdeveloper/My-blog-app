@@ -89,7 +89,7 @@ export default function Home() {
                   <Button type="button" gradientDuoTone="purpleToBlue" outline>
                     <span className="flex items-center">
                       Read post
-                      <FaArrowRight size={18} className="ml-1" />
+                      <FaArrowRight size={12} className="ml-1" />
                     </span>
                   </Button>
                 </Link>

@@ -138,9 +138,11 @@ export default function DashboardUsers() {
             </Table>
             {showMore && (
               <div className='flex justify-center mt-4'>
-                <button onClick={handleShowMore} className='text-purple-500 px-4 py-2 hover:text-purple-600'>
+                <Button onClick={handleShowMore} 
+                  gradientDuoTone='purpleToBlue'
+                  className="flex items-center my-4">
                   Load More
-                </button>
+                </Button>
               </div>
             )}  
           </div>
