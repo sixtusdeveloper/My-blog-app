@@ -51,17 +51,47 @@ export const submitVote = async (req, res, next) => {
 };
 
 // Reset the poll data
+// Reset votes for a specific framework
 export const resetPollVotes = async (req, res, next) => {
+  const { framework } = req.body; // Get the framework from the request
+
   try {
     const pollVotes = await PollVote.findOne();
     if (pollVotes) {
-      pollVotes.reactVotes = 0;
-      pollVotes.vueVotes = 0;
-      pollVotes.angularVotes = 0;
+      switch (framework) {
+        case 'React':
+          pollVotes.reactVotes = 0;
+          break;
+        case 'Vue':
+          pollVotes.vueVotes = 0;
+          break;
+        case 'Angular':
+          pollVotes.angularVotes = 0;
+          break;
+        default:
+          return next(errorHandler(400, 'Invalid framework'));
+      }
       await pollVotes.save();
+      res.json(`Votes for ${framework} reset successfully`);
+    } else {
+      res.status(404).json('No poll data found');
     }
-    res.json('Poll data reset successfully');
   } catch (error) {
     next(error);
   }
 };
+
+// export const resetPollVotes = async (req, res, next) => {
+//   try {
+//     const pollVotes = await PollVote.findOne();
+//     if (pollVotes) {
+//       pollVotes.reactVotes = 0;
+//       pollVotes.vueVotes = 0;
+//       pollVotes.angularVotes = 0;
+//       await pollVotes.save();
+//     }
+//     res.json('Poll data reset successfully');
+//   } catch (error) {
+//     next(error);
+//   }
+// };
