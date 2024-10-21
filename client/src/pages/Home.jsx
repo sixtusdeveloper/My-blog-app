@@ -68,9 +68,9 @@ export default function Home() {
       </div>
 
       {/* Featured Post */}
-      <div className="featured-post py-8 md:px-1 px-4 md:py-10">
+      <div className="featured-post py-8 md:px-1 px-4 md:pt-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-center md:text-start my-8 md:my-10">Featured Post</h2>
+          <h2 className="text-2xl font-bold text-center md:text-start my-6 md:my-6">Featured Post</h2>
           <div className="p-4 border border-gray-300 dark:border-gray-800 rounded-lg flex md:flex-row flex-col items-center gap-8">
             <img
               src="/transition.avif"

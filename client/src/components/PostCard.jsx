@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+import { Button }  from 'flowbite-react';
 
 export default function PostCard({ post }) {
   return (
@@ -18,16 +20,20 @@ export default function PostCard({ post }) {
                 </h3>
                 <div className='flex mt-6 gap-4 justify-between items-center'>
                   <Link to={`/category/${post.category}`}>
-                    <span className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-800 cursor-pointer dark:hover:border-gray-700 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'>
+                    <span className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-600 cursor-pointer dark:hover:border-gray-400 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'>
                       {post.category}
                     </span>
                   </Link>
 
                   <Link
                   to={`/post/${post.slug}`}
-                  className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-800 cursor-pointer dark:hover:border-gray-700 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'
                   >
-                  Read article
+                    <Button type="button" gradientDuoTone="purpleToBlue" outline>
+                      <span className="flex items-center">
+                        Read article
+                        <FaArrowRight size={12} className="ml-1" />
+                      </span>
+                    </Button>
                   </Link>
                 </div>
             </div>
