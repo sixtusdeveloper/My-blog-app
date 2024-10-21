@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Button } from 'flowbite-react';  // Import the Button component
 
 const PollSection = () => {
   const [votes, setVotes] = useState({
@@ -72,37 +73,40 @@ const PollSection = () => {
                 <td className="py-3 px-6 text-left">React</td>
                 <td className="py-3 px-6 text-center">{votes.React}</td>
                 <td className="py-3 px-6 text-center">
-                <button
-                  className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                <Button
+                  className='mx-auto text-center text-xs md:text-sm'
                   onClick={() => handleVote('React')}
+                  gradientDuoTone="redToYellow"
                 >
                   React [{votes.React}]
-                </button>
+                </Button>
                 </td>
               </tr>
               <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
                 <td className="py-3 px-6 text-left">Vue</td>
                 <td className="py-3 px-6 text-center">{votes.Vue}</td>
                 <td className="py-3 px-6 text-center">
-                <button
-                  className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                <Button
+                  className='mx-auto text-center text-xs md:text-sm'
+                  gradientDuoTone="redToYellow"
                   onClick={() => handleVote('Vue')}
                   
                 >
                   Vue [{votes.Vue}]
-                </button>
+                </Button>
                 </td>
               </tr>
               <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
                 <td className="py-3 px-6 text-left">Angular</td>
                 <td className="py-3 px-6 text-center">{votes.Angular}</td>
                 <td className="py-3 px-6 text-center">
-                  <button
-                     className='mx-auto text-center bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-medium md:font-semibold p-1 md:p-2 rounded-lg'
+                  <Button
+                    className='mx-auto text-center text-xs md:text-sm'
                     onClick={() => handleVote('Angular')}
+                    gradientDuoTone="redToYellow"
                   >
                     Angular [{votes.Angular}]
-                  </button>
+                  </Button>
                 </td>
               </tr>
             </tbody>

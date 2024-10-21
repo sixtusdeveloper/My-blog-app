@@ -16,7 +16,7 @@ export default function PostCard({ post }) {
             </Link>
             <div className='py-3'>
                 <h3 className="text-base font-bold"> 
-                  {post.title.length > 70 ? post.title.slice(0, 50) + '...' : post.title}
+                  {post.title.length > 60 ? post.title.slice(0, 40) + '...' : post.title}
                 </h3>
                 <div className='flex mt-6 gap-4 justify-between items-center'>
                   <Link to={`/category/${post.category}`}>

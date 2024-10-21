@@ -12,6 +12,7 @@ export default function DashboardVotes() {
   });
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [selectedFramework, setSelectedFramework] = useState(''); // Track the selected framework
 
   useEffect(() => {
     const fetchVotes = async () => {
@@ -39,11 +40,16 @@ export default function DashboardVotes() {
     }
   }, [currentUser._id]);
 
+  // Handle the reset for a specific framework
   const handleReset = async () => {
     try {
-      const res = await fetch(`/api/pollVote/reset`, { method: 'POST' });
+      const res = await fetch(`/api/pollVote/reset`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ framework: selectedFramework }), // Send framework name
+      });
       if (!res.ok) throw new Error('Failed to reset votes');
-      setVotes({ React: 0, Vue: 0, Angular: 0 });
+      setVotes((prevVotes) => ({ ...prevVotes, [selectedFramework]: 0 }));
       setShowModal(false); // Close the modal after resetting
     } catch (error) {
       console.error('Error resetting votes:', error.message);
@@ -65,7 +71,8 @@ export default function DashboardVotes() {
           <Table hoverable className="shadow-md">
             <Table.Head>
               <Table.HeadCell>Framework</Table.HeadCell>
-              <Table.HeadCell>Votes</Table.HeadCell>
+              <Table.HeadCell className='text-center mx-auto'>Votes</Table.HeadCell>
+              <Table.HeadCell className='text-center mx-auto'>Update</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
               {Object.entries(votes).map(([framework, count]) => (
@@ -75,20 +82,22 @@ export default function DashboardVotes() {
                 >
                   <Table.Cell className="py-3 px-6 text-left">{framework}</Table.Cell>
                   <Table.Cell className="py-3 px-6 text-center">{count}</Table.Cell>
+                  <Table.Cell className="py-3 px-6 text-center">
+                    <Button
+                      onClick={() => {
+                        setSelectedFramework(framework); // Track the selected framework
+                        setShowModal(true); // Open the modal
+                      }}
+                      className="mx-auto text-center text-xs md:text-sm"
+                      gradientDuoTone="redToYellow"
+                    >
+                      Reset Poll
+                    </Button>
+                  </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
           </Table>
-
-          {/* Button to Open the Modal */}
-          <div className="mt-6 flex justify-center">
-            <Button
-              onClick={() => setShowModal(true)}
-              gradientDuoTone="redToYellow"
-            >
-              Reset Poll
-            </Button>
-          </div>
         </div>
       ) : (
         <h1 className="text-center text-2xl">No Votes Found</h1>
@@ -101,7 +110,7 @@ export default function DashboardVotes() {
           <div className="text-center p-4">
             <HiOutlineExclamationCircle className="h-14 w-14 mx-auto mb-4 text-red-800" />
             <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
-              Are you sure you want to reset the poll?
+              Are you sure you want to reset the votes for {selectedFramework}?
             </h3>
             <div className="flex justify-center gap-4">
               <Button
@@ -125,6 +134,10 @@ export default function DashboardVotes() {
     </div>
   );
 }
+
+
+
+
 
 
 
