@@ -5,7 +5,7 @@ import { BsFacebook, BsYoutube, BsTwitter, BsGithub, BsLinkedin } from 'react-ic
 export default function FooterCom() {
   return (
     <Footer container className='border border-t-8 border-blue-500 w-full'>
-      <div className='w-full max-w-6xl mx-auto lg:px-10 px-4'>
+      <div className='w-full max-w-6xl mx-auto lg:px-10 md:px-4'>
         <div className='grid gap-8 lg:gap-10 w-full justify-between lg:grid-cols-2 sm:grid-cols-2'>
           {/* Left section with logo and description */}
           <div className='mt-5 lg:text-left'>

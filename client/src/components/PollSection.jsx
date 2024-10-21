@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from 'flowbite-react';  // Import the Button component
+import { Button, Table } from 'flowbite-react';  // Import the Button component
 
 const PollSection = () => {
   const [votes, setVotes] = useState({
@@ -59,59 +59,66 @@ const PollSection = () => {
         <h2 className="text-2xl font-bold mb-6">Your Opinion Matters</h2>
         <p className="text-gray-600 dark:text-gray-300 mb-4">Which JavaScript framework do you prefer?</p>
 
-        <div className="mt-8">
-          <table className="table-auto border-collapse w-full mt-4">
-            <thead>
-              <tr className="bg-white dark:bg-[rgb(16,23,42)] border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-200 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">Framework</th>
-                <th className="py-3 px-6 text-center">Votes</th>
-                <th className="py-3 px-6 text-center">Lang</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm font-light border border-gray-300 dark:border-gray-700">
-              <tr className="border-b border-gray-200 dark:bg-[rgb(16,23,42)] dark:border-gray-700 bg-white hover:bg-gray-100">
-                <td className="py-3 px-6 text-left">React</td>
-                <td className="py-3 px-6 text-center">{votes.React}</td>
-                <td className="py-3 px-6 text-center">
-                <Button
-                  className='mx-auto text-center text-xs md:text-sm'
-                  onClick={() => handleVote('React')}
-                  gradientDuoTone="redToYellow"
-                >
-                  React [{votes.React}]
-                </Button>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
-                <td className="py-3 px-6 text-left">Vue</td>
-                <td className="py-3 px-6 text-center">{votes.Vue}</td>
-                <td className="py-3 px-6 text-center">
-                <Button
-                  className='mx-auto text-center text-xs md:text-sm'
-                  gradientDuoTone="redToYellow"
-                  onClick={() => handleVote('Vue')}
-                  
-                >
-                  Vue [{votes.Vue}]
-                </Button>
-                </td>
-              </tr>
-              <tr className="border-b border-gray-300 dark:border-gray-700 dark:bg-[rgb(16,23,42)] bg-white hover:bg-gray-100">
-                <td className="py-3 px-6 text-left">Angular</td>
-                <td className="py-3 px-6 text-center">{votes.Angular}</td>
-                <td className="py-3 px-6 text-center">
+        <div className="relative mx-auto py-2 table-auto overflow-x-scroll scrollbar">
+          
+          <Table hoverable className="shadow-md">
+            <Table.Head>
+              <Table.HeadCell>Framework</Table.HeadCell>
+              <Table.HeadCell className='text-center mx-auto'>Votes</Table.HeadCell>
+              <Table.HeadCell className='text-center mx-auto'>Lang</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+
+              <Table.Row
+                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              >
+                <Table.Cell className="py-3 px-6 text-left">React</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">{votes.React}</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">
                   <Button
-                    className='mx-auto text-center text-xs md:text-sm'
-                    onClick={() => handleVote('Angular')}
+                    onClick={() => handleVote('React')}
+                    className="mx-auto text-center text-xs md:text-sm"
                     gradientDuoTone="redToYellow"
                   >
-                    Angular [{votes.Angular}]
+                      React [{votes.React}]
                   </Button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </Table.Cell>
+              </Table.Row>
 
+              <Table.Row
+                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              >
+                <Table.Cell className="py-3 px-6 text-left">Vue</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">{votes.Vue}</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">
+                  <Button
+                    onClick={() => handleVote('Vue')}
+                    className="mx-auto text-center text-xs md:text-sm"
+                    gradientDuoTone="redToYellow"
+                  >
+                      Vue [{votes.Vue}]
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+
+              <Table.Row
+                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              >
+                <Table.Cell className="py-3 px-6 text-left">Angular</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">{votes.Angular}</Table.Cell>
+                <Table.Cell className="py-3 px-6 text-center">
+                  <Button
+                    onClick={() => handleVote('Angular')}
+                    className="mx-auto text-center text-xs md:text-sm"
+                    gradientDuoTone="redToYellow"
+                  >
+                      Angular [{votes.Angular}]
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+             
+            </Table.Body>
+          </Table>    
         </div>
       </div>
     </section>

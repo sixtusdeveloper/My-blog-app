@@ -51,7 +51,7 @@ const ContactPage = () => {
     <section className='min-h-screen w-full bg-white dark:bg-[rgb(16,23,42)]'>
 
       <div
-        className="relative flex items-center pt-20 px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        className="relative flex items-center pt-20 md:px-4 lg:px-20 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
         style={{
             backgroundImage: 'url("/blog03.webp")', // Replace with your desired background image.
         }}
@@ -79,7 +79,7 @@ const ContactPage = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-8 py-10" id="contact">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10" id="contact">
         <div className='py-8'>
           <h1 className="text-3xl lg:text-4xl font-extrabold dark:text-gray-200 text-gray-600 mb-8">
             Contact Me

@@ -60,7 +60,7 @@ export default function About() {
   return (
     <section className='max-w-screen w-full bg-white dark:bg-[rgb(16,23,42)]'>
       <div
-        className="relative flex items-center py-8 md:py-16 px-4 lg:px-10 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
+        className="relative flex items-center py-8 md:py-16 md:px-4 lg:px-10 min-h-screen lg:min-h-[85vh] bg-center bg-cover bg-no-repeat"
         style={{
             backgroundImage: 'url("/bg.png")', // Replace with your desired background image.
         }}
@@ -87,7 +87,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="author-section px-4 py-8">
+      <div className="author-section md:px-4 py-8">
         <div className="max-w-5xl mx-auto flex md:flex-row flex-col gap-4 items-center">
           <img src="/profile-img.png" alt="Author" className="profile-pic rounded-lg mr-6" />
           <div className='px-4'>
@@ -99,7 +99,7 @@ export default function About() {
       </div>
        
       {/* My Journey */}
-        <section className="py-16 px-6">
+        <section className="py-16 px-4 md:px-6">
           <div className="max-w-5xl mx-auto w-full">
             <h2 className="text-2xl md:text-3xl font-bold mb-8">My Journey</h2>
             <ul className="space-y-6">
