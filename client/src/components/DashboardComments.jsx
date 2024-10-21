@@ -112,10 +112,10 @@ export default function DashComments() {
                   <Table.Cell className="text-gray-800 dark:text-gray-300">
                     {comment.numberOfLikes}
                   </Table.Cell>
-                  <Table.Cell className="text-gray-500 dark:text-gray-300">
+                  <Table.Cell className="text-gray-600 dark:text-gray-300">
                     {truncateId(comment.postId)}
                   </Table.Cell>
-                  <Table.Cell className="text-gray-500 dark:text-gray-300">
+                  <Table.Cell className="text-gray-600 dark:text-gray-300">
                     {truncateId(comment.userId)}
                   </Table.Cell>
                   <Table.Cell>
@@ -135,12 +135,13 @@ export default function DashComments() {
           </Table>
           {showMore && (
             <div className="flex justify-center mt-4">
-              <button
+              <Button
                 onClick={handleShowMore}
-                className="text-purple-500 px-4 py-2 hover:text-purple-600"
+                gradientDuoTone='purpleToBlue'
+                className="flex items-center my-4"
               >
                 Load More
-              </button>
+              </Button>
             </div>
           )}
         </div>
