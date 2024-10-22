@@ -56,7 +56,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className='bg-white dark:bg-[rgb(16,23,42)] w-full pt-20'>
+    <div className='bg-white dark:bg-[rgb(16,23,42)] w-full'>
        <div
         className="relative flex flex-col lg:flex-row justify-between items-center pt-20 px-4 lg:px-10 min-h-[85vh]"
         style={{

@@ -156,7 +156,7 @@ export default function Home() {
 
           {!loading && (
             <Link to="/search">
-              <Button gradientDuoTone="purpleToBlue" outline className="self-center my-4">
+              <Button gradientDuoTone="purpleToBlue" outline className="self-center my-8">
                 View all posts
               </Button>
             </Link>
