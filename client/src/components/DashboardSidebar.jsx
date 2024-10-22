@@ -50,7 +50,7 @@ export default function DashboardSidebar() {
                             active={tab === 'dash' || !tab}
                         >  
                             <span className="flex text-sm items-center space-x-2">
-                                <img src={DashboardIcon} alt="Dashboard" className="w-6 h-6 mr-2" />
+                                <img src={DashboardIcon} alt="Dashboard" className="w-5 h-5 mr-4" />
                                 Dashboard
                             </span>
                         </Sidebar.Item>
@@ -65,7 +65,7 @@ export default function DashboardSidebar() {
                     
                     >  
                         <span className="flex text-sm items-center space-x-2">
-                            <img src={ProfileIcon} alt="Profile" className="w-6 h-6 mr-2" />
+                            <img src={ProfileIcon} alt="Profile" className="w-5 h-5 mr-4" />
                             Profile
                         </span>
                     </Sidebar.Item>
@@ -73,7 +73,7 @@ export default function DashboardSidebar() {
                     {currentUser.isAdmin && (
                         <Sidebar.Item as={Link} to="/create-post" active={tab === 'createpost'}>
                             <span className="flex text-sm items-center space-x-2">
-                                <img src={CreatePostIcon} alt="Create Post" className="w-6 h-6 mr-2" />
+                                <img src={CreatePostIcon} alt="Create Post" className="w-5 h-5 mr-4" />
                                 Create Post
                             </span>
                         </Sidebar.Item>
@@ -82,7 +82,7 @@ export default function DashboardSidebar() {
                     {currentUser.isAdmin && (
                         <Sidebar.Item as={Link} to="/dashboard?tab=posts" active={tab === 'posts'}>
                             <span className="flex text-sm items-center space-x-2">
-                                <img src={PostsIcon} alt="Posts" className="w-6 h-6 mr-2" />
+                                <img src={PostsIcon} alt="Posts" className="w-5 h-5 mr-4" />
                                 Posts
                             </span>
                         </Sidebar.Item>
@@ -92,21 +92,21 @@ export default function DashboardSidebar() {
                         <>
                             <Sidebar.Item as={Link} to="/dashboard?tab=users" active={tab === 'users'}>
                                 <span  className="flex text-sm items-center space-x-2">
-                                    <img src={UsersIcon} alt="Users" className="w-6 h-6 mr-2" />
+                                    <img src={UsersIcon} alt="Users" className="w-5 h-5 mr-4" />
                                     Users
                                 </span>
                             </Sidebar.Item>
 
                             <Sidebar.Item as={Link} to="/dashboard?tab=comments" active={tab === 'comments'}>
                                 <span  className="flex text-sm items-center space-x-2">
-                                    <img src={CommentsIcon} alt="Comments" className="w-6 h-6 mr-2" />
+                                    <img src={CommentsIcon} alt="Comments" className="w-5 h-5 mr-4" />
                                     Comments
                                 </span>
                             </Sidebar.Item>
 
                             <Sidebar.Item as={Link} to="/dashboard?tab=votes" active={tab === 'votes'}>
                                 <span  className="flex text-sm items-center space-x-2">
-                                    <img src={VotesIcon} alt="Votes Poll" className="w-6 h-6 mr-2" />
+                                    <img src={VotesIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
                                     Votes Poll
                                 </span>
                             </Sidebar.Item>
@@ -115,7 +115,7 @@ export default function DashboardSidebar() {
 
                     <Sidebar.Item className="cursor-pointer" onClick={handleSignout}>
                         <span  className="flex text-sm items-center space-x-2">
-                            <img src={LogoutIcon} alt="Logout" className="w-6 h-6 mr-2" />
+                            <img src={LogoutIcon} alt="Logout" className="w-5 h-5 mr-4" />
                             Sign Out
                         </span>
                     </Sidebar.Item>

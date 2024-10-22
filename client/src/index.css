@@ -22,6 +22,15 @@ body{
   font-size: 18px;
 }
 
+.prose pre {
+  background-color: #1e293b; /* Dark background */
+  color: #f1f5f9;           /* Light text */
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+
 
 .post-content h1 {
     font-size: 1.5rem;
