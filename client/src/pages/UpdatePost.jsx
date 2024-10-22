@@ -48,8 +48,8 @@ export default function UpdatePost() {
         fetchPost();
     }, [postId]);
 
-    
-    const hangleUploadImage = async () => {
+    // Handle input change function
+    const handleUploadImage = async () => {
 
         try {
             if(!file){
@@ -85,6 +85,15 @@ export default function UpdatePost() {
         
     }
 
+    // Handle input change function
+    const handleInputChange = (e) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [e.target.id]: e.target.value,
+        }));
+    };
+    
+    // Handle submit function
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -151,26 +160,53 @@ export default function UpdatePost() {
                 <form className='flex flex-col gap-4 md:px-10 mx-auto max-w-5xl relative' onSubmit={handleSubmit}>
                      
                     <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-                        <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({
-                            ...formData, title: e.target.value  
-                        })}
-                        value={formData.title}
+                        <TextInput
+                            type='text'
+                            placeholder='Title'
+                            required
+                            id='title'
+                            className='flex-1'
+                            onChange={handleInputChange}
+                            value={formData.title || ''}
                         />
+                      
+                        {/* <TextInput 
+                            type='text' 
+                            placeholder='Title' 
+                            required id='title' 
+                            className='flex-1' 
+                            onChange={(e) => setFormData({
+                                ...formData, title: e.target.value  
+                            })}
+                            value={formData.title}
+                        /> */}
 
-                        <Select onChange={(e) => setFormData({
-                            ...formData, category: e.target.value 
-                           })}
-                            value={formData.category}
-                         >
+                        <Select id='category' onChange={handleInputChange} value={formData.category || ''}>
+                            {/* <Select onChange={(e) => setFormData({
+                                ...formData, category: e.target.value 
+                            })}
+                                value={formData.category}
+                            > */}
                             <option value='uncategorized'>Select a Category</option>
                             <option value='javascript'>JavaScript</option>
+                            <option value='mysql'>MySQL</option>
                             <option value='reactjs'>React.js</option>
                             <option value='nextjs'>Next.js</option>
                             <option value='typescript'>TypeScript</option>
                             <option value='vuejs'>Vue.js</option>
-                            <option value='vuejs'>CSS</option>
-                            <option value='vuejs'>Java</option>
-                            <option value='vuejs'>MySQL</option>
+                            <option value='html'>HTML</option>
+                            <option value='c++'>C++</option>
+                            <option value='c#'>C#</option>
+                            <option value='css'>CSS</option>
+                            <option value='java'>Java</option>
+                            <option value='php'>PHP</option>
+                            <option value='shell'>Shell</option>
+                            <option value='python'>Python</option>
+                            <option value='tailwindcss'>Tailwindcss</option>
+                            <option value='career'>Career</option>
+                            <option value='frontend'>Frontend</option>
+                            <option value='backend'>Backend</option>
+                            <option value='devops'>DevOps</option>
                         
                         </Select>
                     </div>
@@ -180,7 +216,7 @@ export default function UpdatePost() {
                            onChange={(e) => setFile(e.target.files[0])} 
                         /> 
                         <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline 
-                            onClick={hangleUploadImage} disabled={imageUploadProgress}>
+                            onClick={handleUploadImage} disabled={imageUploadProgress}>
                             {
                                 imageUploadProgress ? (
                                     <div className='w-16 h-16'>
@@ -199,14 +235,22 @@ export default function UpdatePost() {
                     )}  
                     
                     {/* The Editor */}
-                    <ReactQuill theme='snow' placeholder='Write something amazing...' 
+                    <ReactQuill
+                        theme='snow'
+                        placeholder='Write something amazing...'
+                        className='h-72 mb-12'
+                        required
+                        onChange={(value) => setFormData({ ...formData, content: value })}
+                        value={formData.content || ''}
+                    />
+                    {/* <ReactQuill theme='snow' placeholder='Write something amazing...' 
                     className='h-72 mb-12' 
                     required 
                     onChange={(value) => setFormData({
                         ...formData, content: value
                     })} 
                     value={formData.content}
-                    />    
+                    />     */}
                     <Button type='submit' gradientDuoTone='purpleToPink'>Update Post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>

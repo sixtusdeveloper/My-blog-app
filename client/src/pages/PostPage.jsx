@@ -5,7 +5,6 @@ import CallToAction from "../pages/CallToAction";
 import CommentSection from "../components/CommentSection";
 import PostCard from "../components/PostCard";
 
-
 export default function PostPage() {
     const { postSlug } = useParams();
     const [loading, setLoading] = useState(true);
@@ -84,7 +83,7 @@ export default function PostPage() {
 
     return (
         <main className="dark:bg-[rgb(16,23,42)] overflow-x-hidden min-h-screen w-full py-20">
-            <div className="flex flex-col max-w-5xl mx-auto px-4 md:px-6 lg:px-4">
+            <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-10 lg:px-10">
                 <h1 className="text-3xl lg:text-4xl pt-6 mt-10 font-serif">{post && post.title}</h1>
                 <div className="flex justify-between gap-8 items-center my-2">
                     <div className="flex justify-between items-center gap-4">
@@ -102,7 +101,10 @@ export default function PostPage() {
                     </Link>
                 </div>
                 <img src={post && post.image} alt={post && post.title} className="mt-8 w-full h-96 object-cover rounded-lg" />
-                <div dangerouslySetInnerHTML={{ __html: post && post.content }} className="post-content mt-8 font-serif leading-relaxed text-gray-700 dark:text-gray-300">
+                <div 
+                // className="post-content mt-8 font-serif leading-relaxed"
+                className="prose dark:prose-dark max-w-none post-content mt-8 font-serif leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post && post.content }}>
                 </div>
 
                 <div className="w-full py-4">

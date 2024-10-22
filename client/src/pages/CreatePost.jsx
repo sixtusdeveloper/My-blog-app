@@ -17,7 +17,9 @@ export default function CreatePost() {
     const navigate = useNavigate(); 
     const [formData, setFormData] = useState({});   
     const [publishError, setPublishError] = useState(null);    
-    const hangleUploadImage = async () => {
+
+    // Handle upload Image function
+    const handleUploadImage = async () => {
 
         try {
             if(!file){
@@ -53,6 +55,16 @@ export default function CreatePost() {
         
     }
 
+    // Handle input change function
+    const handleInputChange = (e) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [e.target.id]: e.target.value,
+        }));
+    };
+      
+
+    // Handle submit function
     const handleSubmit = async (e) => { 
         e.preventDefault();
         try {
@@ -116,14 +128,32 @@ export default function CreatePost() {
                 <form className='flex flex-col gap-4 md:px-10 mx-auto max-w-5xl relative' onSubmit={handleSubmit}>
                      
                     <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-                        <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({
+                        <TextInput
+                            type="text"
+                            placeholder="Title"
+                            required
+                            id="title"
+                            className="flex-1"
+                            onChange={handleInputChange}
+                        />
+                        {/* <TextInput type='text' 
+                        placeholder='Title' 
+                        required id='title' 
+                        className='flex-1' 
+                        onChange={(e) => setFormData({
                             ...formData, title: e.target.value  
-                        })}/>
+                        })}/> */}
 
-                        <Select onChange={(e) => setFormData({
-                            ...formData, category: e.target.value 
-                           })}
-                         >
+                        <Select
+                            id='category'
+                            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                            value={formData.category || 'uncategorized'}
+                        >
+
+                            {/* <Select onChange={(e) => setFormData({
+                                ...formData, category: e.target.value 
+                            })}
+                            > */}
                             <option value='uncategorized'>Select a Category</option>
                             <option value='javascript'>JavaScript</option>
                             <option value='mysql'>MySQL</option>
@@ -131,6 +161,9 @@ export default function CreatePost() {
                             <option value='nextjs'>Next.js</option>
                             <option value='typescript'>TypeScript</option>
                             <option value='vuejs'>Vue.js</option>
+                            <option value='html'>HTML</option>
+                            <option value='c++'>C++</option>
+                            <option value='c#'>C#</option>
                             <option value='css'>CSS</option>
                             <option value='java'>Java</option>
                             <option value='php'>PHP</option>
@@ -149,7 +182,24 @@ export default function CreatePost() {
                         <FileInput type='file' accept='image/*' 
                            onChange={(e) => setFile(e.target.files[0])} 
                         /> 
-                        <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline 
+                        <Button
+                            type="button"
+                            gradientDuoTone="purpleToBlue"
+                            size="sm"
+                            outline
+                            onClick={handleUploadImage}
+                            disabled={imageUploadProgress !== null && imageUploadProgress < 100}
+                            >
+                            {imageUploadProgress ? (
+                                <div className="w-16 h-16">
+                                <CircularProgressbar value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
+                                </div>
+                            ) : (
+                                'Upload Image'
+                            )}
+                        </Button>
+
+                        {/* <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline 
                             onClick={hangleUploadImage} disabled={imageUploadProgress}>
                             {
                                 imageUploadProgress ? (
@@ -160,7 +210,7 @@ export default function CreatePost() {
                                     'Upload Image'
                                 )
                             }
-                        </Button>
+                        </Button> */}
                     </div>
 
                     {imageUploadError && <Alert color='failure' type='danger'>{imageUploadError}</Alert>}  
@@ -169,13 +219,22 @@ export default function CreatePost() {
                     )}  
                     
                     {/* The Editor */}
-                    <ReactQuill theme='snow' placeholder='Write something amazing...' 
+                    <ReactQuill
+                        theme='snow'
+                        placeholder='Write something amazing...'
+                        className='h-72 mb-12'
+                        required
+                        onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
+                        value={formData.content || ''}
+                    />
+                    {/* <ReactQuill theme='snow' 
+                    placeholder='Write something amazing...' 
                     className='h-72 mb-12' 
                     required 
                     onChange={(value) => setFormData({
                         ...formData, content: value
                     })} 
-                    />    
+                    />     */}
                     <Button type='submit' gradientDuoTone='purpleToPink'>Publish post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>
