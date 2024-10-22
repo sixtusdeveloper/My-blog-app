@@ -24,7 +24,7 @@ body{
 
 .prose pre {
   background-color: #1e293b; /* Dark background */
-  color: #f1f5f9;           /* Light text */
+  color: greenyellow;           
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
