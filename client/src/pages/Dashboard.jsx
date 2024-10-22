@@ -7,6 +7,7 @@ import DashboardUsers from '../components/DashboardUsers';
 import DashboardComments from '../components/DashboardComments';
 import DashboardComponent from '../components/DashboardComponent';
 import DashboardVotes from '../components/DashboardVotes';
+import DashboardAdminAccess from '../components/DashboardAdminAccess';
 
 
 export default function Dashboard() {
@@ -30,7 +31,7 @@ export default function Dashboard() {
 
       {/* Profile */}
       <div className='w-full p-4 md:p-2 mx-auto'>
-        <div className='w-full px-4 mx-auto max-w-lg '>
+        <div className='w-full p-0 mx-auto max-w-7xl'>
           {tab === 'profile' && <DashboardProfile />}
         </div>
        
@@ -49,9 +50,14 @@ export default function Dashboard() {
           {tab === 'comments' && <DashboardComments />}
         </div>
 
-        {/* Vote test */}
+        {/* Poll votes */}
         <div className='w-full pt-4 mx-auto max-w-7xl'>
           {tab === 'votes' && <DashboardVotes />}
+        </div>
+
+        {/* Admin access notice */}
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
+          {tab === 'adminaccess' && <DashboardAdminAccess />}
         </div>
 
         {/* Dashboard component */}

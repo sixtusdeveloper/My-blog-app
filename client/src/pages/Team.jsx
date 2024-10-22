@@ -71,17 +71,17 @@ const MeetTheTeam = () => {
                       <h2 className="lg:text-3xl md:text-2xl py-2 font-semibold">{member.name}</h2>
                       <p className="text-gray-600 dark:text-gray-300">{member.title}</p>
                       <p className="mt-4 leading-7">{member.bio}</p>
-                      <div className="flex items-center justify-start mt-6 space-x-8">
-                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                      <div className="flex items-center justify-start mt-6 space-x-4">
+                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="dark:bg-gray-700 dark:text-gray-300 bg-gray-300 text-gray-600 rounded-full p-2 cursor-pointer">
                           <FaTwitter size={20} />
                         </a>
-                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="dark:bg-gray-700 dark:text-gray-300 bg-gray-300 text-gray-600 rounded-full p-2 cursor-pointer">
                           <FaLinkedin size={20} />
                         </a>
-                        <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                        <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer" className="dark:bg-gray-700 dark:text-gray-300 bg-gray-300 text-gray-600 rounded-full p-2 cursor-pointer">
                           <FaGithub size={20} />
                         </a>
-                        <a href={member.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+                        <a href={member.socialLinks.youtube} target="_blank" rel="noopener noreferrer" className="dark:bg-gray-700 dark:text-gray-300 bg-gray-300 text-gray-600 rounded-full p-2 cursor-pointer">
                           <FaYoutube size={20} />
                         </a>
                       </div>

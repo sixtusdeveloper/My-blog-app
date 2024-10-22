@@ -3,8 +3,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TextInput, Textarea, Button, Label, Alert } from 'flowbite-react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const ContactPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#contact-me') {
+      const element = document.getElementById('contact-me');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -67,7 +80,7 @@ const ContactPage = () => {
             If you're interested in becoming an admin and posting content on my blog, please reach out through the contact form below. Together, we can create and share valuable insights with our community!
           </p>
 
-          <a href='#contact'>
+          <Link to='/dashboard?tab=adminaccess'>
             <Button 
               size="lg" 
               gradientDuoTone="purpleToBlue"
@@ -75,11 +88,11 @@ const ContactPage = () => {
             >
               Contact Me
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10" id="contact">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10" id="contact-me">
         <div className='py-8'>
           <h1 className="text-3xl lg:text-4xl font-extrabold dark:text-gray-200 text-gray-600 mb-8">
             Contact Me
