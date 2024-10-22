@@ -198,19 +198,6 @@ export default function CreatePost() {
                                 'Upload Image'
                             )}
                         </Button>
-
-                        {/* <Button type='button' gradientDuoTone='purpleToBlue' size='sm' outline 
-                            onClick={hangleUploadImage} disabled={imageUploadProgress}>
-                            {
-                                imageUploadProgress ? (
-                                    <div className='w-16 h-16'>
-                                        <CircularProgressbar value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
-                                    </div>
-                                ) : (
-                                    'Upload Image'
-                                )
-                            }
-                        </Button> */}
                     </div>
 
                     {imageUploadError && <Alert color='failure' type='danger'>{imageUploadError}</Alert>}  

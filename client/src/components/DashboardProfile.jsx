@@ -12,8 +12,28 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 
+// Inline CSS for background image
+const backgroundStyle = {
+    backgroundImage: 'url("/auth-bg.webp")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    overflowY: 'scroll',
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+};
+
+// Custom CSS for hidden scrollbar but scrollable content
+const hideScrollbar = {
+    overflowY: 'scroll',
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+  };
+  
 
 export default function DashboardProfile() {
+    
+    
     const {currentUser, error, loading} = useSelector((state) => state.user);
     const [imageFile, setImageFile] = useState(null);   
     const [imageFileUrl, setImageFileUrl] = useState(null);  
@@ -169,90 +189,95 @@ export default function DashboardProfile() {
     }
 
     return (
-        <div className='mt-10 w-full p-4'>
-            <h1 className='font-semibold text-2xl md:text-2xl text-center p-8'>Your Profile</h1>
-            
-            <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
-                <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
-                <div className='relative self-center shadow-md overflow-hidden rounded-full w-32 h-32 cursor-pointer' onClick={() => filePickerRef.current.click()}>
-                    {imageFileUploadProgress && (
-                       <CircularProgressbar 
-                            value={imageFileUploadProgress || 0} 
-                            text={`${imageFileUploadProgress}%`} 
-                            strokeWidth={5}
-                            styles={{
-                                root: {
-                                    height: '100%',
-                                    width: '100%',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                },
-                                path: {
-                                    stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`, 
-                                },
-                            }}
+        <div style={backgroundStyle} className='min-h-screen w-full overflow-auto md:py-10'>
+            <div
+                style={hideScrollbar}
+                className="min-h-screen p-2 md:p-8 mx-auto max-w-lg md:max-w-xl"
+            >
+                <h1 className='font-semibold text-2xl md:text-2xl text-center p-8'>Your Profile</h1>
+                
+                <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
+                    <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
+                    <div className='relative self-center shadow-md overflow-hidden rounded-full w-32 h-32 cursor-pointer' onClick={() => filePickerRef.current.click()}>
+                        {imageFileUploadProgress && (
+                        <CircularProgressbar 
+                                value={imageFileUploadProgress || 0} 
+                                text={`${imageFileUploadProgress}%`} 
+                                strokeWidth={5}
+                                styles={{
+                                    root: {
+                                        height: '100%',
+                                        width: '100%',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                    },
+                                    path: {
+                                        stroke: `rgba(62, 152, 199, ${imageFileUploadProgress / 100})`, 
+                                    },
+                                }}
+                            />
+                        )}
+                        <img 
+                            src={imageFileUrl || currentUser?.profilePicture || '/user.png'} 
+                            alt={currentUser.username} 
+                            className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
                         />
+                        <p className='absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 cursor-pointer' onClick={() => filePickerRef.current.click()}><AiOutlineEdit size={18} className='mr-1'/>Edit</p>
+                    </div>
+
+                    {error && (
+                        <Alert type='error' color='failure'>{error}</Alert>
                     )}
-                    <img 
-                        src={imageFileUrl || currentUser?.profilePicture || '/user.png'} 
-                        alt={currentUser.username} 
-                        className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
-                    />
-                   <p className='absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 cursor-pointer' onClick={() => filePickerRef.current.click()}><AiOutlineEdit size={18} className='mr-1'/>Edit</p>
+                    {updateUserError && (
+                        <Alert type='error' color='failure'>{updateUserError}</Alert>
+                    )}
+
+                    {updateUserSuccess && (
+                    <Alert type='success' color='success'>{updateUserSuccess}</Alert>
+                    )}
+                    
+                    {imageFileUploadError && 
+                        <Alert type='error' color='failure'>{imageFileUploadError}</Alert>
+                    }
+                    
+                    <TextInput label='Username' type="text" id="username" placeholder="Username" defaultValue={currentUser?.username} onChange={handleChange} />
+                    <TextInput label='Email' type="email" id="email" placeholder="Email" defaultValue={currentUser?.email} onChange={handleChange} />
+                    <TextInput type="password" id="password" placeholder="Password" onChange={handleChange} />
+
+                    <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold' disabled={loading || imageFileUploading}>
+                    {loading ? 'Loading...' : 'Update Profile'}   
+                    </Button>
+                    {/* IsAdmin functionality */}
+                    {currentUser.isAdmin && (
+                        <Link to={'/create-post'}>
+                        <Button type="button" gradientDuoTone='purpleToBlue' className='mb-1 w-full text-base font-semibold'>Create post</Button>
+                        </Link>
+                    )}  
+                </form>
+
+                <div className='flex justify-between py-8'>
+                    <span onClick={() => setShowModal(true)} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Delete Account</span>
+                    <span onClick={handleSignout} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Sign Out</span>
                 </div>
 
-                {error && (
-                    <Alert type='error' color='failure'>{error}</Alert>
-                )}
-                {updateUserError && (
-                    <Alert type='error' color='failure'>{updateUserError}</Alert>
-                )}
+                <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+                <Modal.Header />
 
-                {updateUserSuccess && (
-                   <Alert type='success' color='success'>{updateUserSuccess}</Alert>
-                )}
-                
-                {imageFileUploadError && 
-                    <Alert type='error' color='failure'>{imageFileUploadError}</Alert>
-                }
-                
-                <TextInput label='Username' type="text" id="username" placeholder="Username" defaultValue={currentUser?.username} onChange={handleChange} />
-                <TextInput label='Email' type="email" id="email" placeholder="Email" defaultValue={currentUser?.email} onChange={handleChange} />
-                <TextInput type="password" id="password" placeholder="Password" onChange={handleChange} />
+                    <Modal.Body>
+                        <div className="text-center p-4"> 
+                            <HiOutlineExclamationCircle className='h-14 w-14 mx-auto mb-4 text-red-800' />
 
-                <Button type="submit" gradientDuoTone='purpleToBlue' outline className='mt-4 text-base font-semibold' disabled={loading || imageFileUploading}>
-                   {loading ? 'Loading...' : 'Update Profile'}   
-                </Button>
-                {/* IsAdmin functionality */}
-                {currentUser.isAdmin && (
-                    <Link to={'/create-post'}>
-                       <Button type="button" gradientDuoTone='purpleToBlue' className='mb-1 w-full text-base font-semibold'>Create post</Button>
-                    </Link>
-                )}  
-            </form>
+                            <h3 className='text-center text-lg mb-4 text-gray-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
 
-            <div className='flex justify-between py-8'>
-                <span onClick={() => setShowModal(true)} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Delete Account</span>
-                <span onClick={handleSignout} className='text-purple-600 hover:text-purple-800 cursor-pointer'>Sign Out</span>
-            </div>
-
-            <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
-               <Modal.Header />
-
-                <Modal.Body>
-                    <div className="text-center p-4"> 
-                        <HiOutlineExclamationCircle className='h-14 w-14 mx-auto mb-4 text-red-800' />
-
-                        <h3 className='text-center text-lg mb-4 text-gray-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
-
-                        <div className='flex justify-center gap-4'>
-                            <Button color='failure' onClick={handleDeleteUser} className='text-base font-semibold'>Yes, Delete</Button>
-                            <Button color='gray' onClick={() => setShowModal(false)} className='text-base font-semibold'>No, Cancel</Button>
+                            <div className='flex justify-center gap-4'>
+                                <Button color='failure' onClick={handleDeleteUser} className='text-base font-semibold'>Yes, Delete</Button>
+                                <Button color='gray' onClick={() => setShowModal(false)} className='text-base font-semibold'>No, Cancel</Button>
+                            </div>
                         </div>
-                    </div>
-                </Modal.Body>
-            </Modal>
+                    </Modal.Body>
+                </Modal>
+            </div>
         </div>
     );
 }
