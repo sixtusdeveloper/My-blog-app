@@ -103,19 +103,19 @@ export default function DashComments() {
             {comments.map((comment) => (
               <Table.Body key={comment._id} className="divide-y">
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                  <Table.Cell>
+                  <Table.Cell className='text-xs'>
                     {new Date(comment.updatedAt).toLocaleString()}
                   </Table.Cell>
-                  <Table.Cell className="text-gray-500 dark:text-gray-400">
+                  <Table.Cell className="text-gray-500 dark:text-gray-300 text-xs">
                     {comment.content}
                   </Table.Cell>
                   <Table.Cell className="text-gray-800 dark:text-gray-300">
                     {comment.numberOfLikes}
                   </Table.Cell>
-                  <Table.Cell className="text-gray-600 dark:text-gray-300">
+                  <Table.Cell className="text-gray-500 text-xs dark:text-gray-300">
                     {truncateId(comment.postId)}
                   </Table.Cell>
-                  <Table.Cell className="text-gray-600 dark:text-gray-300">
+                  <Table.Cell className="text-gray-500 text-xs dark:text-gray-300">
                     {truncateId(comment.userId)}
                   </Table.Cell>
                   <Table.Cell>
@@ -124,7 +124,7 @@ export default function DashComments() {
                         setShowModal(true);
                         setCommentIdToDelete(comment._id);
                       }}
-                      className="bg-red-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600"
+                      className="bg-red-500 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600"
                     >
                       Delete
                     </span>

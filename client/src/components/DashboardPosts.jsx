@@ -103,7 +103,7 @@ export default function DashboardPosts() {
               {userPosts.map((post) => (  
                 <Table.Body key={post._id} className='divide-y'>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell>
+                    <Table.Cell className='text-xs'>
                       {new Date(post.updatedAt).toLocaleString()}
                     </Table.Cell>
 
@@ -114,7 +114,7 @@ export default function DashboardPosts() {
                     </Table.Cell>
 
                     <Table.Cell>
-                      <Link to={`/post/${post.slug}`} className='font-medium text-gray-900 dark:text-white'>
+                      <Link to={`/post/${post.slug}`} className='font-medium text-sm text-gray-600 dark:text-white'>
                         {post.title}
                       </Link>
                     </Table.Cell>
@@ -129,11 +129,11 @@ export default function DashboardPosts() {
                       <span onClick={() => {
                         setShowModal(true)
                         setPostIdToDelete(post._id) 
-                      }} className='bg-red-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600'>Delete</span>
+                      }} className='bg-red-500 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600'>Delete</span>
                     </Table.Cell>
 
                     <Table.Cell>
-                      <Link to={`/update-post/${post._id}`} className='bg-blue-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-blue-600'>
+                      <Link to={`/update-post/${post._id}`} className='text-xs bg-blue-500 font-medium cursor-pointer text-white px-2 py-1 rounded-md hover:bg-blue-600'>
                         <span>Edit</span>
                       </Link>
                     </Table.Cell>

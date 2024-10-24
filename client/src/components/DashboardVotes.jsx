@@ -88,7 +88,7 @@ export default function DashboardVotes() {
                         setSelectedFramework(framework); // Track the selected framework
                         setShowModal(true); // Open the modal
                       }}
-                      className="mx-auto text-center text-xs md:text-sm"
+                      className="mx-auto text-center font-medium text-xs"
                       gradientDuoTone="redToYellow"
                     >
                       Reset Poll

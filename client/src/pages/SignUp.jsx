@@ -78,13 +78,13 @@ export default function SignUp() {
             <p className="text-base mt-4 text-gray-200">
               DevJourney is more than just a blog—it's a community of passionate developers and creatives. 
               Whether you're looking to sharpen your skills, share your experiences, or collaborate on 
-              exciting projects, you'll find everything you need here. Our platform features expert 
+              exciting projects, you'll find everything you need here. My platform features expert 
               articles, tutorials, and real-world insights from professionals like you.
             </p>
             <p className="text-base mt-3 text-gray-200">
               By joining, you gain access to personalized content, networking opportunities, and the 
               chance to contribute your own stories and insights. Let’s grow together in the world of 
-              development and make an impact. Start your journey with us today!
+              development and make an impact. Start your journey with me today!
             </p>
           </div>
 

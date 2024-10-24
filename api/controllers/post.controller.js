@@ -1,3 +1,4 @@
+
 import { errorHandler } from "../utils/error.js"
 import Post from '../models/post.model.js'
 
@@ -28,7 +29,9 @@ export const create = async (req, res, next) => {
 }
 
 
+
 export const getposts = async (req, res, next) => {
+
     try {
         
         const startIndex = parseInt(req.query.startIndex) || 0;   
@@ -66,6 +69,7 @@ export const getposts = async (req, res, next) => {
         next(error);
     }
 }   
+
 
 // Delete post functionality
 export const deletepost = async (req, res, next) => {

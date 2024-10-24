@@ -159,8 +159,8 @@ export default function DashboardComp() {
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>User image</Table.HeadCell>
-              <Table.HeadCell>Username</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>User image</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Username</Table.HeadCell>
             </Table.Head>
             {users &&
               users.map((user) => (
@@ -173,7 +173,7 @@ export default function DashboardComp() {
                         className='w-10 h-10 rounded-full bg-gray-500'
                       />
                     </Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
+                    <Table.Cell className='text-gray-600 dark:text-gray-300 text-sm'>{user.username}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
               ))}
@@ -182,22 +182,22 @@ export default function DashboardComp() {
 
         <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
           <div className='flex items-center justify-between py-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Recent comments</h1>
+            <h1 className='text-center p-2'>Recent Comments</h1>
             <Button outline gradientDuoTone='purpleToPink' className='self-center'>
               <Link to={'/dashboard?tab=comments'}>See all</Link>
             </Button>
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>Comment content</Table.HeadCell>
-              <Table.HeadCell>Likes</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Comment Content</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Likes</Table.HeadCell>
             </Table.Head>
             {comments &&
               comments.map((comment) => (
                 <Table.Body key={comment._id} className='divide-y'>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                     <Table.Cell className='w-96'>
-                        <p className='line-clamp-2'>{comment.content}</p>
+                        <p className='line-clamp-2 text-xs text-gray-600 dark:text-gray-300'>{comment.content}</p>
                     </Table.Cell>
                     <Table.Cell className='text-gray-500 dark:text-gray-200'>{comment.numberOfLikes}</Table.Cell>
                   </Table.Row>
@@ -215,9 +215,9 @@ export default function DashboardComp() {
           </div>
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post Title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Image</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Title</Table.HeadCell>
+              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Category</Table.HeadCell>
             </Table.Head>
             {posts &&
               posts.map((post) => (
@@ -230,8 +230,8 @@ export default function DashboardComp() {
                         className='w-14 h-10 rounded-md bg-gray-500'
                       />
                     </Table.Cell>
-                    <Table.Cell className='w-96'>{post.title}</Table.Cell>
-                    <Table.Cell className='w-5 text-gray-500 dark:text-gray-200'>{post.category}</Table.Cell>
+                    <Table.Cell className='w-96 text-xs text-gray-600 dark:text-gray-200 font-medium'>{post.title}</Table.Cell>
+                    <Table.Cell className='w-5 text-purple-500 cursor-pointer font-medium text-sm hover:text-purple-600'>{post.category}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
               ))}
