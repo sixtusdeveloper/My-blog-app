@@ -16,9 +16,9 @@ h3{
 }
 
 .ql-toolbar.ql-snow .ql-picker-label{
-    color: gray !important;
-    border: 1px solid gray !important;
-    border-radius: 2px !important;
+  color: gray !important;
+  border: 1px solid gray !important;
+  border-radius: 2px !important;
 }
 
 .post-content p{
@@ -33,8 +33,6 @@ h3{
   border-radius: 8px;
   overflow-x: auto;
 }
-
-
 
 .post-content h1 {
     font-size: 1.5rem;
