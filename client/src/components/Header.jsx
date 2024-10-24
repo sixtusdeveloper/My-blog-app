@@ -8,7 +8,9 @@ import { FaUser } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
-
+import DashboardIcon from '/dashboard.webp';
+import ProfileIcon from '/profile.webp';
+import LogoutIcon from '/logout.webp';
 
 export default function Header () {
   const dispatch = useDispatch();
@@ -99,20 +101,30 @@ export default function Header () {
               img={currentUser.profilePicture || defaultAvatar}  // Use defaultAvatar if profilePicture is undefined
               alt='user' 
               rounded 
+              className='border-4 border-blue-400 dark:border-blue-400 rounded-full' 
             />
           }>
             <Dropdown.Header>
-              <span className='block text-[14px] tracking-wide'>@{currentUser.username}</span>
-              <span className='block text-[13px] font-medium tracking-wide truncate'>{currentUser.email}</span>
+              <span className='block text-sm font-medium tracking-wide'>@{currentUser.username}</span>
+              <span className='block text-xs tracking-wide truncate'>{currentUser.email}</span>
             </Dropdown.Header>
-            <Link to={'/dashboard?tab=profile'}>
+
+            <Link to={'/dashboard?tab=dash'}>
               <Dropdown.Item>
-                Profile
+              <img src={DashboardIcon} alt="Dashboard" className="w-5 h-5 mr-4" /><span>Dashboard</span>
               </Dropdown.Item>
             </Link>
+
+            <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>
+              <img src={ProfileIcon} className="w-5 h-5 mr-4" alt="signout" /><span>Profile</span>
+              </Dropdown.Item>
+            </Link>
+            
             <Dropdown.Divider />
+
             <Dropdown.Item onClick={handleSignout}>
-              Sign Out  
+              <img src={LogoutIcon} className="w-5 h-5 mr-4" alt="signout" /><span>Sign Out</span>
             </Dropdown.Item>
             
           </Dropdown>
