@@ -189,7 +189,7 @@ export default function DashboardProfile() {
     }
 
     return (
-        <div style={backgroundStyle} className='min-h-screen w-full overflow-auto md:py-10'>
+        <div style={backgroundStyle} className='min-h-screen w-full overflow-auto md:py-8'>
             <div
                 style={hideScrollbar}
                 className="min-h-screen p-2 md:p-8 mx-auto max-w-lg md:max-w-xl"

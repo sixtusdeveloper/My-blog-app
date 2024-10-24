@@ -78,7 +78,7 @@ export default function DashboardUsers() {
   }
 
   return (
-    <div className="relative mt-4 mx-auto py-4 overflow-x-scroll 
+    <div className="relative mt-2 mx-auto py-4 overflow-x-scroll 
       scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300
        dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {currentUser.isAdmin && users.length > 0 ? (
@@ -155,7 +155,7 @@ export default function DashboardUsers() {
               </Alert>
             }
             <TextInput
-              type="text"
+              type="password"
               placeholder="🔑 Enter Key"
               value={authorizationKey}
               onChange={(e) => setAuthorizationKey(e.target.value)}

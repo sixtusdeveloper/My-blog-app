@@ -37,8 +37,8 @@ export default function DashboardAdminAccess() {
                 style={hideScrollbar}
                 className="min-h-screen flex relative items-center justify-center p-2 md:p-8 mx-auto max-w-5xl"
             >
-                <div className="py-10 rounded-lg">
-                    <h1 className="text-4xl font-bold mb-6">
+                <div className="pb-8 py-6 rounded-lg">
+                    <h1 className="text-2xl md:text-4xl font-bold mb-6">
                         Admin Access Request 🔒
                     </h1>
                     <p className="text-lg mb-4">
@@ -54,9 +54,9 @@ export default function DashboardAdminAccess() {
                         Every post must align with our platform’s goals, policies, and values.
                         </li>
                         <li>
-                        <h3 className="font-semibold">Ownership and Consent</h3>
+                        <h3 className="font-semibold">Ownership and Consent ⚠</h3>
                         <span className="font-semibold">
-                            Do not delete or update posts created by others without explicit permission ⚠
+                            Do not delete or update posts created by others without explicit permission
                         </span><br />
                         Unauthorized changes will lead to removal of privileges and further action if necessary.
                         </li>
@@ -76,7 +76,7 @@ export default function DashboardAdminAccess() {
                         <li><h3 className="font-semibold">Impact</h3> How will your content align with our platform's mission and values?</li>
                     </ul>
 
-                    <h2 className="text-2xl font-semibold mt-8 mb-3">Consequences of Misuse</h2>
+                    <h2 className="text-2xl font-semibold mt-8 mb-3">Consequences of Misuse ⚡</h2>
                     <p className="text-lg">
                         Admin access is a privilege, not a right. Any misuse, such as unauthorized deletion or inappropriate updates,
                         will result in:
