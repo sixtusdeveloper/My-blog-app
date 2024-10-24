@@ -30,7 +30,7 @@ export default function Dashboard() {
       </div>
 
       {/* Profile */}
-      <div className='w-full p-4 md:p-2 mx-auto'>
+      <div className='w-full p-4 md:p-2 md:py-6 mx-auto'>
         <div className='w-full p-0 mx-auto max-w-7xl'>
           {tab === 'profile' && <DashboardProfile />}
         </div>
@@ -51,7 +51,7 @@ export default function Dashboard() {
         </div>
 
         {/* Poll votes */}
-        <div className='w-full pt-4 mx-auto max-w-7xl'>
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
           {tab === 'votes' && <DashboardVotes />}
         </div>
 
