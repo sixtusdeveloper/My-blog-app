@@ -1,3 +1,170 @@
+// import { Spinner, Button } from "flowbite-react";
+// import { useEffect, useState } from "react";
+// import { useParams, Link } from "react-router-dom";
+// import CallToAction from "../pages/CallToAction";
+// import CommentSection from "../components/CommentSection";
+// import PostCard from "../components/PostCard";
+
+// export default function PostPage() {
+//     const { postSlug } = useParams();
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(false);
+//     const [post, setPost] = useState({});
+//     // const [author, setAuthor] = useState({});
+//     const [recentPosts, setRecentPosts] = useState(null);
+
+//     // Fetch post details by slug
+//     useEffect(() => {
+//         const fetchPost = async () => {
+//             try {
+//                 const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+//                 const data = await res.json();
+//                 if (!res.ok) throw new Error("Failed to fetch post");
+
+//                 const fetchedPost = data.posts[0];
+//                 setPost(fetchedPost);
+
+//                 // Fetch author's details
+//                 if (fetchedPost?.authorId) {
+//                     await fetchAuthor(fetchedPost.authorId);
+//                 }
+
+//                 // Ensure spinner stays visible for at least 2 seconds
+//                 setTimeout(() => setLoading(false), 2000);
+//             } catch (error) {
+//                 setError(true);
+//                 setLoading(false);
+//             }
+//         };
+
+//         fetchPost();
+//     }, [postSlug]);
+
+//     // // Fetch author's data
+//     // const fetchAuthor = async (authorId) => {
+//     //     try {
+//     //         const res = await fetch(`/api/author/${authorId}`);
+//     //         const data = await res.json();
+//     //         if (res.ok) setAuthor(data);
+//     //     } catch (error) {
+//     //         console.error("Failed to fetch author:", error);
+//     //     }
+//     // };
+
+//     // Fetch recent posts
+//     useEffect(() => {
+//         const fetchRecentPosts = async () => {
+//             try {
+//                 const res = await fetch(`/api/post/getposts?limit=3`);
+//                 const data = await res.json();
+//                 if (res.ok) setRecentPosts(data.posts);
+//             } catch (error) {
+//                 console.error("Failed to fetch recent posts:", error);
+//             }
+//         };
+//         fetchRecentPosts();
+//     }, []);
+
+//     if (loading) {
+//         return (
+//             <div className="flex justify-center items-center min-h-screen py-20">
+//                 <Spinner size="xl" />
+//             </div>
+//         );
+//     }
+
+//     if (error) {
+//         return (
+//             <div className="flex justify-center items-center min-h-screen py-20">
+//                 <p>Failed to load post. Please try again.</p>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <main className="dark:bg-[rgb(16,23,42)] overflow-x-hidden min-h-screen w-full py-20">
+//             <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-10 lg:px-10">
+//                 <h1 className="text-3xl lg:text-4xl pt-6 mt-10 font-serif">
+//                     {post?.title}
+//                 </h1>
+
+//                 <div className="flex justify-between gap-8 items-center my-2">
+//                     <div className="flex flex-wrap items-center gap-4">
+//                         <p className="text-gray-500 dark:text-gray-400 text-xs">
+//                             {new Date(post?.createdAt).toLocaleString()}
+//                         </p>
+//                         <span className="text-xs text-green-500">
+//                             🕒 {(post?.content?.length / 1000).toFixed(0)} mins read
+//                         </span>
+//                     </div>
+
+//                     {/* Author's details */}
+//                     {/* <div className="flex items-center gap-4">
+//                         <img
+//                             src={post?.authorDetails?.ProfilePicture || "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"}
+//                             alt={post?.authorDetails?.username || "Author"}
+//                             className="w-8 h-8 object-cover rounded-full"
+//                         />
+//                         <p className="text-gray-500 dark:text-gray-400 text-xs">
+//                             {post?.authorDetails?.username || "Unknown Author"}
+//                         </p>
+//                     </div> */}
+
+//                     <Link to={`/search?category=${post?.category}`} className="mr-4">
+//                         <Button color="gray" pill size="sm" className="px-2 tracking-wide">
+//                             {post?.category}
+//                         </Button>
+//                     </Link>
+//                 </div>
+
+//                 <img
+//                     src={post?.image}
+//                     alt={post?.title}
+//                     className="mt-8 w-full h-96 object-cover rounded-lg"
+//                 />
+
+//                 <div
+//                     className="prose dark:prose-dark max-w-none mt-8 font-serif leading-relaxed"
+//                     dangerouslySetInnerHTML={{ __html: post?.content }}
+//                 />
+
+//                 <div className="w-full py-4">
+//                     <CallToAction />
+//                 </div>
+
+//                 <CommentSection postId={post._id} />
+
+//                 <div className="flex flex-col items-center mb-5">
+//                     <h1 className="text-2xl font-bold text-center my-5">
+//                         Recent articles
+//                     </h1>
+//                     <div className="grid gap-4 lg:gap-6 md:grid-cols-3 mb-8">
+//                         {recentPosts &&
+//                             recentPosts.map((post) => (
+//                                 <PostCard key={post._id} post={post} />
+//                             ))}
+//                     </div>
+
+//                     <Link to="/search">
+//                         <Button gradientDuoTone="purpleToBlue" outline className="my-4">
+//                             View all posts
+//                         </Button>
+//                     </Link>
+//                 </div>
+//             </div>
+//         </main>
+//     );
+// }
+
+
+
+
+
+
+
+
+
+
 import { Spinner, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -86,16 +253,22 @@ export default function PostPage() {
             <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-10 lg:px-10">
                 <h1 className="text-3xl lg:text-4xl pt-6 mt-10 font-serif">{post && post.title}</h1>
                 <div className="flex justify-between gap-8 items-center my-2">
-                    <div className="flex justify-between items-center gap-4">
-                        <p className="text-gray-500 dark:text-gray-400 text-xs md:text-sm">{post && new Date(post.createdAt).toLocaleString()}</p>
+                    <div className="flex justify-between flex-wrap lg:flex-nowrap items-center gap-4">
+                        <p className="text-gray-500 dark:text-gray-400 text-xs md:text-xs">{post && new Date(post.createdAt).toLocaleString()}</p>
 
-                        <span className='text-xs md:text-sm text-green-500'>
+                        <span className='text-xs md:text-xs text-green-500'>
                         🕒 {post && (post.content.length / 1000).toFixed(0)}  mins read
                         </span>
                     </div>
                     
-                    <Link to={`/search?category=${post && post.category}`} className="px-4">
-                        <Button color='gray' pill size='sm' className="px-4 tracking-wide">
+                    {/* Author's details */}
+                    <div className="flex items-center gap-4">
+                        <img src={post && post.authorImage} alt={post && post.author} className="w-8 h-8 object-cover rounded-full" />
+                        <p className="text-gray-500 dark:text-gray-400 text-xs">{post && post.author}</p>
+                    </div>
+                    
+                    <Link to={`/search?category=${post && post.category}`} className="mr-4">
+                        <Button color='gray' pill size='sm' className="px-2 tracking-wide">
                             {post && post.category}
                         </Button>
                     </Link>
