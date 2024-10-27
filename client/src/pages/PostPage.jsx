@@ -22,15 +22,13 @@ export default function PostPage() {
                     setLoading(false);
                     return;
                 }
-
+        
                 if (res.ok) {
-                    setPost(data.posts[0]);
+                    setPost(data.posts[0]); // Includes author details now
                     setError(false);
-
-                    // Use setTimeout to ensure the spinner stays for at least 3 seconds
                     setTimeout(() => {
                         setLoading(false);
-                    }, 2000); // 3 seconds
+                    }, 2000); 
                 }
             } catch (error) {
                 setError(true);
@@ -85,7 +83,8 @@ export default function PostPage() {
         <main className="dark:bg-[rgb(16,23,42)] overflow-x-hidden min-h-screen w-full py-20">
             <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-10 lg:px-10">
                 <h1 className="text-3xl lg:text-4xl pt-6 mt-10 font-serif">{post && post.title}</h1>
-                <div className="flex justify-between gap-8 items-center my-2">
+                <div className="flex justify-between flex-wrap lg:flex-nowrap gap-8 items-center my-2">
+
                     <div className="flex justify-between flex-wrap lg:flex-nowrap items-center gap-4">
                         <p className="text-gray-500 dark:text-gray-400 text-xs md:text-xs">{post && new Date(post.createdAt).toLocaleString()}</p>
 
@@ -93,13 +92,24 @@ export default function PostPage() {
                         🕒 {post && (post.content.length / 1000).toFixed(0)}  mins read
                         </span>
                     </div>
-                    
-                    {/* Author's details */}
-                    <div className="flex items-center gap-4">
-                        <img src={post && post.authorImage} alt={post && post.author} className="w-8 h-8 object-cover rounded-full" />
-                        <p className="text-gray-500 dark:text-gray-400 text-xs">{post && post.author}</p>
+
+                    {/* Author's details this is where I want to display the user's details who made the post */}
+                    <div className="flex items-center gap-x-2">
+                        {post.userId && (
+                            <>
+                                <img 
+                                    src={post.userId.profilePicture} 
+                                    alt={post.userId.username} 
+                                    className="w-8 h-8 object-cover rounded-full" 
+                                />
+                                <p className="text-gray-500 dark:text-gray-300 text-xs">
+                                    {post.userId.username}
+                                </p>
+                            </>
+                        )}
                     </div>
-                    
+
+
                     <Link to={`/search?category=${post && post.category}`} className="mr-4">
                         <Button color='gray' pill size='sm' className="px-2 tracking-wide">
                             {post && post.category}

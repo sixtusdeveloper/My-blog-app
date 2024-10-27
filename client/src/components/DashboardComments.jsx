@@ -1,4 +1,4 @@
-import { Modal, Table, Button, Spinner } from 'flowbite-react';
+import { Modal, Alert, Table, Button, TextInput, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -7,9 +7,16 @@ export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
   const [comments, setComments] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [commentIdToDelete, setCommentIdToDelete] = useState('');
   const [loading, setLoading] = useState(true);
+  const [authorizationKey, setAuthorizationKey] = useState('');
+  const [authError, setAuthError] = useState('');
+
+  const AUTH_KEY = import.meta.env.VITE_AUTHORIZATION_KEY?.trim(); // ✅
+  ; // Access the key from .env
+
 
   // Helper function to truncate IDs longer than 30 characters
   function truncateId(id) {
@@ -58,8 +65,18 @@ export default function DashComments() {
     }
   };
 
+  // Authorization Key logic
+  const handleAuthSubmit = () => {
+    if (authorizationKey.trim() === AUTH_KEY) {
+      setShowAuthModal(false);
+      setShowDeleteModal(true);
+    } else {
+      setAuthError('Invalid Authorization Key. Please try again.');
+    }
+  };
+
   const handleDeleteComment = async () => {
-    setShowModal(false);
+    setShowDeleteModal(false);
     try {
       const res = await fetch(`/api/comment/deleteComment/${commentIdToDelete}`, {
         method: 'DELETE',
@@ -69,7 +86,7 @@ export default function DashComments() {
         setComments((prev) =>
           prev.filter((comment) => comment._id !== commentIdToDelete)
         );
-        setShowModal(false);
+        setShowDeleteModal(false);
       } else {
         console.log(data.message);
       }
@@ -121,7 +138,7 @@ export default function DashComments() {
                   <Table.Cell>
                     <span
                       onClick={() => {
-                        setShowModal(true);
+                        setShowAuthModal(true);
                         setCommentIdToDelete(comment._id);
                       }}
                       className="bg-red-500 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600"
@@ -149,7 +166,36 @@ export default function DashComments() {
         <h1 className="text-center text-2xl">No Comments Found</h1>
       )}
 
-      <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
+        {/* Authorization Modal */}
+        <Modal show={showAuthModal} onClose={() => setShowAuthModal(false)} popup size="md">
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center p-4">
+            <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
+              🔐Enter Authorization Key
+            </h3>
+            {authError &&  
+              <Alert className='mb-4 text-base' color='failure'>
+                {authError}
+              </Alert>
+            }
+            <TextInput
+              type="password"
+              placeholder="🔑 Enter Key"
+              value={authorizationKey}
+              onChange={(e) => setAuthorizationKey(e.target.value)}
+              className="mb-4"
+            />
+            
+            <Button onClick={handleAuthSubmit} className="w-full">
+              Okay
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+
+      <Modal show={showDeleteModal} onClose={() => setShowDeleteModal(false)} popup size="md">
         <Modal.Header />
         <Modal.Body>
           <div className="text-center p-4">
@@ -167,7 +213,7 @@ export default function DashComments() {
               </Button>
               <Button
                 color="gray"
-                onClick={() => setShowModal(false)}
+                onClick={() => setShowAuthModal(false)}
                 className="text-base font-semibold"
               >
                 No, Cancel

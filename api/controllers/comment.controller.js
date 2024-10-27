@@ -1,6 +1,9 @@
 import { parse } from 'dotenv';
 import Comment from '../models/comment.model.js';
+import { errorHandler } from '../utils/error.js';
 
+
+// Create comment functionality
 export const createComment = async (req, res, next) => {
     try {
         const { content, postId, userId } = req.body;
@@ -65,6 +68,8 @@ export const likeComment = async (req, res, next) => {
 
 
 // Edit comment
+
+
 export const editComment = async (req, res, next) => {
     try {
         const comment = await Comment.findById(req.params.commentId);
@@ -82,7 +87,8 @@ export const editComment = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
 
 // delete Comment
 

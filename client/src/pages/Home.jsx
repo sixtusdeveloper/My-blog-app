@@ -105,7 +105,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-6">Trending Posts</h2>
           <ul className="space-y-4">
             {posts.slice(0, visiblePosts).map((post) => (
-              <li key={post._id} className="border-b border-b-gray-300 dark:border-b-gray-700 pb-4">
+              <li key={post._id} className="border-b border-b-gray-300 dark:border-b-gray-800 pb-4">
                 <h3 className="text-base font-semibold">
                   <Link to={`/post/${post.slug}`} className="hover:underline">
                     {post.title}
@@ -118,7 +118,7 @@ export default function Home() {
 
           {/* View More / View Less Button */}
           {posts.length > 6 && (
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center items-center mt-8 lg:mt-10">
               <Button
                 onClick={handleViewMore}
                 gradientDuoTone="purpleToBlue"
@@ -127,9 +127,9 @@ export default function Home() {
               >
                 {visiblePosts >= posts.length ? 'View Less' : 'View More'}
                 {visiblePosts >= posts.length ? (
-                  <FaChevronUp className="ml-2" />
+                  <FaChevronUp className="ml-2 self-center items-center mx-auto" />
                 ) : (
-                  <FaChevronDown className="ml-2" />
+                  <FaChevronDown className="ml-2 self-center items-center mx-auto" />
                 )}
               </Button>
             </div>
