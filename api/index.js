@@ -11,6 +11,7 @@ import commentRoutes from './routes/comment.route.js';
 import newsletterRoutes from './routes/newsletter.route.js';
 import pollVoteRoutes from './routes/pollvote.route.js';
 import contactRoutes from './routes/contact.route.js'; // Import the contact route
+import notificationRoutes from './routes/notification.route.js';  // Import the notification route
 import path from 'path';  // Import the path module
 
 
@@ -42,6 +43,7 @@ app.use('/api/comment', commentRoutes);
 app.use('/api/newsletter', newsletterRoutes);  // Newsletter subscription route
 app.use('/api/pollVote', pollVoteRoutes);
 app.use('/api/contact', contactRoutes); // Use the contact route
+app.use('/api/notifications', notificationRoutes);  // Use the notification route
 
 // Serve static assets in production
 app.use(express.static(path.join(__dirname, '/client/dist'))); 

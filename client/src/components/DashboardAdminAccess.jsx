@@ -35,19 +35,19 @@ export default function DashboardAdminAccess() {
         <section style={backgroundStyle} className="min-h-[100vh] w-full overflow-auto md:pt-4">
             <div
                 style={hideScrollbar}
-                className="min-h-screen flex relative items-center justify-center p-2 md:p-8 mx-auto max-w-5xl"
+                className="min-h-screen flex relative items-center justify-center p-2 md:p-8 mx-auto max-w-5xl  border-r dark:border-r-gray-800 border-r-gray-300"
             >
                 <div className="pb-8 py-6 rounded-lg">
-                    <h1 className="text-2xl md:text-4xl font-bold mb-6">
+                    <h1 className="text-2xl md:text-4xl font-bold mb-6 text-gray-100">
                         Admin Access Request 🔒
                     </h1>
-                    <p className="text-lg mb-4">
+                    <p className="text-lg mb-4 text-gray-300">
                         Welcome! If you’re here to request <strong>admin privileges</strong>, please read the following guidelines carefully.
                         Becoming an admin gives you the responsibility and privilege to contribute by writing posts and publishing them online.
                     </p>
 
-                    <h2 className="text-2xl font-bold mt-8 mb-3">Guidelines for Admins</h2>
-                    <ul className="list-disc ml-5 space-y-3 text-lg">
+                    <h2 className="text-2xl font-bold mt-8 mb-3 text-gray-100">Guidelines for Admins</h2>
+                    <ul className="list-disc ml-5 space-y-3 text-lg text-gray-300">
                         <li>
                         <h3 className="font-semibold">Post Creation</h3>
                         As an admin, you will be authorized to create posts and publish them.
@@ -66,22 +66,22 @@ export default function DashboardAdminAccess() {
                         </li>
                     </ul>
 
-                    <h2 className="text-2xl font-semibold mt-8 mb-3">Admin Request Requirements</h2>
-                    <p className="text-lg mb-4">
+                    <h2 className="text-2xl font-semibold mt-8 mb-3 text-gray-100">Admin Request Requirements</h2>
+                    <p className="text-lg mb-4 text-gray-300">
                         To become an admin, you must provide the following details:
                     </p>
-                    <ul className="list-disc ml-5 space-y-3 text-lg">
+                    <ul className="list-disc ml-5 space-y-3 text-lg text-gray-300">
                         <li><h3 className="font-semibold">Reason</h3> Why do you want to become an admin?</li>
                         <li><h3 className="font-semibold">Content Goals</h3> What type of posts do you plan to create?</li>
                         <li><h3 className="font-semibold">Impact</h3> How will your content align with our platform's mission and values?</li>
                     </ul>
 
-                    <h2 className="text-2xl font-semibold mt-8 mb-3">Consequences of Misuse ⚡</h2>
-                    <p className="text-lg">
+                    <h2 className="text-2xl font-semibold mt-8 mb-3 text-gray-100">Consequences of Misuse ⚡</h2>
+                    <p className="text-lg text-300 text-gray-300">
                         Admin access is a privilege, not a right. Any misuse, such as unauthorized deletion or inappropriate updates,
                         will result in:
                     </p>
-                    <ul className="list-disc ml-5 space-y-3 text-lg">
+                    <ul className="list-disc ml-5 space-y-3 text-lg text-gray-300">
                         <li>Immediate revocation of admin privileges</li>
                         <li>Possible account suspension</li>
                         <li>Permanent ban from the platform for repeated violations</li>

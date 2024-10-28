@@ -88,156 +88,168 @@ export default function DashboardComp() {
     );
   }
 
+    // Inline CSS for background image
+    const backgroundStyle = {
+    backgroundImage: 'url("/auth-bg.webp")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    overflowY: 'scroll',
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+  };
+
 
   return (
-    <div className='relative mx-auto py-1 table-auto overflow-x-scroll 
-    scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
-    dark:scrollbar-thumb-slate-500'>
-      <div className='md:flex flex-col space-y-4 md:space-y-0 md:flex-row gap-2 justify-between items-center'>
-
-        <div className='flex flex-col p-4 bg-blue-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
-          <div className='flex justify-between'>
-            <div className=''>
-              <h3 className='text-gray-100 font-bold text-base uppercase'>Total Users</h3>
-              <p className='text-gray-200 text-2xl'>{totalUsers}</p>
+    <section style={backgroundStyle} className='min-h-[100vh] w-full overflow-auto'>
+      <div className='relative mx-auto py-1 table-auto overflow-x-scroll border dark:border-gray-800 border-gray-300
+      scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
+      dark:scrollbar-thumb-slate-500'>
+        <div className='md:flex flex-col space-y-4 md:space-y-0 md:flex-row gap-2 justify-between items-center'>
+          <div className='flex flex-col p-4 bg-blue-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
+            <div className='flex justify-between'>
+              <div className=''>
+                <h3 className='text-gray-100 font-bold text-base uppercase'>Total Users</h3>
+                <p className='text-gray-200 text-2xl'>{totalUsers}</p>
+              </div>
+              <HiOutlineUserGroup className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
             </div>
-            <HiOutlineUserGroup className='bg-teal-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <div className='flex gap-2 text-sm'>
+              <span className='text-green-500 flex items-center'>
+                <HiArrowNarrowUp />
+                {lastMonthUsers}
+              </span>
+              <div className='text-gray-200'>Last month</div>
+            </div>
           </div>
-          <div className='flex gap-2 text-sm'>
-            <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
-              {lastMonthUsers}
-            </span>
-            <div className='text-gray-200'>Last month</div>
+
+          <div className='flex flex-col p-4 bg-green-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
+            <div className='flex justify-between'>
+              <div className=''>
+                <h3 className='text-gray-100 text-base font-bold uppercase'>
+                  Total Comments
+                </h3>
+                <p className='text-2xl text-gray-200'>{totalComments}</p>
+              </div>
+              <HiAnnotation className='bg-indigo-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            </div>
+            <div className='flex  gap-2 text-sm'>
+              <span className='text-green-500 flex items-center'>
+                <HiArrowNarrowUp />
+                {lastMonthComments}
+              </span>
+              <div className='text-gray-200'>Last month</div>
+            </div>
+          </div>
+
+          <div className='flex flex-col p-4 bg-yellow-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
+            <div className='flex justify-between'>
+              <div className=''>
+                <h3 className='text-gray-100 text-base font-bold uppercase'>Total Posts</h3>
+                <p className='text-2xl text-gray-200'>{totalPosts}</p>
+              </div>
+              <HiDocumentText className='bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg' />
+            </div>
+            <div className='flex gap-2 text-sm'>
+              <span className='text-green-500 flex items-center'>
+                <HiArrowNarrowUp />
+                {lastMonthPosts}
+              </span>
+              <div className='text-gray-200'>Last month</div>
+            </div>
           </div>
         </div>
 
-        <div className='flex flex-col p-4 bg-green-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
-          <div className='flex justify-between'>
-            <div className=''>
-              <h3 className='text-gray-100 text-base font-bold uppercase'>
-                Total Comments
-              </h3>
-              <p className='text-2xl text-gray-200'>{totalComments}</p>
+        <div className='flex flex-wrap md:flex-nowrap gap-2 py-4 mx-auto justify-center'>
+          <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800'>
+            <div className='flex items-center justify-between py-3 text-sm font-semibold'>
+              <h1 className='text-center p-2 font-semibold text-gray-700 dark:text-gray-100'>Recent users</h1>
+              <Button outline gradientDuoTone='purpleToPink' className='self-center'>
+                <Link to={'/dashboard?tab=users'}>See all</Link>
+              </Button>
             </div>
-            <HiAnnotation className='bg-indigo-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            <Table hoverable>
+              <Table.Head>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>User image</Table.HeadCell>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Username</Table.HeadCell>
+              </Table.Head>
+              {users &&
+                users.map((user) => (
+                  <Table.Body key={user._id} className='divide-y'>
+                    <Table.Row className='dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Cell>
+                        <img
+                          src={user.profilePicture}
+                          alt='user'
+                          className='w-10 h-10 rounded-full bg-gray-500'
+                        />
+                      </Table.Cell>
+                      <Table.Cell className='text-gray-700 dark:text-gray-300 text-sm'>{user.username}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
           </div>
-          <div className='flex  gap-2 text-sm'>
-            <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
-              {lastMonthComments}
-            </span>
-            <div className='text-gray-200'>Last month</div>
-          </div>
-        </div>
 
-        <div className='flex flex-col p-4 bg-yellow-800 gap-4 md:w-76 w-full rounded-md shadow-md'>
-          <div className='flex justify-between'>
-            <div className=''>
-              <h3 className='text-gray-100 text-base font-bold uppercase'>Total Posts</h3>
-              <p className='text-2xl text-gray-200'>{totalPosts}</p>
+          <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800'>
+            <div className='flex items-center justify-between py-3 text-sm font-semibold'>
+              <h1 className='text-center p-2 font-semibold text-gray-700 dark:text-gray-100'>Recent Comments</h1>
+              <Button outline gradientDuoTone='purpleToPink' className='self-center'>
+                <Link to={'/dashboard?tab=comments'}>See all</Link>
+              </Button>
             </div>
-            <HiDocumentText className='bg-lime-600 text-white rounded-full text-5xl p-3 shadow-lg' />
+            <Table hoverable>
+              <Table.Head>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Comment Content</Table.HeadCell>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Likes</Table.HeadCell>
+              </Table.Head>
+              {comments &&
+                comments.map((comment) => (
+                  <Table.Body key={comment._id} className='divide-y'>
+                    <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Cell className='w-96'>
+                          <p className='line-clamp-2 text-xs text-gray-600 dark:text-gray-300'>{comment.content}</p>
+                      </Table.Cell>
+                      <Table.Cell className='text-gray-500 dark:text-gray-200'>{comment.numberOfLikes}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
           </div>
-          <div className='flex gap-2 text-sm'>
-            <span className='text-green-500 flex items-center'>
-              <HiArrowNarrowUp />
-              {lastMonthPosts}
-            </span>
-            <div className='text-gray-200'>Last month</div>
+
+          <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800'>
+            <div className='flex items-center justify-between py-3 text-sm font-semibold'>
+              <h1 className='text-center p-2 font-semibold text-gray-700 dark:text-gray-100'>Recent posts</h1>
+              <Button outline gradientDuoTone='purpleToPink' className='self-center'>
+                <Link to={'/dashboard?tab=posts'}>See all</Link>
+              </Button>
+            </div>
+            <Table hoverable>
+              <Table.Head>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Image</Table.HeadCell>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Title</Table.HeadCell>
+                <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Category</Table.HeadCell>
+              </Table.Head>
+              {posts &&
+                posts.map((post) => (
+                  <Table.Body key={post._id} className='divide-y'>
+                    <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                      <Table.Cell>
+                        <img
+                          src={post.image}
+                          alt='user'
+                          className='w-14 h-10 rounded-md bg-gray-500'
+                        />
+                      </Table.Cell>
+                      <Table.Cell className='w-96 text-xs text-gray-600 dark:text-gray-200 font-medium'>{post.title}</Table.Cell>
+                      <Table.Cell className='w-5 text-purple-500 cursor-pointer font-medium text-sm hover:text-purple-600'>{post.category}</Table.Cell>
+                    </Table.Row>
+                  </Table.Body>
+                ))}
+            </Table>
           </div>
         </div>
       </div>
-
-      <div className='flex flex-wrap md:flex-nowrap gap-2 py-4 mx-auto justify-center'>
-        <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Recent users</h1>
-            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
-              <Link to={'/dashboard?tab=users'}>See all</Link>
-            </Button>
-          </div>
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>User image</Table.HeadCell>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Username</Table.HeadCell>
-            </Table.Head>
-            {users &&
-              users.map((user) => (
-                <Table.Body key={user._id} className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell>
-                      <img
-                        src={user.profilePicture}
-                        alt='user'
-                        className='w-10 h-10 rounded-full bg-gray-500'
-                      />
-                    </Table.Cell>
-                    <Table.Cell className='text-gray-600 dark:text-gray-300 text-sm'>{user.username}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              ))}
-          </Table>
-        </div>
-
-        <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Recent Comments</h1>
-            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
-              <Link to={'/dashboard?tab=comments'}>See all</Link>
-            </Button>
-          </div>
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Comment Content</Table.HeadCell>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Likes</Table.HeadCell>
-            </Table.Head>
-            {comments &&
-              comments.map((comment) => (
-                <Table.Body key={comment._id} className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell className='w-96'>
-                        <p className='line-clamp-2 text-xs text-gray-600 dark:text-gray-300'>{comment.content}</p>
-                    </Table.Cell>
-                    <Table.Cell className='text-gray-500 dark:text-gray-200'>{comment.numberOfLikes}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              ))}
-          </Table>
-        </div>
-
-        <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex items-center justify-between py-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Recent posts</h1>
-            <Button outline gradientDuoTone='purpleToPink' className='self-center'>
-              <Link to={'/dashboard?tab=posts'}>See all</Link>
-            </Button>
-          </div>
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Image</Table.HeadCell>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Post Title</Table.HeadCell>
-              <Table.HeadCell className='text-gray-700 dark:text-gray-200'>Category</Table.HeadCell>
-            </Table.Head>
-            {posts &&
-              posts.map((post) => (
-                <Table.Body key={post._id} className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell>
-                      <img
-                        src={post.image}
-                        alt='user'
-                        className='w-14 h-10 rounded-md bg-gray-500'
-                      />
-                    </Table.Cell>
-                    <Table.Cell className='w-96 text-xs text-gray-600 dark:text-gray-200 font-medium'>{post.title}</Table.Cell>
-                    <Table.Cell className='w-5 text-purple-500 cursor-pointer font-medium text-sm hover:text-purple-600'>{post.category}</Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              ))}
-          </Table>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 }

@@ -9,6 +9,7 @@ body{
 h3{
   font-weight: 600;
   font-size: 1.3rem;
+  font-family: sans-serif;
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 .ql-editor{
@@ -33,6 +34,16 @@ h3{
   border-radius: 8px;
   overflow-x: auto;
 }
+
+/* Add this CSS to your styles for a dark background code block */
+.code-block {
+  background-color: #1e1e1e; /* Dark background */
+  color: #ffffff; /* White text */
+  padding: 10px; /* Spacing around the text */
+  border-radius: 5px; /* Rounded corners */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font */
+}
+
 
 .post-content h1 {
     font-size: 1.5rem;
