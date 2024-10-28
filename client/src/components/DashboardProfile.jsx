@@ -194,7 +194,7 @@ export default function DashboardProfile() {
                 style={hideScrollbar}
                 className="min-h-screen p-2 md:p-8 mx-auto max-w-lg md:max-w-xl"
             >
-                <h1 className='font-semibold text-2xl md:text-2xl text-center p-8'>Your Profile</h1>
+                <h1 className='font-semibold text-gray-100 text-2xl md:text-2xl text-center p-8'>Your Profile</h1>
                 
                 <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
                     <input type="file" accept='image/*' onChange={handleImageChange} ref={filePickerRef} hidden />
@@ -223,7 +223,7 @@ export default function DashboardProfile() {
                             alt={currentUser.username} 
                             className={`rounded-full w-full h-full object-cover border-4 border-[lightgray] ${imageFileUploadProgress && imageFileUploadProgress < 100 && 'opacity-60'}`} 
                         />
-                        <p className='absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 cursor-pointer' onClick={() => filePickerRef.current.click()}><AiOutlineEdit size={18} className='mr-1'/>Edit</p>
+                        <p className='absolute inset-0 flex items-center justify-center text-white bg-black bg-opacity-50 cursor-pointer' onClick={() => filePickerRef.current.click()}><AiOutlineEdit size={18} className='mr-1 text-xs'/>Edit</p>
                     </div>
 
                     {error && (

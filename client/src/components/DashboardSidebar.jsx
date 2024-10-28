@@ -41,7 +41,7 @@ export default function DashboardSidebar() {
     };
 
     return (
-        <Sidebar className="w-full lg:w-52 pt-8 lg:pt-2">
+        <Sidebar className="w-full lg:w-52 pt-8 lg:pt-2 border-r dark:border-r-gray-800 border-r-gray-300">
             <Sidebar.Items className="mt-20">
                 <Sidebar.ItemGroup className="flex flex-col gap-1">
                     {currentUser && currentUser.isAdmin && (
@@ -60,7 +60,7 @@ export default function DashboardSidebar() {
                     <Sidebar.Item
                         as={Link}
                         to='/dashboard?tab=profile'
-                        active={tab === 'profile'}
+                        active={tab === 'profile' || !tab}
                         label={currentUser.isAdmin ? 'Admin' : 'User'}
                         labelColor='dark'
                     
@@ -72,7 +72,8 @@ export default function DashboardSidebar() {
                     </Sidebar.Item>
 
                     {currentUser.isAdmin && (
-                        <Sidebar.Item as={Link} to="/create-post" active={tab === 'createpost'}>
+                        <Sidebar.Item as={Link} to="/create-post" 
+                            active={tab === 'createpost' || !tab}>
                             <span className="flex text-sm items-center space-x-2">
                                 <img src={CreatePostIcon} alt="Create Post" className="w-5 h-5 mr-4" />
                                 Create Post
@@ -81,7 +82,8 @@ export default function DashboardSidebar() {
                     )}
 
                     {currentUser.isAdmin && (
-                        <Sidebar.Item as={Link} to="/dashboard?tab=posts" active={tab === 'posts'}>
+                        <Sidebar.Item as={Link} to="/dashboard?tab=posts" 
+                            active={tab === 'posts' || !tab}>
                             <span className="flex text-sm items-center space-x-2">
                                 <img src={PostsIcon} alt="Posts" className="w-5 h-5 mr-4" />
                                 Posts
@@ -91,28 +93,32 @@ export default function DashboardSidebar() {
 
                     {currentUser.isAdmin && (
                         <>
-                            <Sidebar.Item as={Link} to="/dashboard?tab=users" active={tab === 'users'}>
+                            <Sidebar.Item as={Link} to="/dashboard?tab=users" 
+                                active={tab === 'users' || !tab}>
                                 <span  className="flex text-sm items-center space-x-2">
                                     <img src={UsersIcon} alt="Users" className="w-5 h-5 mr-4" />
                                     Users
                                 </span>
                             </Sidebar.Item>
 
-                            <Sidebar.Item as={Link} to="/dashboard?tab=comments" active={tab === 'comments'}>
+                            <Sidebar.Item as={Link} to="/dashboard?tab=comments" 
+                                active={tab === 'comments' || !tab}>
                                 <span  className="flex text-sm items-center space-x-2">
                                     <img src={CommentsIcon} alt="Comments" className="w-5 h-5 mr-4" />
                                     Comments
                                 </span>
                             </Sidebar.Item>
 
-                            <Sidebar.Item as={Link} to="/dashboard?tab=votes" active={tab === 'votes'}>
+                            <Sidebar.Item as={Link} to="/dashboard?tab=votes" 
+                                active={tab === 'votes' || !tab}>
                                 <span  className="flex text-sm items-center space-x-2">
                                     <img src={VotesIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
                                     Votes Poll
                                 </span>
                             </Sidebar.Item>
 
-                            <Sidebar.Item as={Link} to="/dashboard?tab=adminaccess" active={tab === 'adminaccess'}>
+                            <Sidebar.Item as={Link} to="/dashboard?tab=adminaccess" 
+                                active={tab === 'adminaccess' || !tab}>
                                 <span  className="flex text-sm items-center space-x-2">
                                     <img src={AdminAccessIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
                                     Admin Access

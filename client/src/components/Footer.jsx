@@ -9,8 +9,8 @@ export default function FooterCom() {
         <div className='grid gap-8 lg:gap-10 w-full justify-between lg:grid-cols-2 sm:grid-cols-2'>
           {/* Left section with logo and description */}
           <div className='mt-5 lg:text-left'>
-            <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-lg font-semibold dark:text-white">
-              <img src="/Logo-icon.png" alt="Logo icon" width='30px' height="30px" />
+            <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-base font-semibold dark:text-white">
+              <img src="/Logo-icon.png" alt="Logo icon" width='25px' height="25px" />
               <span className='self-center mx-1 py-1 px-4 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
                 DevJourney
               </span>
@@ -58,11 +58,11 @@ export default function FooterCom() {
           <p className='text-xs text-gray-500 dark:text-gray-400'>Developed by Sixtusdev | All Rights Reserved</p>
           <p className='text-xs text-gray-500 dark:text-gray-400'>Version 1.0.0</p>
           <div className="flex gap-6 mt-4 sm:mt-0 sm:justify-center lg:justify-end">
-            <Footer.Icon href='https://www.facebook.com/sixtusushrey/' icon={BsFacebook} />
-            <Footer.Icon href="https://www.youtube.com/@Sixtusdev/" icon={BsYoutube} />
-            <Footer.Icon href='https://x.com/dev_elites/' icon={BsTwitter} />
-            <Footer.Icon href='https://github.com/sixtusdeveloper/' icon={BsGithub} />
-            <Footer.Icon href='https://www.linkedin.com/in/sixtusushrey/' icon={BsLinkedin} />
+            <Footer.Icon href='https://www.facebook.com/sixtusushrey/' icon={BsFacebook} size={18} />
+            <Footer.Icon href="https://www.youtube.com/@Sixtusdev/" icon={BsYoutube} size={18} />
+            <Footer.Icon href='https://x.com/dev_elites/' icon={BsTwitter} size={18} />
+            <Footer.Icon href='https://github.com/sixtusdeveloper/' icon={BsGithub} size={18} />
+            <Footer.Icon href='https://www.linkedin.com/in/sixtusushrey/' icon={BsLinkedin} size={18} />
           </div>
         </div>
       </div>

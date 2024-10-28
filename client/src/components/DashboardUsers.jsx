@@ -77,119 +77,132 @@ export default function DashboardUsers() {
     );
   }
 
+  // Inline CSS for background image
+  const backgroundStyle = {
+    backgroundImage: 'url("/auth-bg.webp")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    overflowY: 'scroll',
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+  };
+
   return (
-    <div className="relative mt-2 mx-auto py-4 overflow-x-scroll 
-      scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300
-       dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
-      {currentUser.isAdmin && users.length > 0 ? (
-        <div>
-          <Table hoverable className="shadow-md">
-            <Table.Head>
-              <Table.HeadCell>Date created</Table.HeadCell>
-              <Table.HeadCell>User image</Table.HeadCell>
-              <Table.HeadCell>Username</Table.HeadCell>
-              <Table.HeadCell>Email</Table.HeadCell>
-              <Table.HeadCell>Admin</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
-            </Table.Head>
-            {users.map((user) => (
-              <Table.Body key={user._id} className="divide-y">
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                  <Table.Cell className="text-gray-500 dark:text-gray-400 text-xs">
-                    {new Date(user.createdAt).toLocaleString()}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <img
-                      src={user.profilePicture}
-                      alt={user.username}
-                      className="w-10 h-10 object-cover bg-gray-500 rounded-full"
-                    />
-                  </Table.Cell>
-                  <Table.Cell className="text-gray-600 dark:text-gray-200">
-                    {user.username}
-                  </Table.Cell>
-                  <Table.Cell className="text-gray-500 dark:text-gray-400">
-                    {user.email}
-                  </Table.Cell>
-                  <Table.Cell>
-                    {user.isAdmin ? <FaCheck className="text-green-500" /> : <FaTimes className="text-red-500" />}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <span
-                      onClick={() => {
-                        setShowAuthModal(true);
-                        setUserIdToDelete(user._id);
-                      }}
-                      className="bg-red-500 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600"
-                    >
-                      Delete
-                    </span>
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            ))}
-          </Table>
-          {showMore && (
-            <div className="flex justify-center mt-4">
-              <Button onClick={handleShowMore} gradientDuoTone="purpleToBlue" className="flex items-center my-4">
-                Load More
+    <section style={backgroundStyle} className='min-h-[100vh] w-full overflow-auto'>
+      <div className="relative mt-2 mx-auto py-4 overflow-x-scroll border dark:border-gray-800 border-gray-300
+        scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300
+        dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+        {currentUser.isAdmin && users.length > 0 ? (
+          <div>
+            <Table hoverable className="shadow-md">
+              <Table.Head>
+                <Table.HeadCell>Date created</Table.HeadCell>
+                <Table.HeadCell>User image</Table.HeadCell>
+                <Table.HeadCell>Username</Table.HeadCell>
+                <Table.HeadCell>Email</Table.HeadCell>
+                <Table.HeadCell>Admin</Table.HeadCell>
+                <Table.HeadCell>Delete</Table.HeadCell>
+              </Table.Head>
+              {users.map((user) => (
+                <Table.Body key={user._id} className="divide-y">
+                  <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <Table.Cell className="text-gray-500 dark:text-gray-400 text-xs">
+                      {new Date(user.createdAt).toLocaleString()}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <img
+                        src={user.profilePicture}
+                        alt={user.username}
+                        className="w-10 h-10 object-cover bg-gray-500 rounded-full"
+                      />
+                    </Table.Cell>
+                    <Table.Cell className="text-gray-600 dark:text-gray-200">
+                      {user.username}
+                    </Table.Cell>
+                    <Table.Cell className="text-gray-500 dark:text-gray-400">
+                      {user.email}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {user.isAdmin ? <FaCheck className="text-green-500" /> : <FaTimes className="text-red-500" />}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <span
+                        onClick={() => {
+                          setShowAuthModal(true);
+                          setUserIdToDelete(user._id);
+                        }}
+                        className="bg-purple-800 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-purple-600"
+                      >
+                        Delete
+                      </span>
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              ))}
+            </Table>
+            {showMore && (
+              <div className="flex justify-center mt-4">
+                <Button onClick={handleShowMore} gradientDuoTone="purpleToBlue" className="flex items-center my-4">
+                  Load More
+                </Button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <h1 className="text-center text-2xl">No Users Found</h1>
+        )}
+
+        {/* Authorization Modal */}
+        <Modal show={showAuthModal} onClose={() => setShowAuthModal(false)} popup size="md">
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center p-4">
+              <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
+                🔐Enter Authorization Key
+              </h3>
+              {authError &&  
+                <Alert className='mb-4 text-base' color='failure'>
+                  {authError}
+                </Alert>
+              }
+              <TextInput
+                type="password"
+                placeholder="🔑 Enter Key"
+                value={authorizationKey}
+                onChange={(e) => setAuthorizationKey(e.target.value)}
+                className="mb-4"
+              />
+              
+              <Button gradientDuoTone='purpleToBlue' onClick={handleAuthSubmit} className="w-full">
+                Okay
               </Button>
             </div>
-          )}
-        </div>
-      ) : (
-        <h1 className="text-center text-2xl">No Users Found</h1>
-      )}
+          </Modal.Body>
+        </Modal>
 
-      {/* Authorization Modal */}
-      <Modal show={showAuthModal} onClose={() => setShowAuthModal(false)} popup size="md">
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center p-4">
-            <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
-              🔐Enter Authorization Key
-            </h3>
-            {authError &&  
-              <Alert className='mb-4 text-base' color='failure'>
-                {authError}
-              </Alert>
-            }
-            <TextInput
-              type="password"
-              placeholder="🔑 Enter Key"
-              value={authorizationKey}
-              onChange={(e) => setAuthorizationKey(e.target.value)}
-              className="mb-4"
-            />
-            
-            <Button onClick={handleAuthSubmit} className="w-full">
-              Okay
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
-
-      {/* Delete Confirmation Modal */}
-      <Modal show={showDeleteModal} onClose={() => setShowDeleteModal(false)} popup size="md">
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center p-4">
-            <HiOutlineExclamationCircle className="h-14 w-14 mx-auto mb-4 text-red-800" />
-            <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this user?
-            </h3>
-            <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={handleDeleteUser} className="text-base font-semibold">
-                Yes, Delete
-              </Button>
-              <Button color="gray" onClick={() => setShowDeleteModal(false)} className="text-base font-semibold">
-                No, Cancel
-              </Button>
+        {/* Delete Confirmation Modal */}
+        <Modal show={showDeleteModal} onClose={() => setShowDeleteModal(false)} popup size="md">
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center p-4">
+              <HiOutlineExclamationCircle className="h-14 w-14 mx-auto mb-4 text-red-800" />
+              <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
+                Are you sure you want to delete this user?
+              </h3>
+              <div className="flex justify-center gap-4">
+                <Button gradientDuoTone='purpleToBlue' onClick={handleDeleteUser} className="text-base font-semibold">
+                  Yes, Delete
+                </Button>
+                <Button color="gray" onClick={() => setShowDeleteModal(false)} className="text-base font-semibold">
+                  No, Cancel
+                </Button>
+              </div>
             </div>
-          </div>
-        </Modal.Body>
-      </Modal>
-    </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+    </section>
   );
 }
 

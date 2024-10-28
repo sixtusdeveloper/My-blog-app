@@ -136,24 +136,13 @@ export default function CreatePost() {
                             className="flex-1"
                             onChange={handleInputChange}
                         />
-                        {/* <TextInput type='text' 
-                        placeholder='Title' 
-                        required id='title' 
-                        className='flex-1' 
-                        onChange={(e) => setFormData({
-                            ...formData, title: e.target.value  
-                        })}/> */}
-
+                    
                         <Select
                             id='category'
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             value={formData.category || 'uncategorized'}
                         >
 
-                            {/* <Select onChange={(e) => setFormData({
-                                ...formData, category: e.target.value 
-                            })}
-                            > */}
                             <option value='uncategorized'>Select a Category</option>
                             <option value='javascript'>JavaScript</option>
                             <option value='mysql'>MySQL</option>
@@ -174,6 +163,7 @@ export default function CreatePost() {
                             <option value='frontend'>Frontend</option>
                             <option value='backend'>Backend</option>
                             <option value='devops'>DevOps</option>
+                            <option value='git'>Git</option>
                         
                         </Select>
                     </div>
@@ -206,22 +196,41 @@ export default function CreatePost() {
                     )}  
                     
                     {/* The Editor */}
-                    <ReactQuill
+                    {/* Custom Toolbar */}
+                    <div>
+                        <div id="toolbar">
+                        <button className="ql-bold" />
+                        <button className="ql-italic" />
+                        <button className="ql-underline" />
+                        <select className="ql-header" defaultValue={""}>
+                            <option value="1">Heading</option>
+                            <option value="2">Subheading</option>
+                            <option value="">Normal</option>
+                        </select>
+                        <button className="ql-list" value="ordered" />
+                        <button className="ql-list" value="bullet" />
+                        <button className="ql-code-block" />
+                        </div>
+                        <ReactQuill
+                        theme="snow"
+                        modules={{
+                            toolbar: "#toolbar",
+                        }}
+                        placeholder="Write something amazing..."
+                        className="h-72 mb-12"
+                        required
+                        onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
+                        value={formData.content || ""}
+                        />
+                    </div>
+                    {/* <ReactQuill
                         theme='snow'
                         placeholder='Write something amazing...'
                         className='h-72 mb-12'
                         required
                         onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
                         value={formData.content || ''}
-                    />
-                    {/* <ReactQuill theme='snow' 
-                    placeholder='Write something amazing...' 
-                    className='h-72 mb-12' 
-                    required 
-                    onChange={(value) => setFormData({
-                        ...formData, content: value
-                    })} 
-                    />     */}
+                    /> */}
                     <Button type='submit' gradientDuoTone='purpleToPink'>Publish post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>

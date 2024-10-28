@@ -64,74 +64,89 @@ export default function DashboardVotes() {
     );
   }
 
-  return (
-    <div className="relative mx-auto py-2 table-auto overflow-x-scroll scrollbar">
-      {currentUser.isAdmin ? (
-        <div>
-          <Table hoverable className="shadow-md">
-            <Table.Head>
-              <Table.HeadCell>Framework</Table.HeadCell>
-              <Table.HeadCell className='text-center mx-auto'>Votes</Table.HeadCell>
-              <Table.HeadCell className='text-center mx-auto'>Update</Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-              {Object.entries(votes).map(([framework, count]) => (
-                <Table.Row
-                  key={framework}
-                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                >
-                  <Table.Cell className="py-3 px-6 text-left">{framework}</Table.Cell>
-                  <Table.Cell className="py-3 px-6 text-center">{count}</Table.Cell>
-                  <Table.Cell className="py-3 px-6 text-center">
-                    <Button
-                      onClick={() => {
-                        setSelectedFramework(framework); // Track the selected framework
-                        setShowModal(true); // Open the modal
-                      }}
-                      className="mx-auto text-center font-medium text-xs"
-                      gradientDuoTone="redToYellow"
-                    >
-                      Reset Poll
-                    </Button>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
-        </div>
-      ) : (
-        <h1 className="text-center text-2xl">No Votes Found</h1>
-      )}
+  // Inline CSS for background image
+  const backgroundStyle = {
+    backgroundImage: 'url("/auth-bg.webp")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh',
+    overflowY: 'scroll',
+    scrollbarWidth: 'none', // Firefox
+    msOverflowStyle: 'none', // IE and Edge
+  };
 
-      {/* Modal Component */}
-      <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center p-4">
-            <HiOutlineExclamationCircle className="h-14 w-14 mx-auto mb-4 text-red-800" />
-            <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
-              Are you sure you want to reset the votes for {selectedFramework}?
-            </h3>
-            <div className="flex justify-center gap-4">
-              <Button
-                color="failure"
-                onClick={handleReset}
-                className="text-base font-semibold"
-              >
-                Yes, Reset
-              </Button>
-              <Button
-                color="gray"
-                onClick={() => setShowModal(false)}
-                className="text-base font-semibold"
-              >
-                No, Cancel
-              </Button>
-            </div>
+  return (
+    <section style={backgroundStyle} className='min-h-[100vh] w-full overflow-auto'>
+      <div className="relative mx-auto py-2 table-auto overflow-x-scroll border dark:border-gray-800 border-gray-300
+      scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
+      dark:scrollbar-thumb-slate-500">
+        {currentUser.isAdmin ? (
+          <div>
+            <Table hoverable className="shadow-md">
+              <Table.Head>
+                <Table.HeadCell>Framework</Table.HeadCell>
+                <Table.HeadCell className='text-center mx-auto'>Votes</Table.HeadCell>
+                <Table.HeadCell className='text-center mx-auto'>Update</Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {Object.entries(votes).map(([framework, count]) => (
+                  <Table.Row
+                    key={framework}
+                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                  >
+                    <Table.Cell className="py-3 px-6 text-left">{framework}</Table.Cell>
+                    <Table.Cell className="py-3 px-6 text-center">{count}</Table.Cell>
+                    <Table.Cell className="py-3 px-6 text-center">
+                      <button
+                        onClick={() => {
+                          setSelectedFramework(framework); // Track the selected framework
+                          setShowModal(true); // Open the modal
+                        }}
+                        
+                        className="mx-auto text-center font-medium text-xs bg-purple-800 cursor-pointer text-white px-2 py-1 rounded-md hover:bg-purple-600"
+                      >
+                        Reset
+                      </button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
           </div>
-        </Modal.Body>
-      </Modal>
-    </div>
+        ) : (
+          <h1 className="text-center text-2xl">No Votes Found</h1>
+        )}
+
+        {/* Modal Component */}
+        <Modal show={showModal} onClose={() => setShowModal(false)} popup size="md">
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center p-4">
+              <HiOutlineExclamationCircle className="h-14 w-14 mx-auto mb-4 text-red-800" />
+              <h3 className="text-lg mb-4 text-gray-500 dark:text-gray-400">
+                Are you sure you want to reset the votes for {selectedFramework}?
+              </h3>
+              <div className="flex justify-center gap-4">
+                <Button
+                  gradientDuoTone='purpleToBlue'
+                  onClick={handleReset}
+                  className="text-base font-semibold"
+                >
+                  Yes, Reset
+                </Button>
+                <Button
+                  color="gray"
+                  onClick={() => setShowModal(false)}
+                  className="text-base font-semibold"
+                >
+                  No, Cancel
+                </Button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+    </section>
   );
 }
 
