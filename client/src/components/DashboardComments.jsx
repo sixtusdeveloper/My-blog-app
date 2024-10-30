@@ -121,12 +121,12 @@ export default function DashComments() {
           <div>
             <Table hoverable className="shadow-md">
               <Table.Head>
-                <Table.HeadCell>Date updated</Table.HeadCell>
-                <Table.HeadCell>Comment content</Table.HeadCell>
-                <Table.HeadCell>Number of likes</Table.HeadCell>
-                <Table.HeadCell>PostId</Table.HeadCell>
-                <Table.HeadCell>UserId</Table.HeadCell>
-                <Table.HeadCell>Delete</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Date updated</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Comment content</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Number of likes</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>PostId</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>UserId</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Delete</Table.HeadCell>
               </Table.Head>
 
               {comments.map((comment) => (
@@ -141,10 +141,10 @@ export default function DashComments() {
                     <Table.Cell className="text-gray-800 dark:text-gray-300">
                       {comment.numberOfLikes}
                     </Table.Cell>
-                    <Table.Cell className="text-gray-500 text-xs dark:text-gray-300">
+                    <Table.Cell className="text-purple-500 text-xs dark:text-purple-600">
                       {truncateId(comment.postId)}
                     </Table.Cell>
-                    <Table.Cell className="text-gray-500 text-xs dark:text-gray-300">
+                    <Table.Cell className="text-purple-500 text-xs dark:text-purple-600">
                       {truncateId(comment.userId)}
                     </Table.Cell>
                     <Table.Cell>

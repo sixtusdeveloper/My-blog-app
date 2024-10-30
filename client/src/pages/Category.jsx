@@ -65,13 +65,13 @@ export default function Category() {
     return (
         <div className='dark:bg-[rgb(16,23,42)] overflow-x-hidden min-h-screen w-full py-20'>
             <div className="flex flex-col max-w-6xl mx-auto px-4 md:px-8 lg:px-8">
-                <h1 className="text-3xl lg:text-5xl py-8 mt-10 font-serif">
+                <h1 className="text-3xl lg:text-5xl py-8 mt-10 font-bold">
                     Posts in "{category}" Category
                 </h1>
 
                 {/* Display the total number of posts */}
-                <p className="my-4 text-gray-500">
-                    Total posts: {totalPosts} {/* Ensure this displays the total */}
+                <p className="my-4 text-gray-500 dark:text-gray-200">
+                    Total posts: <span className='text-blue-500 dark:text-gray-100 border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-1'>{totalPosts}</span> {/* Ensure this displays the total */}
                 </p>
 
                 <div className='flex flex-col justify-center items-center mb-5'>

@@ -142,7 +142,6 @@ export default function CreatePost() {
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             value={formData.category || 'uncategorized'}
                         >
-
                             <option value='uncategorized'>Select a Category</option>
                             <option value='javascript'>JavaScript</option>
                             <option value='mysql'>MySQL</option>
@@ -152,7 +151,7 @@ export default function CreatePost() {
                             <option value='vuejs'>Vue.js</option>
                             <option value='html'>HTML</option>
                             <option value='c++'>C++</option>
-                            <option value='c#'>C#</option>
+                            <option value='c-sharp'>C-sharp</option>
                             <option value='css'>CSS</option>
                             <option value='java'>Java</option>
                             <option value='php'>PHP</option>
@@ -164,7 +163,6 @@ export default function CreatePost() {
                             <option value='backend'>Backend</option>
                             <option value='devops'>DevOps</option>
                             <option value='git'>Git</option>
-                        
                         </Select>
                     </div>
 
@@ -196,41 +194,15 @@ export default function CreatePost() {
                     )}  
                     
                     {/* The Editor */}
-                    {/* Custom Toolbar */}
-                    <div>
-                        <div id="toolbar">
-                        <button className="ql-bold" />
-                        <button className="ql-italic" />
-                        <button className="ql-underline" />
-                        <select className="ql-header" defaultValue={""}>
-                            <option value="1">Heading</option>
-                            <option value="2">Subheading</option>
-                            <option value="">Normal</option>
-                        </select>
-                        <button className="ql-list" value="ordered" />
-                        <button className="ql-list" value="bullet" />
-                        <button className="ql-code-block" />
-                        </div>
-                        <ReactQuill
-                        theme="snow"
-                        modules={{
-                            toolbar: "#toolbar",
-                        }}
-                        placeholder="Write something amazing..."
-                        className="h-72 mb-12"
-                        required
-                        onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
-                        value={formData.content || ""}
-                        />
-                    </div>
-                    {/* <ReactQuill
+                
+                    <ReactQuill
                         theme='snow'
                         placeholder='Write something amazing...'
-                        className='h-72 mb-12'
+                        className='h-72 mb-12 code-container'
                         required
-                        onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
                         value={formData.content || ''}
-                    /> */}
+                        onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
+                    /> 
                     <Button type='submit' gradientDuoTone='purpleToPink'>Publish post</Button>
                     {publishError && <Alert color='failure' className='my-2' type='danger'>{publishError}</Alert>} 
                 </form>

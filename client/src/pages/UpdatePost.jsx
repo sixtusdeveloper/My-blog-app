@@ -170,44 +170,30 @@ export default function UpdatePost() {
                             value={formData.title || ''}
                         />
                       
-                        {/* <TextInput 
-                            type='text' 
-                            placeholder='Title' 
-                            required id='title' 
-                            className='flex-1' 
-                            onChange={(e) => setFormData({
-                                ...formData, title: e.target.value  
-                            })}
-                            value={formData.title}
-                        /> */}
 
                         <Select id='category' onChange={handleInputChange} value={formData.category || ''}>
-                            {/* <Select onChange={(e) => setFormData({
-                                ...formData, category: e.target.value 
-                            })}
-                                value={formData.category}
-                            > */}
-                            <option value='uncategorized'>Select a Category</option>
-                            <option value='javascript'>JavaScript</option>
-                            <option value='mysql'>MySQL</option>
-                            <option value='reactjs'>React.js</option>
-                            <option value='nextjs'>Next.js</option>
-                            <option value='typescript'>TypeScript</option>
-                            <option value='vuejs'>Vue.js</option>
-                            <option value='html'>HTML</option>
-                            <option value='c++'>C++</option>
-                            <option value='c#'>C#</option>
-                            <option value='css'>CSS</option>
-                            <option value='java'>Java</option>
-                            <option value='php'>PHP</option>
-                            <option value='shell'>Shell</option>
-                            <option value='python'>Python</option>
-                            <option value='tailwindcss'>Tailwindcss</option>
-                            <option value='career'>Career</option>
-                            <option value='frontend'>Frontend</option>
-                            <option value='backend'>Backend</option>
-                            <option value='devops'>DevOps</option>
-                        
+                           
+                        <option value='uncategorized'>Select a Category</option>
+                        <option value='javascript'>JavaScript</option>
+                        <option value='mysql'>MySQL</option>
+                        <option value='reactjs'>React.js</option>
+                        <option value='nextjs'>Next.js</option>
+                        <option value='typescript'>TypeScript</option>
+                        <option value='vuejs'>Vue.js</option>
+                        <option value='html'>HTML</option>
+                        <option value='c++'>C++</option>
+                        <option value='c-sharp'>C-sharp</option>
+                        <option value='css'>CSS</option>
+                        <option value='java'>Java</option>
+                        <option value='php'>PHP</option>
+                        <option value='shell'>Shell</option>
+                        <option value='python'>Python</option>
+                        <option value='tailwindcss'>Tailwindcss</option>
+                        <option value='career'>Career</option>
+                        <option value='frontend'>Frontend</option>
+                        <option value='backend'>Backend</option>
+                        <option value='devops'>DevOps</option>
+                        <option value='git'>Git</option>
                         </Select>
                     </div>
 

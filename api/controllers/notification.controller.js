@@ -3,58 +3,48 @@ import Notification from "../models/notification.model.js";
 
 // Create notification functionality
 export const createNotification = async (req, res, next) => {
-  if (!req.body.message) {
-    return next(errorHandler('Message is required', 400));
-  }
-
-  const newNotification = new Notification({
-    ...req.body,
-    userId: req.user.id,
-  });
-
-  try {
-    const savedNotification = await newNotification.save();
-    res.status(201).json(savedNotification);
-  } catch (error) {
-    next(error);
-  }
+    if (!req.body.message) {
+      return next(errorHandler('Message is required', 400));
+    }
+  
+    const newNotification = new Notification({
+      ...req.body,
+      userId: req.user.id,
+    });
+  
+    try {
+      const savedNotification = await newNotification.save();
+      res.status(201).json(savedNotification);
+    } catch (error) {
+      next(error);
+    }
 };
+  
 
 // Notify all users about a new post
 // Notify all users about a new post
 // Notify all users about a new post
 export const notifyUsersAboutNewPost = async (post) => {
-    const message = `
-      <div>
-        <h2><a href="/posts/${post.id}">${post.title}</a></h2>
-        <p>New post has been made</p>
-        <p>${post.content}</p>
-        <div>
-          <a href="/users/${post.userId}">
-            <img src="${post.avatarUrl}" alt="${post.username}'s avatar" 
-                 style="width: 40px; height: 40px; border-radius: 50%;" />
-            <span>${post.username}</span>
-          </a>
-        </div>
-        <small>${timeAgo(post.createdAt)}</small>
-      </div>
-    `;
-  
+    const message = `New post: ${post.title} has been created.`;
+    
     try {
       const notifications = await Notification.insertMany(
         post.users.map((user) => ({
           userId: user.id,
           message,
+          type: 'new_post',
+          postId: post._id,  // Associate with the specific post
         }))
       );
       console.log('Users notified about new post:', notifications);
     } catch (error) {
       console.error('Error sending post notifications:', error);
     }
-  };
+};
   
-  // Helper function to display time ago format (e.g., 1min ago, 1h ago)
-  const timeAgo = (timestamp) => {
+  
+// Helper function to display time ago format (e.g., 1min ago, 1h ago)
+const timeAgo = (timestamp) => {
     const now = new Date();
     const postDate = new Date(timestamp);
     const diffInMs = now - postDate;
@@ -103,31 +93,31 @@ export const notifyPostChange = async (post, changeType) => {
 
 // Get notifications functionality
 export const getNotifications = async (req, res, next) => {
-  try {
-    const notifications = await Notification.find({ userId: req.user.id })
-      .sort({ createdAt: -1 });
-    const totalCount = notifications.length;
-
-    res.status(200).json({ notifications, totalCount });
-  } catch (error) {
-    next(error);
-  }
+    try {
+      const notifications = await Notification.find({ userId: req.user.id })
+        .sort({ createdAt: -1 });
+      const totalCount = notifications.length;
+  
+      res.status(200).json({ notifications, totalCount });
+    } catch (error) {
+      next(error);
+    }
 };
-
+  
 // Delete notification functionality
 export const deleteNotification = async (req, res, next) => {
-  if (req.params.userId !== req.user.id) {
-    return next(errorHandler('You are not allowed to delete this notification', 403));
-  }
-
-  try {
-    await Notification.findByIdAndDelete(req.params.notificationId);
-    res.status(200).json('Notification deleted successfully');
-  } catch (error) {
-    next(error);
-  }
+    if (req.params.userId !== req.user.id) {
+      return next(errorHandler('You are not allowed to delete this notification', 403));
+    }
+  
+    try {
+      await Notification.findByIdAndDelete(req.params.notificationId);
+      res.status(200).json('Notification deleted successfully');
+    } catch (error) {
+      next(error);
+    }
 };
-
+  
 
 
 
