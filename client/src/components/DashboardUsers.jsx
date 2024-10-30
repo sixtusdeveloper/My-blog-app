@@ -97,12 +97,12 @@ export default function DashboardUsers() {
           <div>
             <Table hoverable className="shadow-md">
               <Table.Head>
-                <Table.HeadCell>Date created</Table.HeadCell>
-                <Table.HeadCell>User image</Table.HeadCell>
-                <Table.HeadCell>Username</Table.HeadCell>
-                <Table.HeadCell>Email</Table.HeadCell>
-                <Table.HeadCell>Admin</Table.HeadCell>
-                <Table.HeadCell>Delete</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Date created</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>User image</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Username</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Email</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Admin</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Delete</Table.HeadCell>
               </Table.Head>
               {users.map((user) => (
                 <Table.Body key={user._id} className="divide-y">
@@ -120,7 +120,7 @@ export default function DashboardUsers() {
                     <Table.Cell className="text-gray-600 dark:text-gray-200">
                       {user.username}
                     </Table.Cell>
-                    <Table.Cell className="text-gray-500 dark:text-gray-400">
+                    <Table.Cell className="text-purple-500 dark:text-purple-600">
                       {user.email}
                     </Table.Cell>
                     <Table.Cell>

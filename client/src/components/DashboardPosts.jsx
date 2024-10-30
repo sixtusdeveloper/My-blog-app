@@ -102,12 +102,12 @@ export default function DashboardPosts() {
             <div>
               <Table hoverable className='shadow-md'>
                 <Table.Head>
-                  <Table.HeadCell>Date updated</Table.HeadCell>
-                  <Table.HeadCell>Post image</Table.HeadCell>
-                  <Table.HeadCell>Post title</Table.HeadCell>
-                  <Table.HeadCell>Category</Table.HeadCell>
-                  <Table.HeadCell>Delete</Table.HeadCell>
-                  <Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Date updated</Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Post image</Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Post title</Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Category</Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Delete</Table.HeadCell>
+                  <Table.HeadCell className='text-gray-600 dark:text-gray-200'>
                     <span>Edit</span>
                   </Table.HeadCell>
                 </Table.Head>
@@ -140,7 +140,7 @@ export default function DashboardPosts() {
                         <span onClick={() => {
                           setShowModal(true)
                           setPostIdToDelete(post._id) 
-                        }} className='bg-red-500 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-red-600'>Delete</span>
+                        }} className='bg-purple-800 font-medium text-xs cursor-pointer text-white px-2 py-1 rounded-md hover:bg-purple-600'>Delete</span>
                       </Table.Cell>
 
                       <Table.Cell>

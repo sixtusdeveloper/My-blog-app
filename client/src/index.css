@@ -6,6 +6,7 @@
 body{
     height: 100vh;
 }
+
 h3{
   font-weight: 600;
   font-size: 1.3rem;
@@ -29,7 +30,7 @@ h3{
 
 .prose pre {
   background-color: #1e293b; /* Dark background */
-  color: greenyellow;           
+  color: #a6e22e;           
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -37,13 +38,12 @@ h3{
 
 /* Add this CSS to your styles for a dark background code block */
 .code-block {
-  background-color: #1e1e1e; /* Dark background */
+  background-color: #2d2d2d; /* Dark background */
   color: #ffffff; /* White text */
-  padding: 10px; /* Spacing around the text */
+  padding: 16px; /* Spacing around the text */
   border-radius: 5px; /* Rounded corners */
-  font-family: 'Courier New', Courier, monospace; /* Monospace font */
+  font-family: 'Fira Code', monospace; 
 }
-
 
 .post-content h1 {
     font-size: 1.5rem;

@@ -107,55 +107,63 @@ export default function Search() {
     <section className='min-h-screen bg-white dark:bg-[rgb(16,23,42)] w-full pt-20 '>
       <div className='flex flex-col md:flex-row'>
           <div className='p-6 border-b md:border-r md:min-h-screen border-r-gray-300 dark:border-r-gray-800 border-b-gray-400 dark:border-b-gray-800'>
-              <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
+            <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-2'>
-                  <label className='whitespace-nowrap font-semibold justify-start'>
-                  Search Term:
-                  </label>
-                  <TextInput
-                  placeholder='Search...'
-                  id='searchTerm'
-                  type='text'
-                  value={sidebarData.searchTerm}
-                  onChange={handleChange}
-                  />
+                <label className='whitespace-nowrap font-semibold justify-start'>
+                Search Term:
+                </label>
+                <TextInput
+                placeholder='Search...'
+                id='searchTerm'
+                type='text'
+                value={sidebarData.searchTerm}
+                onChange={handleChange}
+                />
               </div>
               <div className='flex flex-col gap-2'>
-                  <label className='font-semibold'>Sort:</label>
-                  <Select onChange={handleChange} value={sidebarData.sort} id='sort'>
+                <label className='font-semibold'>Sort:</label>
+                <Select onChange={handleChange} value={sidebarData.sort} id='sort'>
                   <option value='desc'>Latest</option>
                   <option value='asc'>Oldest</option>
-                  </Select>
+                </Select>
               </div>
               <div className='flex flex-col gap-2'>
-                  <label className='font-semibold'>Category:</label>
-                  <Select
-                  onChange={handleChange}
-                  value={sidebarData.category}
-                  id='category'
-                  >
-                    <option value='uncategorized'>Select a Category</option>
-                      <option value='javascript'>JavaScript</option>
-                      <option value='mysql'>MySQL</option>
-                      <option value='reactjs'>React.js</option>
-                      <option value='nextjs'>Next.js</option>
-                      <option value='typescript'>TypeScript</option>
-                      <option value='vuejs'>Vue.js</option>
-                      <option value='css'>CSS</option>
-                      <option value='java'>Java</option>
-                      <option value='php'>PHP</option>
-                      <option value='shell'>Shell</option>
-                      <option value='python'>Python</option>
-                      <option value='tailwindcss'>Tailwindcss</option>
-                  </Select>
+                <label className='font-semibold'>Category:</label>
+                <Select
+                onChange={handleChange}
+                value={sidebarData.category}
+                id='category'
+                >
+                  <option value='uncategorized'>Select a Category</option>
+                  <option value='javascript'>JavaScript</option>
+                  <option value='mysql'>MySQL</option>
+                  <option value='reactjs'>React.js</option>
+                  <option value='nextjs'>Next.js</option>
+                  <option value='typescript'>TypeScript</option>
+                  <option value='vuejs'>Vue.js</option>
+                  <option value='html'>HTML</option>
+                  <option value='c++'>C++</option>
+                  <option value='c-sharp'>C-sharp</option>
+                  <option value='css'>CSS</option>
+                  <option value='java'>Java</option>
+                  <option value='php'>PHP</option>
+                  <option value='shell'>Shell</option>
+                  <option value='python'>Python</option>
+                  <option value='tailwindcss'>Tailwindcss</option>
+                  <option value='career'>Career</option>
+                  <option value='frontend'>Frontend</option>
+                  <option value='backend'>Backend</option>
+                  <option value='devops'>DevOps</option>
+                  <option value='git'>Git</option>
+                </Select>
               </div>
               <Button type='submit' outline gradientDuoTone='purpleToPink'>
                   Apply Filters
               </Button>
-              </form>
+            </form>
           </div>
           <div className='w-full'>
-              <h1 className='self-center bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white text-3xl font-semibold sm:border-b dark:border-b-gray-800 border-b-gray-300 p-3 mx-2 '>
+              <h1 className='self-center bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white text-2xl font-semibold sm:border-b dark:border-b-gray-800 border-b-gray-300 p-3 mx-2 '>
               Posts results
               </h1>
               <div className='p-2 flex flex-wrap gap-4'>

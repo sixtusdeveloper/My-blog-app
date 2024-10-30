@@ -25,30 +25,16 @@ export default function Header() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
 
+  // Sync the search term from URL when the component mounts
   useEffect(() => {
-    // Get the search query from the URL
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');  // Get the search term from the URL
+    const searchTermFromUrl = urlParams.get('searchTerm');
     if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl);  // Set the search term state
-    } 
+      setSearchTerm(searchTermFromUrl);
+    }
   }, [location.search]);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      if (searchTerm) {
-        const urlParams = new URLSearchParams(location.search);
-        urlParams.set('searchTerm', searchTerm);
-        navigate(`/search?${urlParams.toString()}`);
-      }
-    }, 300); // Adjust the delay as necessary
-
-    return () => {
-      clearTimeout(handler); // Cleanup
-    };
-  }, [searchTerm, location.search, navigate]);
-
-
+  // Load Notifications function
   const loadNotifications = async () => {
     try {
       const response = await fetch('/api/notifications/getnotifications', {
@@ -204,6 +190,7 @@ export default function Header() {
 
                 <Button
                   className="mt-4 w-full"
+                  gradientDuoTone='purpleToBlue'
                   onClick={() => setIsModalOpen(false)}
                   type="button"
                 >

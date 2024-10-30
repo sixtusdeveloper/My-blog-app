@@ -84,9 +84,9 @@ export default function DashboardVotes() {
           <div>
             <Table hoverable className="shadow-md">
               <Table.Head>
-                <Table.HeadCell>Framework</Table.HeadCell>
-                <Table.HeadCell className='text-center mx-auto'>Votes</Table.HeadCell>
-                <Table.HeadCell className='text-center mx-auto'>Update</Table.HeadCell>
+                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Framework</Table.HeadCell>
+                <Table.HeadCell className='text-center mx-auto text-gray-600 dark:text-gray-200'>Votes</Table.HeadCell>
+                <Table.HeadCell className='text-center mx-auto text-gray-600 dark:text-gray-200'>Update</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
                 {Object.entries(votes).map(([framework, count]) => (

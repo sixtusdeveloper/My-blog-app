@@ -20,7 +20,7 @@ export default function PostCard({ post }) {
                 </h3>
                 <div className='flex mt-6 gap-4 justify-between items-center'>
                   <Link to={`/category/${post.category}`}>
-                    <span className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-600 cursor-pointer dark:hover:border-gray-400 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'>
+                    <span className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-700 cursor-pointer dark:hover:border-gray-600 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'>
                       {post.category}
                     </span>
                   </Link>

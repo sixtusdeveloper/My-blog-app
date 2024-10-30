@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+import { Button } from 'flowbite-react';
 
 export default function PostCategory({ post }) {
   return (
@@ -18,16 +20,21 @@ export default function PostCategory({ post }) {
               </h3>
               <div className='flex mt-6 gap-4 justify-between items-center'>
                   <Link to={`/category/${post.category}`}>
-                    <span className='text-base border text-gray-400 border-gray-300 dark:border-gray-800 rounded-lg py-2 px-4'>
+                    <span className='border text-base border-gray-400 hover:border-blue-500 dark:border-gray-700 cursor-pointer dark:hover:border-gray-600 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'>
                       {post.category}
                     </span>
                   </Link>
 
                   <Link
                   to={`/post/${post.slug}`}
-                  className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-800 cursor-pointer dark:hover:border-gray-700 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'
+                  // className='border text-base border-gray-400 hover:border-blue-800 dark:border-gray-800 cursor-pointer dark:hover:border-gray-700 text-blue-800 dark:text-gray-400 text-center py-2 px-4 rounded-lg'
                   >
-                  Read article
+                    <Button type="button" gradientDuoTone="purpleToBlue" outline>
+                      <span className="flex items-center">
+                        Read article
+                        <FaArrowRight size={12} className="ml-1" />
+                      </span>
+                    </Button>
                   </Link>
               </div>
           </div>

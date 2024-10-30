@@ -103,7 +103,7 @@ export default function Home() {
       <div className="popular-posts px-4 md:px-6 py-8">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">Trending Posts</h2>
-          <ul className="space-y-4">
+          <ul className="list-disc pl-5 space-y-4">
             {posts.slice(0, visiblePosts).map((post) => (
               <li key={post._id} className="border-b border-b-gray-300 dark:border-b-gray-800 pb-4">
                 <h3 className="text-base font-semibold">
