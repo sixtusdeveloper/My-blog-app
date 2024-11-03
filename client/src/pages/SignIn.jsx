@@ -51,7 +51,7 @@ export default function SignIn() {
       }
     
     } catch (error) {
-      dispatch(signInFailure(error.message));  // Dispatch the signInFailure action
+      dispatch(signInFailure(error.message || 'Please check your internet connection and try again!'));  // Dispatch the signInFailure action
     }
   };
 
