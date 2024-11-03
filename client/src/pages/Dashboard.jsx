@@ -8,6 +8,7 @@ import DashboardComments from '../components/DashboardComments';
 import DashboardComponent from '../components/DashboardComponent';
 import DashboardVotes from '../components/DashboardVotes';
 import DashboardAdminAccess from '../components/DashboardAdminAccess';
+import DashboardNotifications from '../components/DashboardNotifications';
 
 
 export default function Dashboard() {
@@ -58,6 +59,11 @@ export default function Dashboard() {
         {/* Admin access notice */}
         <div className='w-full pt-0 mx-auto max-w-7xl'>
           {tab === 'adminaccess' && <DashboardAdminAccess />}
+        </div>
+
+        {/* Notification notice */}
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
+          {tab === 'notifications' && <DashboardNotifications />}
         </div>
 
         {/* Dashboard component */}

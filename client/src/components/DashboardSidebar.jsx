@@ -13,6 +13,7 @@ import UsersIcon from '/users.webp';
 import CommentsIcon from '/comments.webp';
 import VotesIcon from '/votes.png';
 import AdminAccessIcon from '/access.webp'; 
+import NotificationsIcon from '/notification.webp'; 
 import LogoutIcon from '/logout.webp';
 
 export default function DashboardSidebar() {
@@ -109,23 +110,31 @@ export default function DashboardSidebar() {
                                 </span>
                             </Sidebar.Item>
 
-                            <Sidebar.Item as={Link} to="/dashboard?tab=votes" 
-                                active={tab === 'votes' || !tab}>
+                            <Sidebar.Item as={Link} to="/dashboard?tab=notifications" 
+                                active={tab === 'notifications' || !tab}>
                                 <span  className="flex text-sm items-center space-x-2">
-                                    <img src={VotesIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
-                                    Votes Poll
-                                </span>
-                            </Sidebar.Item>
-
-                            <Sidebar.Item as={Link} to="/dashboard?tab=adminaccess" 
-                                active={tab === 'adminaccess' || !tab}>
-                                <span  className="flex text-sm items-center space-x-2">
-                                    <img src={AdminAccessIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
-                                    Admin Access
+                                    <img src={NotificationsIcon} alt="notifications" className="w-5 h-5 mr-4" />
+                                    Notifications
                                 </span>
                             </Sidebar.Item>
                         </>
                     )}
+
+                    <Sidebar.Item as={Link} to="/dashboard?tab=votes" 
+                        active={tab === 'votes' || !tab}>
+                        <span  className="flex text-sm items-center space-x-2">
+                            <img src={VotesIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
+                            Votes Poll
+                        </span>
+                    </Sidebar.Item>
+
+                    <Sidebar.Item as={Link} to="/dashboard?tab=adminaccess" 
+                        active={tab === 'adminaccess' || !tab}>
+                        <span  className="flex text-sm items-center space-x-2">
+                            <img src={AdminAccessIcon} alt="Votes Poll" className="w-5 h-5 mr-4" />
+                            Admin Access
+                        </span>
+                    </Sidebar.Item>
 
                     <Sidebar.Item className="cursor-pointer" onClick={handleSignout}>
                         <span  className="flex text-sm items-center space-x-2">

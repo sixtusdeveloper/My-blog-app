@@ -9,6 +9,7 @@ const notificationSchema = new mongoose.Schema({
   message: {
     type: String,
     required: true,
+    maxlength: 256, // Limit the message length
   },
   isRead: {
     type: Boolean,
@@ -23,17 +24,13 @@ const notificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
 }, { timestamps: true });
+
+notificationSchema.index({ userId: 1, createdAt: -1 }); // Index for better querying
 
 const Notification = mongoose.model("Notification", notificationSchema);
 
 export default Notification;
-
-
 
 
 

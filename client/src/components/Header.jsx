@@ -1,8 +1,9 @@
+// Code is functioning properly but with a proper implementation of the notification controller.
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai'; 
-import { FaMoon, FaSun, FaBell, FaUser } from 'react-icons/fa'; 
+import { FaMoon, FaSun, FaBell, FaUser, FaTimes } from 'react-icons/fa'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
@@ -34,29 +35,56 @@ export default function Header() {
     }
   }, [location.search]);
 
-  // Load Notifications function
   const loadNotifications = async () => {
     try {
-      const response = await fetch('/api/notifications/getnotifications', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      if (!response.ok) throw new Error('Failed to fetch notifications');
-      const { notifications, totalCount } = await response.json();
-      setNotifications(notifications);
-      setUnreadCount(totalCount); // Set the total count
+      const response = await fetch('/api/notifications/getNotifications');
+      const data = await response.json();
+      console.log("Fetched Notifications:", data); // Log the data fetched
+      if (Array.isArray(data)) {
+        setNotifications(data);
+        setUnreadCount(data.filter(n => !n.isRead).length); // Update unread count
+      }
     } catch (error) {
-      console.error('Error loading notifications:', error);
+      console.error("Error loading notifications:", error);
     }
   };
 
-  // Call loadNotifications when the component mounts
+  const handleNotificationClick = async (notificationId) => {
+    const token = currentUser.token;
+    try {
+      const response = await fetch(`/api/notifications/markAsRead/${notificationId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.ok) {
+        setNotifications(prevNotifications =>
+          prevNotifications.map(notification =>
+            notification._id === notificationId
+              ? { ...notification, isRead: true }
+              : notification
+          )
+        );
+        // Update unread count after marking as read
+        setUnreadCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
+      } else {
+        const errorData = await response.json();
+        console.error(errorData.message);
+      }
+    } catch (error) {
+      console.error('Error marking notification as read:', error);
+    }
+  };
+
   useEffect(() => {
     loadNotifications();
-  }, []); // Empty dependency array to run only once
+    console.log("Notifications loaded:", notifications);
+    console.log("Unread count:", unreadCount);
+  }, []);
+
 
    
   // Toggle modal function
@@ -75,19 +103,18 @@ export default function Header() {
     if (e.target.id === 'notification-modal') setIsModalOpen(false);
   };
 
-  const handleNotificationClick = async (notificationId) => {
-    try {
-      await fetch(`/api/notifications/markAsRead/${notificationId}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      loadNotifications();
-    } catch (error) {
-      console.error('Error marking notification as read:', error);
+  // Hook to disable background scrolling
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
-  };
+
+    return () => {
+      document.body.style.overflow = ''; // Clean up when the component unmounts
+    };
+  }, [isModalOpen]);
 
 
   // Signout function  
@@ -151,54 +178,60 @@ export default function Header() {
                 <FaBell size={18} />
               </button>
               {unreadCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-semibold rounded-full px-2">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-2">
                   {unreadCount}
                 </span>
               )}
             </div>
-            {/* Notification Modal */}
+           {/* Notification Modal */}
             {isModalOpen && (
               <div
                 id="notification-modal"
                 className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
                 onClick={handleCloseModal}
               >
-                <div className="bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-lg p-6 w-96">
-                <h2 className="text-lg font-medium mb-4 py-1 border-b border-b-gray-300 dark:border-b-gray-700">Notifications</h2>
-
-                {notifications?.length > 0 ? (
-                  <ul>
-                    {notifications.map((notification) => (
-                      <li
-                        key={notification._id}
-                        className={`py-2 rounded border-b border-b-gray-300 dark:border-b-gray-700 ${
-                          notification.isRead
-                            ? 'text-gray-600 dark:text-gray-300'
-                            : 'font-medium text-gray-600 dark:text-gray-300'
-                        }`}
-                        onClick={() => handleNotificationClick(notification._id)}
-                      >
-                        <div
-                          dangerouslySetInnerHTML={{ __html: notification.message }}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-500">No notifications</p>
-                )}
-
-                <Button
-                  className="mt-4 w-full"
-                  gradientDuoTone='purpleToBlue'
-                  onClick={() => setIsModalOpen(false)}
-                  type="button"
+                <div
+                  className="relative bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-lg p-6 w-96 max-h-[50vh] overflow-y-auto scrollable-content"
                 >
-                  Close
-                </Button>
-              </div>
+                  {/* Close Icon */}
+                  <FaTimes
+                    className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 cursor-pointer"
+                    onClick={() => setIsModalOpen(false)}
+                    size={18} // Adjust icon size if necessary
+                  />
 
+                  <h2 className="text-lg font-medium mb-4 py-1 border-b border-b-gray-300 dark:border-b-gray-700">Notifications</h2>
 
+                  {notifications.length > 0 ? (
+                    <ul>
+                      {notifications.map((notification) => (
+                        <li
+                          key={notification._id}
+                          className={`py-2 rounded border-b border-b-gray-300 dark:border-b-gray-700 ${
+                            notification.isRead ? 'text-gray-600 dark:text-gray-300' : 'font-medium text-gray-600 dark:text-gray-300'
+                          }`}
+                          onClick={() => handleNotificationClick(notification._id)}
+                        >
+                          <div dangerouslySetInnerHTML={{ __html: notification.message }} />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-gray-500">No notifications</p>
+                  )}
+                  
+                  <Button
+                    className="mt-4 w-full"
+                    gradientDuoTone='purpleToBlue'
+                    onClick={() => {
+                      navigate('/dashboard?tab=notifications');
+                      setIsModalOpen(false); // Close the modal after navigation
+                    }}
+                    type="button"
+                  >
+                    View All Notifications
+                  </Button>
+                </div>
               </div>
             )}
 
