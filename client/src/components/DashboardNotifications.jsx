@@ -113,7 +113,9 @@ export default function NotificationDashboard() {
 
   return (
     <section style={backgroundStyle} className="min-h-[100vh] w-full overflow-auto">
-      <div className="relative mx-auto py-5 px-4 overflow-x-auto scrollbar border dark:border-gray-800 border-gray-300">
+      <div className="relative mt-2 mx-auto overflow-x-scroll border dark:border-gray-800 border-gray-300
+        scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300
+        dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
         {currentUser.isAdmin && notifications.length > 0 ? (
           <div>
             <Table hoverable className="shadow-md">
