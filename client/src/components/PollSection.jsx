@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Table } from 'flowbite-react';  // Import the Button component
+import { Table } from 'flowbite-react';  // Import the Button component
 
 const PollSection = () => {
   const [votes, setVotes] = useState({
@@ -75,13 +75,12 @@ const PollSection = () => {
                 <Table.Cell className="py-3 px-6 text-left">React</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">{votes.React}</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">
-                  <Button
+                  <button
                     onClick={() => handleVote('React')}
-                    className="mx-auto text-center text-xs md:text-sm"
-                    gradientDuoTone="redToYellow"
+                    className="mx-auto text-center px-3 py-2 text-xs md:text-sm bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-500 rounded-lg text-white"
                   >
                       React [{votes.React}]
-                  </Button>
+                  </button>
                 </Table.Cell>
               </Table.Row>
 
@@ -91,13 +90,12 @@ const PollSection = () => {
                 <Table.Cell className="py-3 px-6 text-left">Vue</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">{votes.Vue}</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">
-                  <Button
+                  <button
                     onClick={() => handleVote('Vue')}
-                    className="mx-auto text-center text-xs md:text-sm"
-                    gradientDuoTone="redToYellow"
+                    className="mx-auto text-center px-3 py-2 text-xs md:text-sm bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-800 rounded-lg text-white"
                   >
                       Vue [{votes.Vue}]
-                  </Button>
+                  </button>
                 </Table.Cell>
               </Table.Row>
 
@@ -107,13 +105,12 @@ const PollSection = () => {
                 <Table.Cell className="py-3 px-6 text-left">Angular</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">{votes.Angular}</Table.Cell>
                 <Table.Cell className="py-3 px-6 text-center">
-                  <Button
+                  <button
                     onClick={() => handleVote('Angular')}
-                    className="mx-auto text-center text-xs md:text-sm"
-                    gradientDuoTone="redToYellow"
+                    className="mx-auto text-center px-3 py-2 text-xs md:text-sm bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-600 rounded-lg text-white"
                   >
                       Angular [{votes.Angular}]
-                  </Button>
+                  </button>
                 </Table.Cell>
               </Table.Row>
              

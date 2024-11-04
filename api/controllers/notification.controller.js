@@ -17,6 +17,18 @@ const timeAgo = (timestamp) => {
     return `${weeks}w ago`;
 };
 
+export const getUser = async (req, res, next) => {
+    try {
+      const user = await User.findById(req.user.id).select('-password'); // Exclude sensitive data like password
+      if (!user) {
+        return next(errorHandler('User not found', 404));
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      next(errorHandler('Failed to fetch user details', 500));
+    }
+};
+
 // Create a new notification
 export const createNotification = async (req, res, next) => {
   try {
@@ -29,6 +41,28 @@ export const createNotification = async (req, res, next) => {
 };
 
 // Get all notifications for the authenticated user
+// Get all notifications for the authenticated user
+// export const getNotifications = async (req, res, next) => {
+//     try {
+//       const userId = req.user.id; // Extract user ID from the authenticated request
+//       const notifications = await Notification.find({ userId }).populate('userId', '-password'); // Populate user details
+      
+//       // Optionally, you can modify the response to include only the relevant fields
+//       const notificationsWithUserDetails = notifications.map(notification => ({
+//         _id: notification._id,
+//         message: notification.message,
+//         isRead: notification.isRead,
+//         type: notification.type,
+//         createdAt: notification.createdAt,
+//         user: notification.userId // This will include the user details
+//       }));
+  
+//       res.status(200).json(notificationsWithUserDetails); // Respond with the notifications including user details
+//     } catch (error) {
+//       next(errorHandler("Failed to fetch notifications", 500)); // Handle any errors
+//     }
+// };
+  
 export const getNotifications = async (req, res, next) => {
   try {
       const userId = req.user.id; // Extract user ID from the authenticated request
@@ -42,7 +76,7 @@ export const getNotifications = async (req, res, next) => {
 // Delete a notification
 export const deleteNotification = async (req, res, next) => {
     try {
-        const deletedNotification = await Notification.findByIdAndDelete(req.params.id);
+        const deletedNotification = await Notification.findByIdAndDelete(req.params.notificationId);
         if (!deletedNotification) return next(errorHandler("Notification not found", 404));
         res.status(200).json({ message: "Notification deleted successfully" });
     } catch (error) {

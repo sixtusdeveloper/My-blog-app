@@ -84,7 +84,7 @@ h3{
   /* Optional - Ensures the container is scrollable */
   #notification-modal .scrollable-content {
     overflow-y: auto; /* Allows vertical scrolling */
-    max-height: 50vh; /* Prevents the modal from expanding beyond 80% of the viewport height */
+    max-height: 65vh; /* Prevents the modal from expanding beyond 80% of the viewport height */
   }
 
 
