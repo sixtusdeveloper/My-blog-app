@@ -62,46 +62,50 @@ export default function NotificationDashboard() {
   
   
   
-  const handleShowMore = async () => {
-    const startIndex = notifications.length;
-    try {
-      const res = await fetch(`/api/notifications/getNotifications?startIndex=${startIndex}`);
-      const data = await res.json();
-      if (res.ok && data.notifications) { // Check if data.notifications exists
-        setNotifications((prev) => [...prev, ...data.notifications]);
-        setShowMore(data.notifications.length >= 9);
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-  
+    const handleShowMore = async () => {
+        const startIndex = notifications.length;
+        try {
+        const res = await fetch(`/api/notifications/getNotifications?startIndex=${startIndex}`);
+        const data = await res.json();
+        if (res.ok && data.notifications) { // Check if data.notifications exists
+            setNotifications((prev) => [...prev, ...data.notifications]);
+            setShowMore(data.notifications.length >= 9);
+        }
+        } catch (error) {
+        console.error(error.message);
+        }
+    };
+        
 
-  // Authorization Key logic
-  const handleAuthSubmit = () => {
-    if (authorizationKey.trim() === AUTH_KEY) {
-      setShowAuthModal(false);
-      setShowDeleteModal(true);
-    } else {
-      setAuthError('Invalid Authorization Key. Please try again.');
-    }
-  };
+    // Authorization Key logic
+    const handleAuthSubmit = () => {
+        if (authorizationKey.trim() === AUTH_KEY) {
+        setShowAuthModal(false);
+        setShowDeleteModal(true);
+        } else {
+        setAuthError('Invalid Authorization Key. Please try again.');
+        }
+    };
 
-  const handleDeleteNotification = async () => {
-    setShowDeleteModal(false);
-    try {
-      const res = await fetch(`/api/notifications/deleteNotification/${notificationIdToDelete}`, {
-        method: 'DELETE',
-      });
-      if (res.ok) {
-        setNotifications((prev) =>
-          prev.filter((notification) => notification._id !== notificationIdToDelete)
-        );
-      }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    const handleDeleteNotification = async () => {
+        console.log("Deleting Notification ID:", notificationIdToDelete); // Debugging log
+        setShowDeleteModal(false);
+        try {
+            const res = await fetch(`/api/notifications/deleteNotification/${notificationIdToDelete}`, {
+                method: 'DELETE',
+            });
+            if (res.ok) {
+                setNotifications((prev) =>
+                    prev.filter((notification) => notification._id !== notificationIdToDelete)
+                );
+            } else {
+                console.error("Failed to delete notification:", await res.text());
+            }
+        } catch (error) {
+            console.error("Error deleting notification:", error.message);
+        }
+    };
+
 
   if (loading) {
     return (
@@ -121,9 +125,9 @@ export default function NotificationDashboard() {
             <Table hoverable className="shadow-md">
               <Table.Head>
                 <Table.HeadCell className="text-gray-600 dark:text-gray-200">Date</Table.HeadCell>
-                <Table.HeadCell className="text-gray-600 dark:text-gray-200">Content</Table.HeadCell>
-                <Table.HeadCell className="text-gray-600 dark:text-gray-200">Type</Table.HeadCell>
+                <Table.HeadCell className="text-gray-600 dark:text-gray-200">Notification ID</Table.HeadCell>
                 <Table.HeadCell className="text-gray-600 dark:text-gray-200">User ID</Table.HeadCell>
+                <Table.HeadCell className="text-gray-600 dark:text-gray-200">Notification Content</Table.HeadCell>
                 <Table.HeadCell className="text-gray-600 dark:text-gray-200">Delete</Table.HeadCell>
               </Table.Head>
 
@@ -131,9 +135,9 @@ export default function NotificationDashboard() {
                 <Table.Body key={notification._id} className="divide-y">
                   <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
                     <Table.Cell className="text-xs">{new Date(notification.createdAt).toLocaleString()}</Table.Cell>
-                    <Table.Cell className="text-gray-500 dark:text-gray-300 text-xs">{notification.message}</Table.Cell>
                     <Table.Cell className="text-purple-500 dark:text-purple-600 text-xs">{notification._id}</Table.Cell>
-                    <Table.Cell className="text-purple-500 text-xs dark:text-purple-600">{truncateId(notification.userId)}</Table.Cell>
+                    <Table.Cell className="text-purple-500 text-xs dark:text-purple-600">{truncateId(notification.user._id)}</Table.Cell>
+                    <Table.Cell className="text-gray-500 dark:text-gray-300 text-xs">{notification.message}</Table.Cell>
                     <Table.Cell>
                       <span
                         onClick={() => {

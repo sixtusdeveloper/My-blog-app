@@ -1,4 +1,3 @@
-
 // improved code for post model: including the notification model
 import mongoose from "mongoose";
 
