@@ -5,7 +5,9 @@ import User from "../models/user.model.js";
 // Helper: Time Ago formatting
 const timeAgo = (timestamp) => {
     const now = new Date();
-    const diffInMs = now - new Date(timestamp);
+    const date = new Date(timestamp);
+    if (isNaN(date)) return 'Unknown time'; // Handle invalid dates gracefully
+    const diffInMs = now - date;
     const minutes = Math.floor(diffInMs / 60000);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
@@ -40,42 +42,67 @@ export const createNotification = async (req, res, next) => {
   }
 };
 
+
 // Get all notifications for the authenticated user
-// Get all notifications for the authenticated user
-// export const getNotifications = async (req, res, next) => {
+// export const getNotifications = async (req, res) => {
 //     try {
-//       const userId = req.user.id; // Extract user ID from the authenticated request
-//       const notifications = await Notification.find({ userId }).populate('userId', '-password'); // Populate user details
-      
-//       // Optionally, you can modify the response to include only the relevant fields
-//       const notificationsWithUserDetails = notifications.map(notification => ({
-//         _id: notification._id,
-//         message: notification.message,
-//         isRead: notification.isRead,
-//         type: notification.type,
-//         createdAt: notification.createdAt,
-//         user: notification.userId // This will include the user details
-//       }));
-  
-//       res.status(200).json(notificationsWithUserDetails); // Respond with the notifications including user details
+//         const userId = req.user?.id;
+//         if (!userId) {
+//             return res.status(401).json({ error: "Unauthorized: User ID is missing" });
+//         }
+
+//         const notifications = await Notification.find({ userId })
+//             .populate('userId', 'username profilePicture -password');
+
+//         const notificationsWithUserDetails = notifications.map(notification => ({
+//             _id: notification._id,
+//             message: notification.message,
+//             isRead: notification.isRead,
+//             type: notification.type,
+//             createdAt: notification.createdAt,
+//             timeAgo: timeAgo(notification.createdAt),
+//             user: {
+//                 username: notification.userId?.username,
+//                 profilePicture: notification.userId?.profilePicture
+//             },
+//             creatorProfilePicture: notification.creatorProfilePicture,
+//         }));
+
+//         res.status(200).json(notificationsWithUserDetails);
 //     } catch (error) {
-//       next(errorHandler("Failed to fetch notifications", 500)); // Handle any errors
+//         console.error("Error fetching notifications:", error);
+//         res.status(500).json({ error: "Failed to fetch notifications" });
 //     }
 // };
-  
-export const getNotifications = async (req, res, next) => {
-  try {
-      const userId = req.user.id; // Extract user ID from the authenticated request
-      const notifications = await Notification.find({ userId }); // Fetch notifications for this user
-      res.status(200).json(notifications); // Respond with the notifications
-  } catch (error) {
-      next(errorHandler("Failed to fetch notifications", 500)); // Handle any errors
-  }
-};
 
-// Delete a notification
-export const deleteNotification = async (req, res, next) => {
+
+//================= Working correctly just not fetching and displaying username and profilePicture
+export const getNotifications = async (req, res, next) => {
     try {
+        const userId = req.user.id; // Extract user ID from the authenticated request
+        const notifications = await Notification.find({ userId }).populate('userId', '-password'); // Populate user details
+      
+        // Optionally, you can modify the response to include only the relevant fields
+        const notificationsWithUserDetails = notifications.map(notification => ({
+            _id: notification._id,
+            message: notification.message,
+            isRead: notification.isRead,
+            type: notification.type,
+            createdAt: notification.createdAt,
+            timeAgo: timeAgo(notification.createdAt), // Add formatted timeAgo
+            user: notification.userId, // User details populated here
+        }));
+    
+      res.status(200).json(notificationsWithUserDetails); // Respond with the notifications including user details
+    } catch (error) {
+      next(errorHandler("Failed to fetch notifications", 500)); // Handle any errors
+    }
+};
+  
+// Delete a notification
+export const deleteNotifications = async (req, res, next) => {
+    try {
+        console.log("Notification ID:", req.params.notificationId); // Debugging log
         const deletedNotification = await Notification.findByIdAndDelete(req.params.notificationId);
         if (!deletedNotification) return next(errorHandler("Notification not found", 404));
         res.status(200).json({ message: "Notification deleted successfully" });
@@ -85,23 +112,48 @@ export const deleteNotification = async (req, res, next) => {
 };
 
 // Notify all admin users about a new post
+
+// export const notifyUsersAboutNewPost = async (post) => {
+//     try {
+//         const adminUsers = await User.find({ isAdmin: true });
+
+//         const notifications = await Notification.insertMany(
+//             adminUsers.map((admin) => ({
+//                 userId: admin._id,
+//                 message: `New post titled "${post.title}" was created by ${post.creator?.username || 'Unknown User'}`,
+//                 type: "new_post",
+//                 postId: post._id,
+//                 creatorProfilePicture: post.user?.profilePicture  || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s', // Provide fallback if needed
+//                 createdAt: post.createdAt,
+//                 timeAgo: timeAgo(post.createdAt),
+//             }))
+//         );
+
+//         console.log("Admins notified about new post:", notifications);
+//     } catch (error) {
+//         console.error("Error sending new post notifications:", error);
+//     }
+// };
+
+//=============== Previous but working correctly just not fetching and displaying username and profilePicture
 export const notifyUsersAboutNewPost = async (post) => {
+    console.log("Post creator in notification:", post.creator);
     try {
-      const adminUsers = await User.find({ isAdmin: true });
+        const adminUsers = await User.find({ isAdmin: true });
 
-      const notifications = await Notification.insertMany(
-        adminUsers.map((admin) => ({
-            userId: admin._id,
-            message: `New post titled "${post.title}" was created by ${post.user?.username || 'Unknown User'}`, // fallback if creator username is undefined
-            type: "new_post",
-            postId: post._id,
-            creatorProfilePicture: post.creator?.profilePicture || null, // Optional: provide fallback
-            createdAt: post.createdAt,
-            timeAgo: timeAgo(post.createdAt),
-        }))
-      );
+        const notifications = await Notification.insertMany(
+            adminUsers.map((admin) => ({
+                userId: admin._id,
+                message: `New post titled "${post.title}" was created by ${post.creator?.username || 'Unknown User'}`, // Ensure username is used here
+                type: "new_post",
+                postId: post._id,
+                creatorProfilePicture: post.creator?.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s', // Provide fallback if needed
+                createdAt: post.createdAt,
+                timeAgo: timeAgo(post.createdAt),
+            }))
+        );
 
-      console.log("Admins notified about new post:", notifications);
+        console.log("Admins notified about new post:", notifications);
     } catch (error) {
         console.error("Error sending new post notifications:", error);
     }
@@ -118,8 +170,10 @@ export const notifyPostChange = async (post, changeType) => {
                 message: `The post titled "${post.title}" has been ${changeType}.`,
                 type: `${changeType}_post`,
                 postId: post._id,
+                timeAgo: timeAgo(post.updatedAt || new Date()), // Ensure correct time
             }))
         );
+        
 
         console.log("Admins notified about post change:", notifications);
     } catch (error) {
@@ -138,8 +192,10 @@ export const notifyAdminChange = async (user, action) => {
                 message: `${user.username} has been ${action} as an admin.`,
                 type: `${action}_admin`,
                 affectedUserId: user._id,
+                timeAgo: timeAgo(new Date()), // Timestamp the notification
             }))
         );
+        
 
         console.log(`Admin role change notifications sent for ${action}:`, notifications);
     } catch (error) {

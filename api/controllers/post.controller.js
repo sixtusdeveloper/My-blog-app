@@ -48,39 +48,82 @@ export const create = async (req, res, next) => {
 };
 
 
+// Get Post with Notifications
 
-// Get post functionality
 export const getposts = async (req, res, next) => {
-    try {
-      const startIndex = parseInt(req.query.startIndex) || 0;   
-      const limit = parseInt(req.query.limit) || 9;  // Default to 3 posts
-  
-      const sortDirection = req.query.order === 'asc' ? 1 : -1;  // Ascending or Descending order
-  
-      const posts = await Post.find({
-        ...(req.query.userId && { userId: req.query.userId }),
-        ...(req.query.category && { category: req.query.category }),
-        ...(req.query.slug && { slug: req.query.slug }),
-        ...(req.query.postId && { _id: req.query.postId }),
-        ...(req.query.searchTerm && {
-          $or: [
-            { title: { $regex: req.query.searchTerm, $options: "i" } },
-            { content: { $regex: req.query.searchTerm, $options: "i" } },
-          ],
-        }),
-      })
-        .sort({ updatedAt: -1 })  // Sort posts by most recent
-        .skip(startIndex)  // Support for pagination
-        .limit(limit)  // Default to 3 posts unless otherwise specified
-        .populate("userId", "username profilePicture");  // Populate user data
-  
-      const totalPosts = await Post.countDocuments();  // Total number of posts
-  
-      res.status(200).json({ posts, totalPosts });  // Send response
-    } catch (error) {
-      next(error);  // Handle errors
-    }
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.order === 'asc' ? 1 : -1;
+
+    // Calculate the date one month ago from now
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+
+    const query = {
+      ...(req.query.userId && { userId: req.query.userId }),
+      ...(req.query.category && { category: req.query.category }),
+      ...(req.query.slug && { slug: req.query.slug }),
+      ...(req.query.postId && { _id: req.query.postId }),
+      ...(req.query.searchTerm && {
+        $or: [
+          { title: { $regex: req.query.searchTerm, $options: "i" } },
+          { content: { $regex: req.query.searchTerm, $options: "i" } },
+        ],
+      }),
+    };
+
+    const posts = await Post.find(query)
+      .sort({ updatedAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit)
+      .populate("userId", "username profilePicture");
+
+    const totalPosts = await Post.countDocuments(query);
+
+    // Fetch posts created in the last month
+    const lastMonthPostsCount = await Post.countDocuments({
+      ...query,
+      createdAt: { $gte: oneMonthAgo },
+    });
+
+    res.status(200).json({ posts, totalPosts, lastMonthPosts: lastMonthPostsCount });
+  } catch (error) {
+    next(error);
+  }
 };
+
+// export const getposts = async (req, res, next) => {
+//     try {
+//       const startIndex = parseInt(req.query.startIndex) || 0;   
+//       const limit = parseInt(req.query.limit) || 9;  // Default to 3 posts
+  
+//       const sortDirection = req.query.order === 'asc' ? 1 : -1;  // Ascending or Descending order
+  
+//       const posts = await Post.find({
+//         ...(req.query.userId && { userId: req.query.userId }),
+//         ...(req.query.category && { category: req.query.category }),
+//         ...(req.query.slug && { slug: req.query.slug }),
+//         ...(req.query.postId && { _id: req.query.postId }),
+//         ...(req.query.searchTerm && {
+//           $or: [
+//             { title: { $regex: req.query.searchTerm, $options: "i" } },
+//             { content: { $regex: req.query.searchTerm, $options: "i" } },
+//           ],
+//         }),
+//       })
+//         .sort({ updatedAt: -1 })  // Sort posts by most recent
+//         .skip(startIndex)  // Support for pagination
+//         .limit(limit)  // Default to 3 posts unless otherwise specified
+//         .populate("userId", "username profilePicture");  // Populate user data
+  
+//       const totalPosts = await Post.countDocuments();  // Total number of posts
+  
+//       res.status(200).json({ posts, totalPosts });  // Send response
+//     } catch (error) {
+//       next(error);  // Handle errors
+//     }
+// };
   
 
 

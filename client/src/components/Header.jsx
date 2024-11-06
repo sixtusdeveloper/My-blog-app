@@ -11,6 +11,9 @@ import { signoutSuccess } from '../redux/user/userSlice';
 import DashboardIcon from '/dashboard.webp';
 import ProfileIcon from '/profile.webp';
 import LogoutIcon from '/logout.webp';
+import moment from 'moment';
+
+
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -172,69 +175,92 @@ export default function Header() {
 
         {currentUser ? (
           <>
+             
             {/* Notification Icon */}
-            <div className="px-1 relative items-center mx-auto">
-              <button type='button' className='border border-gray-300 dark:border-gray-700 rounded-full p-2 self-center mx-auto items-center' onClick={toggleModal}>
-                <FaBell size={18} />
-              </button>
-              {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-2">
-                  {unreadCount}
-                </span>
-              )}
-            </div>
-           {/* Notification Modal */}
-            {isModalOpen && (
-              <div
-                id="notification-modal"
-                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-                onClick={handleCloseModal}
-              >
-                <div
-                  className="relative bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-lg p-6 w-96 max-h-[65vh] overflow-y-auto scrollable-content"
-                >
-                  {/* Close Icon */}
-                  <FaTimes
-                    className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 cursor-pointer"
-                    onClick={() => setIsModalOpen(false)}
-                    size={18} // Adjust icon size if necessary
-                  />
-
-                  <h2 className="text-lg font-medium mb-4 py-1 border-b border-b-gray-300 dark:border-b-gray-700">Notifications</h2>
-
-                   {notifications.length > 0 ? (
-                    <ul>
-                    {(showAllNotifications ? notifications : notifications.slice(0, 3)).map((notification) => (
-                      <li
-                        key={notification._id}
-                        className={`py-2 text-xs leading-snug rounded border-b border-b-gray-300 dark:border-b-gray-700 ${
-                          notification.isRead ? 'text-gray-400 dark:text-purple-300' : 'cursor-pointer font-medium text-purple-600 dark:text-purple-500'
-                        }`}
-                        onClick={() => handleNotificationClick(notification._id)}
-                      >
-                        <div dangerouslySetInnerHTML={{ __html: notification.message }} />
-                      </li>
-                    ))}
-                  </ul>
-                  ) : (
-                    <p className="text-gray-500">No notifications</p>
+            {currentUser.isAdmin && (
+              <>
+                <div className="px-1 relative items-center mx-auto">
+                  <button type='button' className='border border-gray-300 dark:border-gray-700 rounded-full p-2 self-center mx-auto items-center' onClick={toggleModal}>
+                    <FaBell size={18} />
+                  </button>
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full px-2">
+                      {unreadCount}
+                    </span>
                   )}
-                  
-                  <Button
-                    className="mt-4 w-full"
-                    gradientDuoTone='purpleToBlue'
-                    onClick={() => {
-                      navigate('/dashboard?tab=notifications');
-                      setIsModalOpen(false); // Close the modal after navigation
-                    }}
-                    type="button"
-                  >
-                    View All Notifications
-                  </Button>
                 </div>
-              </div>
-            )}
+                {/* Notification Modal */}
+                {isModalOpen && (
+                  <div
+                    id="notification-modal"
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+                    onClick={handleCloseModal}
+                  >
+                    <div
+                      className="relative bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-lg p-6 w-96 max-h-[65vh] overflow-y-auto scrollable-content"
+                    >
+                      {/* Close Icon */}
+                      <FaTimes
+                        className="absolute top-4 right-4 text-gray-600 dark:text-gray-300 cursor-pointer"
+                        onClick={() => setIsModalOpen(false)}
+                        size={18} // Adjust icon size if necessary
+                      />
 
+                      <h2 className="text-lg font-medium mb-4 py-1 border-b border-b-gray-300 dark:border-b-gray-700">Notifications</h2>
+
+                      {notifications.length > 0 ? (
+                        <ul>
+                        {(showAllNotifications ? notifications : notifications.slice(0, 9)).map((notification) => (
+                          <li
+                            key={notification._id}
+                            className={`py-2 text-xs leading-snug rounded border-b border-b-gray-300 dark:border-b-gray-700 ${
+                              notification.isRead ? 'text-gray-400 dark:text-purple-400' : 'cursor-pointer text-xs font-medium text-purple-600 dark:text-purple-500'
+                            }`}
+                            onClick={() => handleNotificationClick(notification._id)}
+                          >
+                          
+                            <div className='flex gap-2 flex-wrap md:flex-nowrap md:justify-center'>
+
+                              <img src={notification.creatorProfilePicture || defaultAvatar} className="h-8 w-8 objet-cover items-start" alt="User Avatar" />
+                              <div>
+                                <p dangerouslySetInnerHTML={{ __html: notification.message }}></p>
+                          
+                                <p className="text-xs py-1 text-purple-400 dark:text-purple-400">
+                                  {moment(notification.createdAt).fromNow()}
+                                </p>
+
+                                <div className='flex text-xs justify-between items-center py-1'>
+                                  <span className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-purple-600 dark:text-purple-400'>
+                                    {notification.isRead  ? 'Read' : 'Mark as Read'}
+                                  </span>
+
+                                  <button className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-gray-600 dark:text-gray-400' type='button'>delete</button>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                      ) : (
+                        <p className="text-gray-500">No notifications</p>
+                      )}
+                      
+                      <Button
+                        className="mt-4 w-full"
+                        gradientDuoTone='purpleToBlue'
+                        onClick={() => {
+                          navigate('/dashboard?tab=notifications');
+                          setIsModalOpen(false); // Close the modal after navigation
+                        }}
+                        type="button"
+                      >
+                        View All Notifications
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
             <Dropdown className="px-4" arrowIcon={false} inline label={
               <Avatar 
                 img={currentUser.profilePicture || defaultAvatar} 

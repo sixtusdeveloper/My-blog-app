@@ -23,6 +23,7 @@ export default function DashboardComp() {
   const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
+    // User logic
     const fetchUsers = async () => {
       try {
         const res = await fetch('/api/user/getusers?limit=5');
@@ -38,6 +39,8 @@ export default function DashboardComp() {
         setLoading(false); // Stop spinner even if there's an error
       }
     };
+    
+    // Post logic
     const fetchPosts = async () => {
       try {
         const res = await fetch('/api/post/getposts?limit=5');
@@ -45,14 +48,16 @@ export default function DashboardComp() {
         if (res.ok) {
           setPosts(data.posts);
           setTotalPosts(data.totalPosts);
-          setLastMonthPosts(data.lastMonthPosts);
+          setLastMonthPosts(data.lastMonthPosts); // This should now display the correct value
         }
-        setLoading(false); // Stop spinner after loading data
+        setLoading(false); 
       } catch (error) {
         console.log(error.message);
-        setLoading(false); // Stop spinner even if there's an error
+        setLoading(false);
       }
     };
+    
+    // Comment logic
     const fetchComments = async () => {
       try {
         const res = await fetch('/api/comment/getcomments?limit=5');
