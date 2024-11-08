@@ -102,8 +102,12 @@ export default function PostPage() {
                                     alt={post.userId.username} 
                                     className="w-8 h-8 object-cover rounded-full" 
                                 />
-                                <p className="text-gray-500 dark:text-gray-300 text-xs">
-                                    {post.userId.username}
+                                <p>
+                                    <span className="text-gray-500 dark:text-gray-300 text-xs">Created by </span>
+                                    <span className="text-gray-500 dark:text-gray-300 text-xs font-medium tracking-wide">
+
+                                        {post.userId.username}
+                                    </span>
                                 </p>
                             </>
                         )}

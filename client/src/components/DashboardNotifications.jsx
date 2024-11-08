@@ -60,21 +60,53 @@ export default function NotificationDashboard() {
         }
     }, [currentUser?._id]);
   
-  
-  
     const handleShowMore = async () => {
         const startIndex = notifications.length;
+        console.log('Loading more notifications, starting from index:', startIndex);
+        
+        // Disable button while fetching
+        setLoading(true);
+        
         try {
-        const res = await fetch(`/api/notifications/getNotifications?startIndex=${startIndex}`);
-        const data = await res.json();
-        if (res.ok && data.notifications) { // Check if data.notifications exists
+          const res = await fetch(`/api/notifications/getNotifications?startIndex=${startIndex}`);
+          const data = await res.json();
+          
+          console.log('API Response for Load More:', data); // Check API response
+          
+          if (res.ok && data.notifications) {
             setNotifications((prev) => [...prev, ...data.notifications]);
+            
+            // Log the updated notifications length
+            console.log('Updated notifications length:', notifications.length);
+            
+            // Show more only if there are more than 9 notifications
             setShowMore(data.notifications.length >= 9);
-        }
+            
+          } else {
+            console.log('No more notifications to load or an issue with the API response');
+            setShowMore(false); // Hide button if no more notifications are available
+          }
         } catch (error) {
-        console.error(error.message);
+          console.error('Error loading more notifications:', error.message);
+        } finally {
+          setLoading(false);
         }
     };
+      
+  
+    // const handleShowMore = async () => {
+    //     const startIndex = notifications.length;
+    //     try {
+    //     const res = await fetch(`/api/notifications/getNotifications?startIndex=${startIndex}`);
+    //     const data = await res.json();
+    //     if (res.ok && data.notifications) { // Check if data.notifications exists
+    //         setNotifications((prev) => [...prev, ...data.notifications]);
+    //         setShowMore(data.notifications.length >= 9);
+    //     }
+    //     } catch (error) {
+    //     console.error(error.message);
+    //     }
+    // };
         
 
     // Authorization Key logic
@@ -91,7 +123,7 @@ export default function NotificationDashboard() {
         console.log("Deleting Notification ID:", notificationIdToDelete); // Debugging log
         setShowDeleteModal(false);
         try {
-            const res = await fetch(`/api/notifications/deleteNotification/${notificationIdToDelete}`, {
+            const res = await fetch(`/api/notifications/deleteNotifications/${notificationIdToDelete}`, {
                 method: 'DELETE',
             });
             if (res.ok) {
@@ -158,6 +190,7 @@ export default function NotificationDashboard() {
                 <Button
                   onClick={handleShowMore}
                   gradientDuoTone="purpleToBlue"
+                  disabled={loading} // Disable while loading
                   className="flex items-center my-4"
                 >
                   Load More

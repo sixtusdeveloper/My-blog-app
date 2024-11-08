@@ -30,14 +30,17 @@ export const create = async (req, res, next) => {
     try {
         const savedPost = await newPost.save();
 
+        // Ensure that `req.user` contains the necessary fields
+        const creator = {
+            username: req.user.username,
+            profilePicture: req.user.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s',
+        };
+
         // Notify all admin users about the new post
         await notifyUsersAboutNewPost({
             title: savedPost.title,
             _id: savedPost._id,
-            creator: {
-                username: req.user.username,
-                profilePicture: req.user.profilePicture,
-            },
+            creator, // Pass creator object
             createdAt: savedPost.createdAt,
         });
 
@@ -92,39 +95,6 @@ export const getposts = async (req, res, next) => {
     next(error);
   }
 };
-
-// export const getposts = async (req, res, next) => {
-//     try {
-//       const startIndex = parseInt(req.query.startIndex) || 0;   
-//       const limit = parseInt(req.query.limit) || 9;  // Default to 3 posts
-  
-//       const sortDirection = req.query.order === 'asc' ? 1 : -1;  // Ascending or Descending order
-  
-//       const posts = await Post.find({
-//         ...(req.query.userId && { userId: req.query.userId }),
-//         ...(req.query.category && { category: req.query.category }),
-//         ...(req.query.slug && { slug: req.query.slug }),
-//         ...(req.query.postId && { _id: req.query.postId }),
-//         ...(req.query.searchTerm && {
-//           $or: [
-//             { title: { $regex: req.query.searchTerm, $options: "i" } },
-//             { content: { $regex: req.query.searchTerm, $options: "i" } },
-//           ],
-//         }),
-//       })
-//         .sort({ updatedAt: -1 })  // Sort posts by most recent
-//         .skip(startIndex)  // Support for pagination
-//         .limit(limit)  // Default to 3 posts unless otherwise specified
-//         .populate("userId", "username profilePicture");  // Populate user data
-  
-//       const totalPosts = await Post.countDocuments();  // Total number of posts
-  
-//       res.status(200).json({ posts, totalPosts });  // Send response
-//     } catch (error) {
-//       next(error);  // Handle errors
-//     }
-// };
-  
 
 
 // Delete Post with Notifications
