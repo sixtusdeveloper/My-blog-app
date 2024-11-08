@@ -40,6 +40,7 @@ export default function Header() {
     }
   }, [location.search]);
 
+  // Fetch notifications
   const loadNotifications = async () => {
     try {
       const response = await fetch('/api/notifications/getNotifications');
@@ -149,7 +150,7 @@ export default function Header() {
     <Navbar className='border-b-2 fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800'>
       <Link to="/" className="flex items-center self-center whitespace-nowrap text-sm md:text-base lg:text-base font-semibold dark:text-white">
         <img src="/Logo-icon.png" alt="Logo icon" width='25px' height="25px"/>
-        <span className='self-center mx-1 py-1 px-3 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
+        <span className='hidden sm:block self-center mx-1 py-1 px-3 bg-gradient-to-r from-indigo-600 via-blue-500 to-pink-800 rounded-lg text-white'>
           DevJourney
         </span>
       </Link>
@@ -214,27 +215,29 @@ export default function Header() {
                           <li
                             key={notification._id}
                             className={`py-2 text-xs leading-snug rounded border-b border-b-gray-300 dark:border-b-gray-700 ${
-                              notification.isRead ? 'text-gray-400 dark:text-purple-400' : 'cursor-pointer text-xs font-medium text-purple-600 dark:text-purple-500'
+                              notification.isRead ? 'text-gray-400 dark:text-purple-400' : 'cursor-pointer text-xs font-semibold text-purple-600 dark:text-purple-500'
                             }`}
                             onClick={() => handleNotificationClick(notification._id)}
                           >
                           
                             <div className='flex gap-2 flex-wrap md:flex-nowrap md:justify-center'>
 
-                              <img src={notification.creatorProfilePicture || defaultAvatar} className="h-8 w-8 objet-cover items-start" alt="User Avatar" />
+                              <img 
+                                src={notification.creatorProfilePicture || defaultAvatar} 
+                                className="h-8 w-8 object-cover rounded-full items-start" 
+                                alt={notification.creatorUsername || "User Avatar"} 
+                              />
                               <div>
                                 <p dangerouslySetInnerHTML={{ __html: notification.message }}></p>
                           
-                                <p className="text-xs py-1 text-purple-400 dark:text-purple-400">
+                                <p className="text-xs pt-2 text-purple-600 dark:text-purple-500">
                                   {moment(notification.createdAt).fromNow()}
                                 </p>
 
-                                <div className='flex text-xs justify-between items-center py-1'>
-                                  <span className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-purple-600 dark:text-purple-400'>
+                                <div className='flex text-xs justify-end items-center py-1'>
+                                  <button className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-purple-600 dark:text-purple-400'>
                                     {notification.isRead  ? 'Read' : 'Mark as Read'}
-                                  </span>
-
-                                  <button className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-gray-600 dark:text-gray-400' type='button'>delete</button>
+                                  </button>
                                 </div>
                               </div>
                             </div>

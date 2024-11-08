@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post('/create', verifyToken, createNotification);
 router.get('/getnotifications', verifyToken, getNotifications);
-router.delete('/deletenotifications/:notificationId', verifyToken, deleteNotifications);
+router.delete('/deleteNotifications/:notificationId', verifyToken, deleteNotifications);
 router.patch('/markAsRead/:notificationId', verifyToken, markNotificationAsRead);
 
 // New route to get user details
