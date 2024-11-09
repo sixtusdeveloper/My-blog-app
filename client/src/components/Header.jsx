@@ -11,7 +11,7 @@ import { signoutSuccess } from '../redux/user/userSlice';
 import DashboardIcon from '/dashboard.webp';
 import ProfileIcon from '/profile.webp';
 import LogoutIcon from '/logout.webp';
-import moment from 'moment';
+// import moment from 'moment';
 
 
 
@@ -231,7 +231,9 @@ export default function Header() {
                                 <p dangerouslySetInnerHTML={{ __html: notification.message }}></p>
                           
                                 <p className="text-xs pt-2 text-purple-600 dark:text-purple-500">
-                                  {moment(notification.createdAt).fromNow()}
+                                  {notification.timeAgo}
+                                  {/* You could as well use moment.js to format the date */}
+                                  {/* {moment(notification.createdAt).fromNow()} */}
                                 </p>
 
                                 <div className='flex text-xs justify-end items-center py-1'>
