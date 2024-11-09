@@ -146,29 +146,6 @@ export const notifyUsersAboutNewPost = async (post) => {
 };
 
 
-// export const notifyUsersAboutNewPost = async (post) => {
-//     console.log("Post creator in notification:", post.creator);
-//     try {
-//         const adminUsers = await User.find({ isAdmin: true });
-
-//         const notifications = await Notification.insertMany(
-//             adminUsers.map((admin) => ({
-//                 userId: admin._id,
-//                 message: `New post titled "${post.title}" was created by ${post.user?.username || 'Unknown User'}`, // Ensure username is used here
-//                 type: "new_post",
-//                 postId: post._id,
-//                 creatorProfilePicture: post.creator?.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s', // Provide fallback if needed
-//                 createdAt: post.createdAt,
-//                 timeAgo: timeAgo(post.createdAt),
-//             }))
-//         );
-
-//         console.log("Admins notified about new post:", notifications);
-//     } catch (error) {
-//         console.error("Error sending new post notifications:", error);
-//     }
-// };
-
 // Notify admin users about post deletion
 export const notifyPostChange = async (post, changeType) => {
     try {
