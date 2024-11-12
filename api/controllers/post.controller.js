@@ -2,6 +2,7 @@ import { errorHandler } from "../utils/error.js";
 import Post from "../models/post.model.js";
 import { notifyUsersAboutNewPost, notifyPostChange } from "./notification.controller.js";
 
+
 // Create Post with Notifications
 export const create = async (req, res, next) => {
     if (!req.user.isAdmin) {
@@ -9,12 +10,11 @@ export const create = async (req, res, next) => {
     }
 
     const { title, content } = req.body;
-    
+
     if (!title || !content) {
         return next(errorHandler("Title and content are required", 400));
     }
 
-    // Example validation: Title should be at least 5 characters
     if (title.length < 5) {
         return next(errorHandler("Title must be at least 5 characters long", 400));
     }
@@ -30,17 +30,21 @@ export const create = async (req, res, next) => {
     try {
         const savedPost = await newPost.save();
 
-        // Ensure that `req.user` contains the necessary fields
+        // Verify the req.user object
+        console.log("req.user:", req.user);
+
+        // Ensure creator details are correct
         const creator = {
             username: req.user.username,
             profilePicture: req.user.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s',
         };
 
-        // Notify all admin users about the new post
+        console.log("Creating notification with creator:", creator);
+
         await notifyUsersAboutNewPost({
             title: savedPost.title,
             _id: savedPost._id,
-            creator, // Pass creator object
+            creator,
             createdAt: savedPost.createdAt,
         });
 
@@ -49,6 +53,7 @@ export const create = async (req, res, next) => {
         next(error);
     }
 };
+
 
 
 // Get Post with Notifications
@@ -108,16 +113,41 @@ export const deletepost = async (req, res, next) => {
 
         if (!post) return next(errorHandler("Post not found", 404));
 
+        // Log the post data to debug
+        console.log("Post to be deleted:", post);
+
         await Post.findByIdAndDelete(req.params.postId);
 
         // Notify admin users about the deleted post
-        notifyPostChange(post, "deleted");
+        await notifyPostChange(post, "deleted");
 
         res.status(200).json("Post deleted successfully");
     } catch (error) {
         next(error);
     }
 };
+
+
+// export const deletepost = async (req, res, next) => {
+//     if (!req.user.isAdmin || req.params.userId !== req.user.id) {
+//         return next(errorHandler("You are not allowed to delete a post", 403));
+//     }
+
+//     try {
+//         const post = await Post.findById(req.params.postId);
+
+//         if (!post) return next(errorHandler("Post not found", 404));
+
+//         await Post.findByIdAndDelete(req.params.postId);
+
+//         // Notify admin users about the deleted post
+//         notifyPostChange(post, "deleted");
+
+//         res.status(200).json("Post deleted successfully");
+//     } catch (error) {
+//         next(error);
+//     }
+// };
 
 // The rest of the controller functions remain the same
 
