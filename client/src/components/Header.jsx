@@ -13,7 +13,7 @@ import ProfileIcon from '/profile.webp';
 import LogoutIcon from '/logout.webp';
 // import moment from 'moment';
 
-export default function Header() {
+export default function Header({ post }) {
   const dispatch = useDispatch();
   const path = useLocation().pathname;  
   const { currentUser } = useSelector(state => state.user); 
@@ -29,6 +29,7 @@ export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
   const [showAllNotifications, setShowAllNotifications] = useState(false);
   const [clearModal, setClearModal] = useState(null); // Tracks which notification's clear modal is open
+
 
   // Sync the search term from URL when the component mounts
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function Header() {
       });
 
       if (response.ok) {
+        
         setNotifications(prevNotifications =>
           prevNotifications.map(notification =>
             notification._id === notificationId
@@ -73,6 +75,8 @@ export default function Header() {
               : notification
           )
         );
+
+        
         // Update unread count after marking as read
         setUnreadCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
       } else {
@@ -106,11 +110,6 @@ export default function Header() {
   useEffect(() => {
     if (isModalOpen) loadNotifications();
   }, [isModalOpen]);
-
-
-  // useEffect(() => {
-  //   loadNotifications();
-  // }, []);
 
 
   // Toggle modal function
@@ -260,8 +259,9 @@ export default function Header() {
                                 alt={notification.creatorUsername || "User Avatar"} 
                               />
                               <div>
+                                
                                 <p dangerouslySetInnerHTML={{ __html: notification.message }}></p>
-                          
+                                
                                 <p className="text-xs pt-2 text-purple-600 dark:text-purple-500">
                                   {notification.timeAgo}
                                   {/* You could as well use moment.js to format the date */}
