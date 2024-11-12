@@ -1,4 +1,4 @@
-
+// Working properly with notification functionality implemented in the notification controller.
 // Code is functioning properly but with a proper implementation of the notification controller.
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
@@ -12,8 +12,6 @@ import DashboardIcon from '/dashboard.webp';
 import ProfileIcon from '/profile.webp';
 import LogoutIcon from '/logout.webp';
 // import moment from 'moment';
-
-
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -86,8 +84,13 @@ export default function Header() {
   };
 
   useEffect(() => {
-    loadNotifications();
-  }, []);
+    if (isModalOpen) loadNotifications();
+  }, [isModalOpen]);
+
+
+  // useEffect(() => {
+  //   loadNotifications();
+  // }, []);
 
 
   // Toggle modal function
@@ -137,7 +140,11 @@ export default function Header() {
       console.log(error);
     }
   }
-
+  
+  useEffect(() => {
+    console.log(notifications);
+  }, [notifications]);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
