@@ -268,7 +268,6 @@ export default function Header({ post }) {
                                   {/* {moment(notification.createdAt).fromNow()} */}
                                 </p>
 
-                                
                                 <div className='flex text-xs justify-between items-center py-2'>
                                   <button className='text-xs py-1 px-2 border border-gray-300 dark:border-gray-700 rounded-full text-purple-600 dark:text-purple-400'>
                                     {notification.isRead  ? 'Read' : 'Mark as Read'}
@@ -358,7 +357,6 @@ export default function Header({ post }) {
                   <Dropdown.Divider />
                 </>
               )}
-
 
               <Link to={'/dashboard?tab=profile'}>
                 <Dropdown.Item>
