@@ -80,36 +80,71 @@ export const getNotifications = async (req, res, next) => {
 // Notify admins of a new post
 export const notifyUsersAboutNewPost = async (post) => {
   try {
-    // Populate the userId field to get the username and profilePicture
-    const fullPost = await post.populate('userId', 'username profilePicture').execPopulate();
+    const { creator, title, _id, createdAt } = post;
+    const creatorUsername = creator?.username || 'Unknown User';
+    const creatorProfilePicture = creator?.profilePicture || 'https://default-profile-url.com';
 
-    // Log to confirm the populated user data
-    console.log("User details:", fullPost.userId);
-
-    // Extract user details with fallbacks
-    const creatorUsername = fullPost.userId?.username || 'Unknown User';
-    const creatorProfilePicture = fullPost.userId?.profilePicture || 'https://default-profile-url.com';
-
-    // Find all admin users to notify
+    // Retrieve admin users and prepare notifications
     const adminUsers = await User.find({ isAdmin: true });
 
-    // Map each admin user to a new notification
     const notifications = adminUsers.map((admin) => ({
       userId: admin._id,
-      message: `New post titled "${fullPost.title}" was created by ${creatorUsername}`,
+      message: `New post titled "${title}" was created by ${creatorUsername}`,
       type: "new_post",
-      postId: fullPost._id,
+      postId: _id,
       creatorUsername,
       creatorProfilePicture,
-      createdAt: fullPost.createdAt,
+      createdAt,
     }));
 
-    // Insert the notifications
     await Notification.insertMany(notifications);
+    console.log("Notifications created successfully.");
   } catch (error) {
-    console.error("Error sending new post notifications:", error);
+    console.error("Error notifying users about new post:", error);
   }
 };
+
+// Working but not displaying the username and profile picture
+// export const notifyUsersAboutNewPost = async (post) => {
+//   try {
+//     // Explicitly populate the userId field with both username and profilePicture
+//     const fullPost = await Post.findById(post._id).populate({
+//       path: 'userId',
+//       select: 'username profilePicture',
+//     });
+
+//     if (!fullPost) {
+//       console.error("Post not found or could not be populated:", post._id);
+//       return;
+//     }
+
+//     // Check populated data
+//     console.log("Populated user data:", fullPost.userId);
+
+//     const creatorUsername = fullPost.userId?.username || 'Unknown User';
+//     const creatorProfilePicture = fullPost.userId?.profilePicture || 'https://default-profile-url.com';
+
+//     // Fetch all admin users to send notifications
+//     const adminUsers = await User.find({ isAdmin: true });
+
+//     const notifications = adminUsers.map((admin) => ({
+//       userId: admin._id,
+//       message: `New post titled "${fullPost.title}" was created by ${creatorUsername}`,
+//       type: "new_post",
+//       postId: fullPost._id,
+//       creatorUsername,
+//       creatorProfilePicture,
+//       createdAt: fullPost.createdAt,
+//     }));
+
+//     // Log notifications to verify details
+//     console.log("Notifications being created:", notifications);
+
+//     await Notification.insertMany(notifications);
+//   } catch (error) {
+//     console.error("Error sending new post notifications:", error);
+//   }
+// };
 
 
 // Notify admins about post updates

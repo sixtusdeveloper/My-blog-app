@@ -207,7 +207,7 @@ export default function Header({ post }) {
             {currentUser.isAdmin && (
               <>
                 <div className="px-1 relative items-center mx-auto">
-                  <button type='button' className='border border-gray-300 dark:border-gray-700 rounded-full p-2 self-center mx-auto items-center' onClick={toggleModal}>
+                  <button type='button' className='outline-none border border-gray-300 dark:border-gray-700 rounded-full p-2 self-center mx-auto items-center' onClick={toggleModal}>
                     <FaBell size={18} />
                   </button>
                   {unreadCount > 0 ? (
