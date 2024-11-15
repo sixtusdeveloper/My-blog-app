@@ -5,6 +5,7 @@ import { notifyUsersAboutNewPost, notifyPostChange } from "./notification.contro
 
 // Create Post with Notifications
 export const create = async (req, res, next) => {
+
     if (!req.user.isAdmin) {
         return next(errorHandler("You are not allowed to create a post", 403));
     }
@@ -24,23 +25,24 @@ export const create = async (req, res, next) => {
     const newPost = new Post({
         ...req.body,
         slug,
-        userId: req.user.id,
+        userId: req.user.id, // Make sure req.user.id is correctly set
     });
 
     try {
         const savedPost = await newPost.save();
 
-        // Verify the req.user object
+        // Log req.user to confirm it contains the necessary information
         console.log("req.user:", req.user);
 
-        // Ensure creator details are correct
+        // Ensure creator details are correctly defined
         const creator = {
-            username: req.user.username,
+            username: req.user.username || "Unknown User",  // Provide a fallback if username is missing
             profilePicture: req.user.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s',
         };
 
         console.log("Creating notification with creator:", creator);
 
+        // Send notification with the creator's details
         await notifyUsersAboutNewPost({
             title: savedPost.title,
             _id: savedPost._id,
@@ -53,6 +55,57 @@ export const create = async (req, res, next) => {
         next(error);
     }
 };
+
+// Working but not perfect
+// export const create = async (req, res, next) => {
+//     if (!req.user.isAdmin) {
+//         return next(errorHandler("You are not allowed to create a post", 403));
+//     }
+
+//     const { title, content } = req.body;
+
+//     if (!title || !content) {
+//         return next(errorHandler("Title and content are required", 400));
+//     }
+
+//     if (title.length < 5) {
+//         return next(errorHandler("Title must be at least 5 characters long", 400));
+//     }
+
+//     const slug = title.split(" ").join("-").toLowerCase().replace(/[^a-zA-Z0-9-]/g, "");
+
+//     const newPost = new Post({
+//         ...req.body,
+//         slug,
+//         userId: req.user.id,
+//     });
+
+//     try {
+//         const savedPost = await newPost.save();
+
+//         // Verify the req.user object
+//         console.log("req.user:", req.user);
+
+//         // Ensure creator details are correct
+//         const creator = {
+//             username: req.user.username,
+//             profilePicture: req.user.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxR_rp3nHPV73AXGPcOVFX8v8wCh2qw2QiEQ&s',
+//         };
+
+//         console.log("Creating notification with creator:", creator);
+
+//         await notifyUsersAboutNewPost({
+//             title: savedPost.title,
+//             _id: savedPost._id,
+//             creator,
+//             createdAt: savedPost.createdAt,
+//         });
+
+//         res.status(201).json(savedPost);
+//     } catch (error) {
+//         next(error);
+//     }
+// };
 
 
 
@@ -126,28 +179,6 @@ export const deletepost = async (req, res, next) => {
         next(error);
     }
 };
-
-
-// export const deletepost = async (req, res, next) => {
-//     if (!req.user.isAdmin || req.params.userId !== req.user.id) {
-//         return next(errorHandler("You are not allowed to delete a post", 403));
-//     }
-
-//     try {
-//         const post = await Post.findById(req.params.postId);
-
-//         if (!post) return next(errorHandler("Post not found", 404));
-
-//         await Post.findByIdAndDelete(req.params.postId);
-
-//         // Notify admin users about the deleted post
-//         notifyPostChange(post, "deleted");
-
-//         res.status(200).json("Post deleted successfully");
-//     } catch (error) {
-//         next(error);
-//     }
-// };
 
 // The rest of the controller functions remain the same
 

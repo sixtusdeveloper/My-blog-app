@@ -9,7 +9,26 @@ export default function DashboardVotes() {
     React: 0,
     Vue: 0,
     Angular: 0,
+    Nextjs: 0,
+    Svelte: 0,
+    TypeScript: 0,
+    Express: 0,
+    MongoDB: 0,
+    Laravel: 0,
+    PostgreSQL: 0,
+    Django: 0,
+    Flask:0,
+    MySQL:0,
+    Bootstrap: 0,
+    TailwindCSS: 0,
+    MaterialUI: 0,
+    ChakraUI: 0,
+    Shadcn: 0,
+    GraphQL: 0,
+    Docker: 0,
+    Kubernetes: 0,
   });
+
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedFramework, setSelectedFramework] = useState(''); // Track the selected framework
@@ -24,7 +43,26 @@ export default function DashboardVotes() {
             React: data.reactVotes,
             Vue: data.vueVotes,
             Angular: data.angularVotes,
+            Nextjs: data.nextjsVotes,
+            Svelte: data.svelteVotes,
+            TypeScript: data.typescriptVotes,
+            Express: data.expressVotes,
+            MongoDB: data.mongodbVotes,
+            Laravel: data.laravelVotes,
+            PostgreSQL: data.postgresqlVotes,
+            Django: data.djangoVotes,
+            Flask: data.flaskVotes,
+            MySQL: data.mysqlVotes,
+            Bootstrap: data.bootstrapVotes,
+            TailwindCSS: data.tailwindcssVotes,
+            MaterialUI: data.materialuiVotes,
+            ChakraUI: data.chakrauiVotes,
+            Shadcn: data.shadcnVotes,
+            GraphQL: data.graphqlVotes,
+            Docker: data.dockerVotes,
+            Kubernetes: data.kubernetesVotes,
           });
+          
         }
       } catch (error) {
         console.error('Error fetching poll votes:', error.message);
@@ -33,11 +71,8 @@ export default function DashboardVotes() {
       }
     };
 
-    if (currentUser.isAdmin) {
-      setLoading(true);
-      setTimeout(fetchVotes, 2000); // Fetch after a 2-second delay
-      fetchVotes();
-    }
+    setLoading(true);
+    setTimeout(fetchVotes, 2000); // Fetch after a 2-second delay
   }, [currentUser._id]);
 
   // Handle the reset for a specific framework
@@ -76,17 +111,27 @@ export default function DashboardVotes() {
   };
 
   return (
-    <section style={backgroundStyle} className='min-h-[100vh] w-full overflow-auto'>
-      <div className="relative mx-auto py-2 table-auto overflow-x-scroll border dark:border-gray-800 border-gray-300
+    <section style={backgroundStyle} className="min-h-[100vh] w-full overflow-auto">
+      <div
+        className="relative mx-auto py-2 table-auto overflow-x-scroll border dark:border-gray-800 border-gray-300
       scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700
-      dark:scrollbar-thumb-slate-500">
-        {currentUser.isAdmin ? (
+      dark:scrollbar-thumb-slate-500"
+      >
+        {votes ? (
           <div>
             <Table hoverable className="shadow-md">
               <Table.Head>
-                <Table.HeadCell className='text-gray-600 dark:text-gray-200'>Framework</Table.HeadCell>
-                <Table.HeadCell className='text-center mx-auto text-gray-600 dark:text-gray-200'>Votes</Table.HeadCell>
-                <Table.HeadCell className='text-center mx-auto text-gray-600 dark:text-gray-200'>Update</Table.HeadCell>
+                <Table.HeadCell className="text-gray-600 dark:text-gray-200">
+                  Framework
+                </Table.HeadCell>
+                <Table.HeadCell className="text-center mx-auto text-gray-600 dark:text-gray-200">
+                  Votes
+                </Table.HeadCell>
+                {currentUser.isAdmin && (
+                  <Table.HeadCell className="text-center mx-auto text-gray-600 dark:text-gray-200">
+                    Update
+                  </Table.HeadCell>
+                )}
               </Table.Head>
               <Table.Body className="divide-y">
                 {Object.entries(votes).map(([framework, count]) => (
@@ -96,18 +141,19 @@ export default function DashboardVotes() {
                   >
                     <Table.Cell className="py-3 px-6 text-left">{framework}</Table.Cell>
                     <Table.Cell className="py-3 px-6 text-center">{count}</Table.Cell>
-                    <Table.Cell className="py-3 px-6 text-center">
-                      <button
-                        onClick={() => {
-                          setSelectedFramework(framework); // Track the selected framework
-                          setShowModal(true); // Open the modal
-                        }}
-                        
-                        className="mx-auto text-center font-medium text-xs bg-purple-800 cursor-pointer text-white px-2 py-1 rounded-md hover:bg-purple-600"
-                      >
-                        Reset
-                      </button>
-                    </Table.Cell>
+                    {currentUser.isAdmin && (
+                      <Table.Cell className="py-3 px-6 text-center">
+                        <button
+                          onClick={() => {
+                            setSelectedFramework(framework); // Track the selected framework
+                            setShowModal(true); // Open the modal
+                          }}
+                          className="mx-auto text-center font-medium text-xs bg-purple-800 cursor-pointer text-white px-2 py-1 rounded-md hover:bg-purple-600"
+                        >
+                          Reset
+                        </button>
+                      </Table.Cell>
+                    )}
                   </Table.Row>
                 ))}
               </Table.Body>
@@ -128,7 +174,7 @@ export default function DashboardVotes() {
               </h3>
               <div className="flex justify-center gap-4">
                 <Button
-                  gradientDuoTone='purpleToBlue'
+                  gradientDuoTone="purpleToBlue"
                   onClick={handleReset}
                   className="text-base font-semibold"
                 >
@@ -149,10 +195,6 @@ export default function DashboardVotes() {
     </section>
   );
 }
-
-
-
-
 
 
 
