@@ -54,7 +54,9 @@ export default function Header({ post }) {
       console.error("Error loading notifications:", error);
     }
   };
-
+  
+  
+  // Handle notification click function
   const handleNotificationClick = async (notificationId) => {
     const token = currentUser.token;
     try {
@@ -87,6 +89,8 @@ export default function Header({ post }) {
       console.error('Error marking notification as read:', error);
     }
   };
+
+  // Handle notification clear function
 
   const handleClearNotification = async (notificationId) => {
     try {

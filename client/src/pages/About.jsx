@@ -234,6 +234,7 @@ export default function About() {
 
         {/* Modal for Subscription */}
         <Modal
+          className='w-full md:w-1/2 mx-auto' 
           show={modalOpen}
           onClose={() => setModalOpen(false)}
         >

@@ -2,7 +2,6 @@ import { errorHandler } from "../utils/error.js";
 import Post from "../models/post.model.js";
 import { notifyUsersAboutNewPost, notifyPostChange } from "./notification.controller.js";
 
-
 // Create Post with Notifications
 export const create = async (req, res, next) => {
 
