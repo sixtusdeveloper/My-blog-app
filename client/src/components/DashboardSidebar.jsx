@@ -15,6 +15,8 @@ import VotesIcon from '/votes.png';
 import AdminAccessIcon from '/access.webp'; 
 import NotificationsIcon from '/notification.webp'; 
 import LogoutIcon from '/logout.webp';
+import SavedPostIcon from '/savedpost.webp';
+import LovedPostIcon from '/lovedpost.webp';
 
 export default function DashboardSidebar() {
     const location = useLocation();
@@ -120,6 +122,22 @@ export default function DashboardSidebar() {
                         </>
                     )}
 
+                    <Sidebar.Item as={Link} to="/dashboard?tab=savedposts" 
+                        active={tab === 'savedposts' || !tab}>
+                        <span  className="flex text-sm items-center space-x-2">
+                            <img src={SavedPostIcon} alt="Saved Posts" className="w-5 h-5 mr-4" />
+                            Saved Posts
+                        </span>
+                    </Sidebar.Item>
+
+                    <Sidebar.Item as={Link} to="/dashboard?tab=lovedposts" 
+                        active={tab === 'lovedposts' || !tab}>
+                        <span  className="flex text-sm items-center space-x-2">
+                            <img src={LovedPostIcon} alt="Loved Posts" className="w-5 h-5 mr-4" />
+                            Loved Posts
+                        </span>
+                    </Sidebar.Item>
+
                     <Sidebar.Item as={Link} to="/dashboard?tab=votes" 
                         active={tab === 'votes' || !tab}>
                         <span  className="flex text-sm items-center space-x-2">
@@ -127,6 +145,7 @@ export default function DashboardSidebar() {
                             Votes Poll
                         </span>
                     </Sidebar.Item>
+
 
                     <Sidebar.Item as={Link} to="/dashboard?tab=adminaccess" 
                         active={tab === 'adminaccess' || !tab}>

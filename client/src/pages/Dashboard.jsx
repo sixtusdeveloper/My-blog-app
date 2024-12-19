@@ -9,6 +9,8 @@ import DashboardComponent from '../components/DashboardComponent';
 import DashboardVotes from '../components/DashboardVotes';
 import DashboardAdminAccess from '../components/DashboardAdminAccess';
 import DashboardNotifications from '../components/DashboardNotifications';
+import DashboardSavedPost from '../components/DashboardSavedPost';
+import DashboardLovedPost from '../components/DashboardLovedPost';
 
 
 export default function Dashboard() {
@@ -51,6 +53,23 @@ export default function Dashboard() {
           {tab === 'comments' && <DashboardComments />}
         </div>
 
+        
+        {/* Notification notice */}
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
+          {tab === 'notifications' && <DashboardNotifications />}
+        </div>
+
+        {/* Notification notice */}
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
+          {tab === 'savedposts' && <DashboardSavedPost />}
+        </div>
+
+        {/* Notification notice */}
+        <div className='w-full pt-0 mx-auto max-w-7xl'>
+          {tab === 'lovedposts' && <DashboardLovedPost />}
+        </div>
+
+
         {/* Poll votes */}
         <div className='w-full pt-0 mx-auto max-w-7xl'>
           {tab === 'votes' && <DashboardVotes />}
@@ -59,11 +78,6 @@ export default function Dashboard() {
         {/* Admin access notice */}
         <div className='w-full pt-0 mx-auto max-w-7xl'>
           {tab === 'adminaccess' && <DashboardAdminAccess />}
-        </div>
-
-        {/* Notification notice */}
-        <div className='w-full pt-0 mx-auto max-w-7xl'>
-          {tab === 'notifications' && <DashboardNotifications />}
         </div>
 
         {/* Dashboard component */}
